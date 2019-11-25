@@ -1,5 +1,5 @@
 ---------------------------
--- Default awesome theme --
+-- custom awesome theme --
 ---------------------------
 
 local theme_assets = require("beautiful.theme_assets")
@@ -90,7 +90,7 @@ end
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
+theme.menu_submenu_icon = themes_path.."custom/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
@@ -124,22 +124,22 @@ theme.titlebar_height = 28
 theme.wallpaper = themes_path.."custom/wallpaper4.jpg"
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
-theme.layout_fairv = themes_path.."default/layouts/fairvw.png"
-theme.layout_floating  = themes_path.."default/layouts/floatingw.png"
-theme.layout_magnifier = themes_path.."default/layouts/magnifierw.png"
-theme.layout_max = themes_path.."default/layouts/maxw.png"
-theme.layout_fullscreen = themes_path.."default/layouts/fullscreenw.png"
-theme.layout_tilebottom = themes_path.."default/layouts/tilebottomw.png"
-theme.layout_tileleft   = themes_path.."default/layouts/tileleftw.png"
-theme.layout_tile = themes_path.."default/layouts/tilew.png"
-theme.layout_tiletop = themes_path.."default/layouts/tiletopw.png"
-theme.layout_spiral  = themes_path.."default/layouts/spiralw.png"
-theme.layout_dwindle = themes_path.."default/layouts/dwindlew.png"
-theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
-theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
-theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
-theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
+theme.layout_fairh = themes_path.."custom/layouts/fairhw.png"
+theme.layout_fairv = themes_path.."custom/layouts/fairvw.png"
+theme.layout_floating  = themes_path.."custom/layouts/floatingw.png"
+theme.layout_magnifier = themes_path.."custom/layouts/magnifierw.png"
+theme.layout_max = themes_path.."custom/layouts/maxw.png"
+theme.layout_fullscreen = themes_path.."custom/layouts/fullscreenw.png"
+theme.layout_tilebottom = themes_path.."custom/layouts/tilebottomw.png"
+theme.layout_tileleft   = themes_path.."custom/layouts/tileleftw.png"
+theme.layout_tile = themes_path.."custom/layouts/tilew.png"
+theme.layout_tiletop = themes_path.."custom/layouts/tiletopw.png"
+theme.layout_spiral  = themes_path.."custom/layouts/spiralw.png"
+theme.layout_dwindle = themes_path.."custom/layouts/dwindlew.png"
+theme.layout_cornernw = themes_path.."custom/layouts/cornernww.png"
+theme.layout_cornerne = themes_path.."custom/layouts/cornernew.png"
+theme.layout_cornersw = themes_path.."custom/layouts/cornersww.png"
+theme.layout_cornerse = themes_path.."custom/layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
@@ -160,6 +160,12 @@ theme.battery_alert_icon = icon_path.."battery_alert.png"
 theme.battery_charging_icon = icon_path.."battery_charging.png"
 theme.battery_full_icon = icon_path.."battery_full.png"
 theme.battery_full_icon_dark = icon_path.."battery_full_dark.png"
+
+-- apps
+theme.firefox_icon = icon_path.."firefox.png"
+theme.spotify_icon = icon_path.."spotify.png"
+theme.folder_icon = icon_path.."folder.png"
+theme.intellij_icon = icon_path.."intellij.png"
 
 return theme
 

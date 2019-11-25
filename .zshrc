@@ -97,6 +97,9 @@ source $ZSH/oh-my-zsh.sh
 
 #alias neofetch="neofetch --chafa /home/parndt/.config/awesome/themes/custom/wallpaper.jpg --size 150% --gap -103"
 
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias resetmouse='sudo modprobe -r psmouse && sudo modprobe psmouse'
+
 # restore pywal-theme
 (cat ~/.cache/wal/sequences &)
 clear

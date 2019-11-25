@@ -57,6 +57,7 @@ beautiful.init(awful.util.getdir("config") .. "themes/custom/theme.lua" )
 
 
 require("topbar")
+local mainmenu = require("mainmenu")
 local notifications = require("notifications")
 
 -- This is used later as the default terminal and editor to run.
@@ -139,7 +140,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
+    awful.button({ }, 1, mainmenu.toggle)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -234,6 +235,8 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey },            "r", function () awful.util.spawn("sh /home/parndt/.config/rofi/launch.sh") end),
 
+    awful.key({ modkey }, "m", mainmenu.toggle),
+     
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run {
