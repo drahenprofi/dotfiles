@@ -122,6 +122,7 @@ theme.titlebar_minimize_button_focus_hover  = ex_tip .. "minimize/minimize_3.svg
 theme.titlebar_height = 28
 
 theme.wallpaper = themes_path.."custom/wallpaper4.jpg"
+theme.meme = themes_path.."custom/meme.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."custom/layouts/fairhw.png"
@@ -160,12 +161,23 @@ theme.battery_alert_icon = icon_path.."battery_alert.png"
 theme.battery_charging_icon = icon_path.."battery_charging.png"
 theme.battery_full_icon = icon_path.."battery_full.png"
 theme.battery_full_icon_dark = icon_path.."battery_full_dark.png"
+theme.power_icon = icon_path.."power.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"
 theme.spotify_icon = icon_path.."spotify.png"
 theme.folder_icon = icon_path.."folder.png"
 theme.intellij_icon = icon_path.."intellij.png"
+theme.github_icon = icon_path.."github.png"
+theme.reddit_icon = icon_path.."reddit.png"
+theme.youtube_icon = icon_path.."youtube.png"
+theme.hxh_icon = icon_path.."hxh.png"
+
+-- spotify
+theme.play_icon = icon_path.."play.png"
+theme.pause_icon = icon_path.."pause.png"
+theme.next_icon = icon_path.."next.png"
+theme.previous_icon = icon_path.."previous.png"
 
 return theme
 

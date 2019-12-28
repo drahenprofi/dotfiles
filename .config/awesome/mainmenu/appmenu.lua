@@ -15,7 +15,7 @@ local appmenu = wibox.widget {
             firefox,
             layout = wibox.layout.align.horizontal
         },
-        bottom = dpi(10),
+        right = dpi(30),
         widget = wibox.container.margin,
     }, 
     {
@@ -23,14 +23,14 @@ local appmenu = wibox.widget {
             spotify, 
             layout = wibox.layout.align.horizontal
         },
-        bottom = dpi(10),
+        right = dpi(30),
         widget = wibox.container.margin,
     }, 
     {
         intellij, 
         layout = wibox.layout.align.horizontal
     }, 
-    layout = wibox.layout.align.vertical
+    layout = wibox.layout.align.horizontal
 }
 
 return appmenu
