@@ -20,11 +20,9 @@ require("awful.hotkeys_popup.keys")
 local titlebars = require("titlebars")
 -- utils stolen
 local utils = require("utils")
-local runprompt = require("runprompt")
+local runprompt = require("widgets.runprompt")
 
-local switcher = require("awesome-switcher")
-
-require("daemons")
+local switcher = require("widgets.awesome-switcher")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -56,12 +54,13 @@ end
 beautiful.init(awful.util.getdir("config") .. "themes/custom/theme.lua" )
 
 
-require("topbar")
-local mainmenu = require("mainmenu")
+local sidepanel = require("widgets.sidepanel")
+require("widgets.topbar")
+--local mainmenu = require("mainmenu")
 local notifications = require("notifications")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -70,8 +69,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -140,7 +139,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 1, mainmenu.toggle)
+    awful.button({ }, 1, sidepanel.toggle)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -235,7 +234,7 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey },            "r", function () awful.util.spawn("sh /home/parndt/.config/rofi/launch.sh") end),
 
-    awful.key({ modkey }, "m", mainmenu.toggle),
+    awful.key({ modkey }, "m", sidepanel.toggle),
      
     awful.key({ modkey }, "x",
               function ()
@@ -255,7 +254,7 @@ globalkeys = gears.table.join(
 
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
-        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 5%- ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
+        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 3%- ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
             local volume = stdout:gsub("%D+", "")
             awful.spawn.easy_async_with_shell("amixer sget Master | grep off", function(stdout)
                 local muted = true
@@ -269,7 +268,7 @@ globalkeys = gears.table.join(
      --awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
     end),
     awful.key({}, "XF86AudioRaiseVolume", function ()
-        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 5%+ ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
+        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 3%+ ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
             local volume = stdout:gsub("%D+", "")
             awful.spawn.easy_async_with_shell("amixer sget Master | grep off", function(stdout)
                 local muted = true
@@ -294,23 +293,6 @@ globalkeys = gears.table.join(
     -- Media Keys
     awful.key({}, "XF86AudioPlay", function()
      awful.util.spawn("playerctl play-pause", false)
-    end),
-
-     -- Brightness
-
-    awful.key({ }, "XF86MonBrightnessDown", function ()
-        awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
-            local brightness = stdout:gsub("%D+", "")
-            -- naughty.notify({title="Brightness", text=brightness .. "%"})
-            notifications.brightness(brightness, false)
-        end)
-    end),
-    awful.key({ }, "XF86MonBrightnessUp", function ()
-        awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
-            local brightness = stdout:gsub("%D+", "")
-            -- naughty.notify({title="Brightness", text=brightness .. "%"})
-            notifications.brightness(brightness, false)
-        end)
     end)
 )
 

@@ -63,7 +63,7 @@ awesome.connect_signal("daemons::battery", function(value)
     end
 end)
 
-local size = dpi(32)
+local size = dpi(96)
 
 -- icon 
 local icon = wibox.widget {
@@ -82,42 +82,18 @@ end
 
 local progressbar = wibox.widget {
     value         = 1,
+    forced_height = dpi(8),
+    forced_width  = size,
     color		  = beautiful.highlight,
     background_color = beautiful.fg_normal .. "66",
     shape         = notyfi_shape,
     bar_shape	  = notyfi_shape,
-    forced_width = dpi(120),
-    forced_height  = dpi(5),
     widget        = wibox.widget.progressbar
-}
-
-local progressbar_container = wibox.widget {
-    {
-        progressbar,
-        layout = wibox.layout.align.vertical    
-    },
-    direction     = 'east',
-    layout        = wibox.container.rotate,
 }
 
 local notyfi = awful.popup {
     widget = {
         {
-            {
-                nil, 
-                {
-                    {
-                        progressbar_container,
-                        layout = wibox.layout.align.horizontal
-                    },
-                    top = 10, 
-                    bottom = 10, 
-                    widget = wibox.container.margin
-                },
-                nil, 
-                expand="none",
-                layout = wibox.layout.align.horizontal
-            }, 
             {
                 widget = wibox.container.margin,
                 bottom = dpi(10),
@@ -126,15 +102,16 @@ local notyfi = awful.popup {
                     icon,
                 }
             },
+            progressbar,
             layout = wibox.layout.fixed.vertical,
         },
-        margins = dpi(5),
+        margins = dpi(10),
         widget  = wibox.container.margin
     },
     y            = awful.screen.focused().geometry.height / 2 - 72,
-    x            = awful.screen.focused().geometry.width - 72,
+    x            = (awful.screen.focused().geometry.width / 2) - (size / 2),
     shape        = notyfi_shape,
-    bg           = beautiful.bg_normal,
+    bg           = beautiful.bg_normal .. "D9",
     ontop        = true,
     visible      = false,
 }

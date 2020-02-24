@@ -5,7 +5,7 @@ local gears = require("gears")
 
 -- bar colors
 
-local color_transparent = gears.color({
+--[[local color_transparent = gears.color({
     type = "linear", 
     from = { 0, 0 }, 
     to = { 0, beautiful.bar_height }, 
@@ -14,17 +14,18 @@ local color_transparent = gears.color({
         { 0.5, beautiful.bg_normal .. "1A"},
         { 1, beautiful.bg_normal .. "00" }
     }
-})
+})]]--
 
 local color_solid = beautiful.bg_normal 
 
 -- Init widgets
 ------------------------------------------------
-local layoutbox = require("topbar.layoutbox")
-local battery = require("topbar.battery")
-local taglist = require("topbar.taglist")
-local calendar = require("topbar.calendar")
-local tasklist = require("topbar.tasklist")
+local layoutbox = require("widgets.topbar.widgets.layoutbox")
+--local battery = require("topbar.battery")
+local taglist = require("widgets.topbar.widgets.taglist")
+local calendar = require("widgets.topbar.widgets.calendar")
+local tasklist = require("widgets.topbar.widgets.tasklist")
+local opener = require("widgets.topbar.widgets.sidepanelopener")
 
 local rofi_launcher = awful.widget.launcher({
     image = beautiful.launcher_icon, 
@@ -42,13 +43,15 @@ awful.screen.connect_for_each_screen(function(s)
         screen = s,
         position = beautiful.bar_position, 
         height = beautiful.bar_height, 
-        bg = color_transparent,
+        type = "dock",
+        bg = color_solid,
     })
 
-    local battery_image, battery_text = battery.get()
+    --local battery_image, battery_text = battery.get()
     local bar_taglist = taglist.init(s)
     --local bar_tasklist = tasklist.init(s)
     calendar.init(s)
+    local panel_opener = opener.init(s)
 
 
     s.topbar:setup {
@@ -122,7 +125,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
-            {
+            --[[{
                 widget = wibox.container.margin,
                 top = beautiful.bar_item_padding, 
                 bottom = beautiful.bar_item_padding,
@@ -147,7 +150,7 @@ awful.screen.connect_for_each_screen(function(s)
                         }
                     }
                 }
-            },
+            },]]--
             {
                 widget = wibox.container.margin,
                 top = beautiful.bar_item_padding, 
@@ -215,14 +218,39 @@ awful.screen.connect_for_each_screen(function(s)
                         }
                     }
                 }
-            },
+            }, 
+            {
+                widget = wibox.container.margin,
+                top = beautiful.bar_item_padding, 
+                bottom = beautiful.bar_item_padding,
+                left = 4,
+                right = 4,
+                {
+                    widget = wibox.container.background,
+                    bg = beautiful.highlight, 
+                    shape = function(cr, width, height)
+                        gears.shape.rounded_rect(cr, width, height, 50)
+                    end,
+                    {
+                        widget = wibox.container.margin,
+                        top = 2, 
+                        bottom = 2,
+                        left = 2,
+                        right = 2,
+                        {
+                            panel_opener,
+                            layout = wibox.layout.fixed.horizontal, 
+                        }
+                    }
+                }
+            }, 
             layout = wibox.layout.fixed.horizontal, 
         }
     }
 end)
 ------------------------------------------------
 
-function set_topbar_color(clients, screen)
+--[[function set_topbar_color(clients, screen)
     local maximized_on_tag = false
 
     for _, c in pairs(clients) do
@@ -259,4 +287,4 @@ tag.connect_signal("property::selected", function(t)
     if t.selected then
         set_topbar_color(t:clients(), t.screen)
     end
-end)
+end)]]--

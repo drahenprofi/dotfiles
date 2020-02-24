@@ -82,7 +82,7 @@ theme.notification_opacity = 0.85
 theme.notification_spacing = dpi(0)
 theme.notification_border_width = dpi(0)
 theme.notification_max_width = dpi(350)
-theme.notification_max_height = dpi(78)
+--theme.notification_max_height = dpi(78)
 theme.notification_shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, dpi(5))
 end
@@ -121,7 +121,7 @@ theme.titlebar_minimize_button_focus_hover  = ex_tip .. "minimize/minimize_3.svg
 
 theme.titlebar_height = 28
 
-theme.wallpaper = themes_path.."custom/wallpaper4.jpg"
+theme.wallpaper = themes_path.."custom/wallpaper.jpg"
 theme.meme = themes_path.."custom/meme.jpg"
 
 -- You can use your own layout icons like this:
@@ -161,7 +161,13 @@ theme.battery_alert_icon = icon_path.."battery_alert.png"
 theme.battery_charging_icon = icon_path.."battery_charging.png"
 theme.battery_full_icon = icon_path.."battery_full.png"
 theme.battery_full_icon_dark = icon_path.."battery_full_dark.png"
-theme.power_icon = icon_path.."power.png"
+theme.power_icon = icon_path.."poweroff.png"
+theme.reboot_icon = icon_path.."reboot.png"
+theme.sleep_icon = icon_path.."sleep.png"
+theme.logout_icon = icon_path.."logout.png"
+theme.open_panel_icon = icon_path.."open_panel.png"
+theme.close_panel_icon = icon_path.."close_panel.png"
+theme.settings_icon = icon_path.."settings.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"
@@ -178,6 +184,8 @@ theme.play_icon = icon_path.."play.png"
 theme.pause_icon = icon_path.."pause.png"
 theme.next_icon = icon_path.."next.png"
 theme.previous_icon = icon_path.."previous.png"
+
+theme.avatar = icon_path.."fateful.png"
 
 return theme
 
