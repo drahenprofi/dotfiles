@@ -21,7 +21,7 @@ local color_solid = beautiful.bg_normal
 -- Init widgets
 ------------------------------------------------
 local layoutbox = require("widgets.topbar.widgets.layoutbox")
---local battery = require("topbar.battery")
+local battery = require("widgets.topbar.widgets.battery")
 local taglist = require("widgets.topbar.widgets.taglist")
 local calendar = require("widgets.topbar.widgets.calendar")
 local tasklist = require("widgets.topbar.widgets.tasklist")
@@ -47,7 +47,7 @@ awful.screen.connect_for_each_screen(function(s)
         bg = color_solid,
     })
 
-    --local battery_image, battery_text = battery.get()
+    local battery_image, battery_text = battery.get()
     local bar_taglist = taglist.init(s)
     --local bar_tasklist = tasklist.init(s)
     calendar.init(s)
@@ -125,7 +125,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
-            --[[{
+            {
                 widget = wibox.container.margin,
                 top = beautiful.bar_item_padding, 
                 bottom = beautiful.bar_item_padding,
@@ -150,7 +150,7 @@ awful.screen.connect_for_each_screen(function(s)
                         }
                     }
                 }
-            },]]--
+            },
             {
                 widget = wibox.container.margin,
                 top = beautiful.bar_item_padding, 

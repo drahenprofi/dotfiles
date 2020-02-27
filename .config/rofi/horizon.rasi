@@ -7,7 +7,7 @@ configuration {
 
 * {
     background-color:               transparent;
-    background:                     #1C1E2666;
+    background:                     #1C1E26;
     background-alt:                 #2E303E47;
     text-color:                     #D8DEE9;
     selected-text-color:            #D8DEE9;
@@ -19,12 +19,12 @@ configuration {
 window {
     transparency:                   "real";
     background-color:               @background;
-    height:                         768px;
+    height:                         740px;
     width:                          1366px;
     location:                       northwest;
     anchor:                         northwest;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       28;
 }
 
 prompt {
@@ -44,14 +44,14 @@ entry  {
 }
 
 listview {
-    columns:                        5;
+    columns:                        4;
     margin:                         40px 120px 40px 120px;
 }
 
 element {
     orientation:                    vertical;
-    padding:                        8px;
-    margin:                         8px;
+    padding:                        16px;
+    margin:                         16px;
 }
 
 mainbox {

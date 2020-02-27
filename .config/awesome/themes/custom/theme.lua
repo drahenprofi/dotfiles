@@ -186,6 +186,7 @@ theme.next_icon = icon_path.."next.png"
 theme.previous_icon = icon_path.."previous.png"
 
 theme.avatar = icon_path.."fateful.png"
+theme.series_icon = icon_path.."series.png"
 
 return theme
 

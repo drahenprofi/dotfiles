@@ -23,6 +23,7 @@ local utils = require("utils")
 local runprompt = require("widgets.runprompt")
 
 local switcher = require("widgets.awesome-switcher")
+require("daemons")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -293,7 +294,24 @@ globalkeys = gears.table.join(
     -- Media Keys
     awful.key({}, "XF86AudioPlay", function()
      awful.util.spawn("playerctl play-pause", false)
+    end),
+
+    -- Brightness
+
+   awful.key({ }, "XF86MonBrightnessDown", function ()
+       awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
+           local brightness = stdout:gsub("%D+", "")
+           -- naughty.notify({title="Brightness", text=brightness .. "%"})
+           notifications.brightness(brightness, false)
+       end)
+   end),
+   awful.key({ }, "XF86MonBrightnessUp", function ()
+       awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
+           local brightness = stdout:gsub("%D+", "")
+           -- naughty.notify({title="Brightness", text=brightness .. "%"})
+           notifications.brightness(brightness, false)
     end)
+end)
 )
 
 clientkeys = gears.table.join(

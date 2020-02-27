@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local avatar = require("widgets.sidepanel.widgets.avatar")
 local volume = require("widgets.sidepanel.widgets.volume")
 local ram = require("widgets.sidepanel.widgets.ram")
+local series = require("widgets.sidepanel.widgets.series")
 local logout = require("widgets.sidepanel.widgets.logout")
 local settings = require("widgets.sidepanel.widgets.settings")
 
@@ -46,6 +47,7 @@ awful.screen.connect_for_each_screen(function(s)
                 widget = wibox.layout.margin
             },
             {
+                series,
                 logout, 
                 layout = wibox.layout.align.vertical
             },
