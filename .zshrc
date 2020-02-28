@@ -100,6 +100,6 @@ source $ZSH/oh-my-zsh.sh
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias resetmouse='sudo modprobe -r psmouse && sudo modprobe psmouse'
 
-# restore pywal-theme
-(cat ~/.cache/wal/sequences &)
+
+
 clear
