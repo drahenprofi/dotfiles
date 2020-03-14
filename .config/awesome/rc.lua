@@ -52,7 +52,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.getdir("config") .. "themes/custom/theme.lua" )
+beautiful.init(awful.util.getdir("config") .. "theme.lua" )
 
 
 local sidepanel = require("widgets.sidepanel")
