@@ -8,7 +8,6 @@ local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
 local themes_path = "~/.config/awesome/themes/" -- gfs.get_themes_dir()
-local ex_tip = "~/.config/awesome/themes/custom/titlebar/"
 local gears = require("gears")
 
 local icon_path = "~/.config/awesome/themes/custom/icons/"
@@ -48,9 +47,9 @@ theme.border_radius = dpi(6) -- set roundness of corners
 
 -- bar config
 theme.bar_position = "top"
-theme.bar_height = 28
-theme.bar_item_radius = 10
-theme.bar_item_padding = 3
+theme.bar_height = dpi(28)
+theme.bar_item_radius = dpi(10)
+theme.bar_item_padding = dpi(3)
 
 -- There are other variable sets
 -- overriding the default one when
@@ -90,7 +89,6 @@ end
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."custom/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
@@ -100,47 +98,46 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- regular
-theme.titlebar_close_button_normal = ex_tip .. "close/close_1.svg"
-theme.titlebar_close_button_focus = ex_tip .. "close/close_2.svg"
-theme.titlebar_maximized_button_normal_inactive = ex_tip .. "maximize/maximize_1.svg"
-theme.titlebar_maximized_button_focus_inactive  = ex_tip .. "maximize/maximize_2.svg"
-theme.titlebar_maximized_button_normal_active = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_active  = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_minimize_button_normal = ex_tip .. "minimize/minimize_1.svg"
-theme.titlebar_minimize_button_focus  = ex_tip .. "minimize/minimize_2.svg"
+theme.titlebar_close_button_normal = icon_path.."titlebar/close/close_1.svg"
+theme.titlebar_close_button_focus = icon_path.."titlebar/close/close_2.svg"
+theme.titlebar_maximized_button_normal_inactive = icon_path.."titlebar/maximize/maximize_1.svg"
+theme.titlebar_maximized_button_focus_inactive  = icon_path.."titlebar/maximize/maximize_2.svg"
+theme.titlebar_maximized_button_normal_active = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_active  = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_minimize_button_normal = icon_path.."titlebar/minimize/minimize_1.svg"
+theme.titlebar_minimize_button_focus  = icon_path.."titlebar/minimize/minimize_2.svg"
 
 -- hover
-theme.titlebar_close_button_normal_hover = ex_tip .. "close/close_3.svg"
-theme.titlebar_close_button_focus_hover = ex_tip .. "close/close_3.svg"
-theme.titlebar_maximized_button_normal_inactive_hover = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_inactive_hover  = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_maximized_button_normal_active_hover = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_active_hover  = ex_tip .. "maximize/maximize_3.svg"
-theme.titlebar_minimize_button_normal_hover = ex_tip .. "minimize/minimize_3.svg"
-theme.titlebar_minimize_button_focus_hover  = ex_tip .. "minimize/minimize_3.svg"
+theme.titlebar_close_button_normal_hover = icon_path.."titlebar/close/close_3.svg"
+theme.titlebar_close_button_focus_hover = icon_path.."titlebar/close/close_3.svg"
+theme.titlebar_maximized_button_normal_inactive_hover = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_inactive_hover  = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_maximized_button_normal_active_hover = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_active_hover  = icon_path.."titlebar/maximize/maximize_3.svg"
+theme.titlebar_minimize_button_normal_hover = icon_path.."titlebar/minimize/minimize_3.svg"
+theme.titlebar_minimize_button_focus_hover  = icon_path.."titlebar/minimize/minimize_3.svg"
 
-theme.titlebar_height = 28
+theme.titlebar_height = dpi(28)
 
 theme.wallpaper = themes_path.."custom/wallpaper.jpg"
-theme.meme = themes_path.."custom/meme.jpg"
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = themes_path.."custom/layouts/fairhw.png"
-theme.layout_fairv = themes_path.."custom/layouts/fairvw.png"
-theme.layout_floating  = themes_path.."custom/layouts/floatingw.png"
-theme.layout_magnifier = themes_path.."custom/layouts/magnifierw.png"
-theme.layout_max = themes_path.."custom/layouts/maxw.png"
-theme.layout_fullscreen = themes_path.."custom/layouts/fullscreenw.png"
-theme.layout_tilebottom = themes_path.."custom/layouts/tilebottomw.png"
-theme.layout_tileleft   = themes_path.."custom/layouts/tileleftw.png"
-theme.layout_tile = themes_path.."custom/layouts/tilew.png"
-theme.layout_tiletop = themes_path.."custom/layouts/tiletopw.png"
-theme.layout_spiral  = themes_path.."custom/layouts/spiralw.png"
-theme.layout_dwindle = themes_path.."custom/layouts/dwindlew.png"
-theme.layout_cornernw = themes_path.."custom/layouts/cornernww.png"
-theme.layout_cornerne = themes_path.."custom/layouts/cornernew.png"
-theme.layout_cornersw = themes_path.."custom/layouts/cornersww.png"
-theme.layout_cornerse = themes_path.."custom/layouts/cornersew.png"
+theme.layout_fairh = icon_path.."layouts/fairhw.png"
+theme.layout_fairv = icon_path.."layouts/fairvw.png"
+theme.layout_floating  = icon_path.."layouts/floatingw.png"
+theme.layout_magnifier = icon_path.."layouts/magnifierw.png"
+theme.layout_max = icon_path.."layouts/maxw.png"
+theme.layout_fullscreen = icon_path.."layouts/fullscreenw.png"
+theme.layout_tilebottom = icon_path.."layouts/tilebottomw.png"
+theme.layout_tileleft   = icon_path.."layouts/tileleftw.png"
+theme.layout_tile = icon_path.."layouts/tilew.png"
+theme.layout_tiletop = icon_path.."layouts/tiletopw.png"
+theme.layout_spiral  = icon_path.."layouts/spiralw.png"
+theme.layout_dwindle = icon_path.."layouts/dwindlew.png"
+theme.layout_cornernw = icon_path.."layouts/cornernww.png"
+theme.layout_cornerne = icon_path.."layouts/cornernew.png"
+theme.layout_cornersw = icon_path.."layouts/cornersww.png"
+theme.layout_cornerse = icon_path.."layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
@@ -189,5 +186,3 @@ theme.avatar = icon_path.."fateful.png"
 theme.series_icon = icon_path.."series.png"
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

@@ -8,7 +8,7 @@ export ZSH="/home/parndt/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="custom"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -97,7 +97,7 @@ source $ZSH/oh-my-zsh.sh
 
 #alias neofetch="neofetch --chafa /home/parndt/.config/awesome/themes/custom/wallpaper.jpg --size 150% --gap -103"
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias resetmouse='sudo modprobe -r psmouse && sudo modprobe psmouse'
 
 

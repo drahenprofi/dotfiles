@@ -255,12 +255,12 @@ globalkeys = gears.table.join(
 
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
-        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 3%- ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
-            local volume = stdout:gsub("%D+", "")
-            awful.spawn.easy_async_with_shell("amixer sget Master | grep off", function(stdout)
-                local muted = true
-                if stdout == nil or stdout == "" then 
-                    muted = false
+        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%  ; pamixer --get-volume", function(stdout)
+            local volume = stdout
+            awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
+                local muted = false
+                if stdout == "true" then 
+                    muted = true
                 end
                 
                 notifications.volume(tonumber(volume), muted)
@@ -269,12 +269,12 @@ globalkeys = gears.table.join(
      --awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
     end),
     awful.key({}, "XF86AudioRaiseVolume", function ()
-        awful.spawn.easy_async_with_shell("amixer -q -D pulse sset Master 3%+ ; amixer get Master | grep Left | grep % |awk '{print $5}'|sed 's/[^0-9]//g'", function(stdout)
-            local volume = stdout:gsub("%D+", "")
-            awful.spawn.easy_async_with_shell("amixer sget Master | grep off", function(stdout)
-                local muted = true
-                if stdout == nil or stdout == "" then 
-                    muted = false
+        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3% ; pamixer --get-volume", function(stdout)
+            local volume = stdout
+            awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
+                local muted = false
+                if stdout == "true" then 
+                    muted = true
                 end
                 
                 notifications.volume(tonumber(volume), muted)
@@ -282,10 +282,10 @@ globalkeys = gears.table.join(
         end)
     end),
     awful.key({}, "XF86AudioMute", function ()
-        awful.spawn.easy_async_with_shell("amixer -D pulse set Master 1+ toggle ; amixer sget Master | grep off", function(stdout)
-            local muted = true
-            if stdout == nil or stdout == "" then 
-                muted = false
+        awful.spawn.easy_async_with_shell("pamixer -t ; pamixer --get-muted", function(stdout)
+            local muted = false
+            if stdout == "true" then 
+                muted = true
             end
                 
             notifications.volume(0, muted)
