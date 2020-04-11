@@ -168,6 +168,8 @@ theme.open_panel_icon = icon_path.."open_panel.png"
 theme.close_panel_icon = icon_path.."close_panel.png"
 theme.settings_icon = icon_path.."settings.png"
 theme.settings_grey_icon = icon_path.."settings_grey.png"
+theme.notification_icon = icon_path.."notification.png"
+theme.notification_grey_icon = icon_path.."notification_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

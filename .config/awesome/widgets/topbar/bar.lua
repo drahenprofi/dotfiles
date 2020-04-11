@@ -27,6 +27,7 @@ local calendar = require("widgets.topbar.widgets.calendar")
 local tasklist = require("widgets.topbar.widgets.tasklist")
 local opener = require("widgets.topbar.widgets.sidepanelopener")
 local session = require("widgets.topbar.widgets.session")
+local notification = require("widgets.topbar.widgets.notification")
 
 local rofi_launcher = awful.widget.launcher({
     image = beautiful.launcher_icon, 
@@ -230,6 +231,17 @@ awful.screen.connect_for_each_screen(function(s)
                     session,
                     layout = wibox.layout.fixed.horizontal
                 }
+            }, 
+            {
+                {
+                    notification, 
+                    layout = wibox.layout.fixed.horizontal
+                }, 
+                top = beautiful.bar_item_padding + 2, 
+                bottom = beautiful.bar_item_padding + 2,
+                left = 6,
+                right = 6,
+                widget = wibox.container.margin,
             }, 
             layout = wibox.layout.fixed.horizontal, 
         }
