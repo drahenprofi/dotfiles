@@ -31,7 +31,7 @@ local popupWidget = wibox.widget {
         margins = margin, 
         widget = wibox.container.margin
     }, 
-    forced_height = height, 
+    max_height = height, 
     forced_width = width,
     layout = wibox.layout.fixed.vertical
 }

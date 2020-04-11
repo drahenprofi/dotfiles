@@ -42,38 +42,6 @@ button.create = function(image, size, radius, margin, bg, bg_hover, bg_press, co
     return button
 end
 
-button.create_text = function(text, font, command)
-    local button = wibox.widget {
-        {
-            {
-                markup = text,
-                font = font, 
-                align  = 'center',
-                valign = 'center',
-                widget = wibox.widget.textbox
-            },
-            margins = dpi(10),
-            widget = wibox.container.margin,
-        }, 
-        bg = beautiful.bg_normal, 
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, dpi(10))
-        end,
-        widget = wibox.container.background 
-    }
-
-    button:connect_signal("button::press", function()
-        button.bg = beautiful.bg_very_light
-        command()
-    end)
-
-    button:connect_signal("button::leave", function() button.bg = beautiful.bg_normal end)
-    button:connect_signal("mouse::enter", function() button.bg = beautiful.bg_light end)
-    button:connect_signal("mouse::leave", function() button.bg = beautiful.bg_normal end)
-
-    return button
-end
-
 button.create_widget = function(widget, command)
     local button = wibox.widget {
         {
@@ -123,6 +91,19 @@ button.create_image_onclick = function(image, image_hover, onclick)
     container:connect_signal("button::press", onclick)
 
     return container
+end
+
+button.create_text = function(color, color_hover, text, font)
+    local text = wibox.widget {
+        font = font, 
+        markup = "<span foreground='"..color.."'>"..text.."</span>", 
+        widget = wibox.widget.textbox
+    }
+
+    text:connect_signal("mouse::enter", function() text.markup = "<span foreground='"..color_hover.."'>"..text.."</span>" end)
+    text:connect_signal("mouse::leave", function() text.markup = "<span foreground='"..color.."'>"..text.."</span>" end)
+
+    return text
 end
 
 return button

@@ -30,6 +30,7 @@ local calendar = require("widgets.topbar.widgets.calendar")
 local session = require("widgets.topbar.widgets.session")
 local notification = require("widgets.topbar.widgets.notification")
 local volume = require("widgets.topbar.widgets.volume")
+local workspaces = require("widgets.topbar.widgets.workspaces") 
 
 local rofi_launcher = button.create_image_onclick(beautiful.search_grey_icon, beautiful.search_icon, function()
     awful.spawn("/home/parndt/.config/rofi/launch.sh")
@@ -61,6 +62,7 @@ awful.screen.connect_for_each_screen(function(s)
         expand = "none",
         {   -- Left
             widget(session), 
+            widget(workspaces),
             {
 
                 widget = wibox.container.margin,
