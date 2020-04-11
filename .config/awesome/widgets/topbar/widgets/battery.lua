@@ -21,13 +21,13 @@ local battery_image = wibox.widget {
 local function update_widget(bat, charging)
   battery_text.markup = bat .. "%"
 
-  if charging then
+  --[[if charging then
     battery_image.image = beautiful.battery_charging_icon
   elseif bat > 10 then
     battery_image.image = beautiful.battery_full_grey_icon
   else
     battery_image.image = beautiful.battery_alert_icon
-  end
+  end]]--
 end
 
 awesome.connect_signal("daemons::battery", function(value)

@@ -72,6 +72,8 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
 )
 
+theme.layoutlist_bg_selected = "#2E303E"
+
 -- Notificatons
 theme.notification_margin = dpi(7)
 theme.notification_icon_size = dpi(64)

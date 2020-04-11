@@ -23,7 +23,6 @@ end
 
 -- Init widgets
 ------------------------------------------------
-local layoutbox = require("widgets.topbar.widgets.layoutbox")
 local battery = require("widgets.topbar.widgets.battery")
 local taglist = require("widgets.topbar.widgets.taglist")
 local calendar = require("widgets.topbar.widgets.calendar")
@@ -102,34 +101,17 @@ awful.screen.connect_for_each_screen(function(s)
                 spacing = 2, 
                 layout = wibox.layout.fixed.horizontal
             }), 
-            {
+            widget(wibox.widget {
                 widget = wibox.container.margin,
-                top = beautiful.bar_item_padding, 
-                bottom = beautiful.bar_item_padding,
-                left = 4, 
-                right = 4, 
+                top = 1, 
+                bottom = 1, 
                 {
-                    widget = wibox.container.background,
-                    bg = beautiful.bg_normal, 
-                    shape = function(cr, width, height)
-                        gears.shape.rounded_rect(cr, width, height, beautiful.bar_item_radius)
-                    end,
-                    {
-                        widget = wibox.container.margin,
-                        top = 3, 
-                        bottom = 3,
-                        left = 7, 
-                        right = 7, 
-                        {
-                            systray, 
-                            layout = wibox.layout.fixed.horizontal, 
-                        }
-                    }
+                    systray, 
+                    layout = wibox.layout.fixed.horizontal, 
                 }
-            },
+            }),
             widget(calendar.clock), 
             widget(rofi_launcher), 
-            widget(layoutbox),
             widget(notification),
             layout = wibox.layout.fixed.horizontal, 
         }

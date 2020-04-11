@@ -5,43 +5,73 @@ local naughty = require("naughty")
 local gears = require("gears")
 
 local button = require("components.button")
+local layoutlist = require("widgets.topbar.widgets.layoutlist")
+
 local height = 400
 local width = 400
 
+local popup = {}
 local workspacesWidget = button.create_image(beautiful.sort_grey_icon, beautiful.sort_icon)
 
-
-local createClientUI = function(client)
-    return wibox.widget {
+local createClientUI = function(client, tag)
+    local widget = wibox.widget {
         {
-            image = client.icon,
-            forced_height = 24, 
-            forced_width = 24,  
-            widget = wibox.widget.imagebox
+            {
+                {
+                    nil, 
+                    {
+                        image = client.icon,
+                        forced_height = 24, 
+                        forced_width = 24,  
+                        widget = wibox.widget.imagebox
+                    }, 
+                    nil,
+                    expand = "none", 
+                    layout = wibox.layout.align.vertical
+                }, 
+                {
+                    forced_height = 24, 
+                    font = "Roboto Regular 11", 
+                    valign = "center",
+                    markup = client.name, 
+                    widget = wibox.widget.textbox
+                }, 
+                spacing = 10, 
+                layout = wibox.layout.fixed.horizontal
+            }, 
+            margins = 10, 
+            widget = wibox.container.margin, 
         }, 
-        {
-            font = "Roboto Medium 10", 
-            valign = "center", 
-            markup = client.name, 
-            widget = wibox.widget.textbox
-        }, 
-        spacing = 7, 
-        layout = wibox.layout.fixed.horizontal
+        shape = function(cr, width, height)
+            gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
+        end,
+        widget = wibox.container.background
     }
+
+    widget:connect_signal("mouse::enter", function() widget.bg = beautiful.bg_very_light end)
+    widget:connect_signal("mouse::leave", function() widget.bg = beautiful.bg_normal end)
+
+    widget:connect_signal("button::press", function()
+        client:raise()
+        tag:view_only()
+        popup.visible = false
+    end)
+
+    return widget
 end
 
-local createTagUI = function(name, clients)
+local createTagUI = function(tag, clients)
     local clientsContainer = wibox.layout.fixed.vertical()
     clientsContainer.spacing = 7
 
     for _, c in pairs(clients) do
-        clientsContainer:add(createClientUI(c))
+        clientsContainer:add(createClientUI(c, tag))
     end
 
     return wibox.widget {
         {
             font = "Roboto Regular 10", 
-            markup = "<span foreground='#cccccc8a'>Workspace "..name.."</span>", 
+            markup = "<span foreground='#cccccc8a'>Workspace "..tag.name.."</span>", 
             widget = wibox.widget.textbox
         }, 
         {
@@ -59,15 +89,10 @@ local createSettingsUI = function()
     local newWorkspace = button.create_text("#cccccc", "#ffffff", "New workspace", "Roboto Regular 10")
     local taskManager = button.create_text("#cccccc", "#ffffff", "Task manager...", "Roboto Regular 10")
     return wibox.widget {
-        {
             newWorkspace, 
             taskManager, 
             spacing = 7, 
             layout = wibox.layout.fixed.vertical
-        },
-        top = 10, 
-        bottom = 10, 
-        widget = wibox.widget.margin
     }
 end
 
@@ -79,7 +104,7 @@ local updateWidget = function()
     for _, tag in pairs(root.tags()) do
         local clients = tag:clients()
         if #clients > 0 then
-            workspacesLayout:add(createTagUI(tag.name, clients))
+            workspacesLayout:add(createTagUI(tag, clients))
         end
     end
 end
@@ -92,6 +117,7 @@ local popupWidget = wibox.widget {
     },
     {
         {
+            layoutlist, 
             workspacesLayout,
             {
                 widget = wibox.widget.separator,
@@ -99,15 +125,7 @@ local popupWidget = wibox.widget {
                 forced_height = 1,
             },
             createSettingsUI(),
-            {
-                {
-                    markup = "test", 
-                    widget = wibox.widget.textbox
-                },
-                top = 10, 
-                bottom = 10, 
-                widget = wibox.container.margin
-            }, 
+            spacing = 10, 
             layout = wibox.layout.fixed.vertical 
         }, 
         margins = 10, 
@@ -117,7 +135,7 @@ local popupWidget = wibox.widget {
     layout = wibox.layout.fixed.vertical
 }
 
-local popup = awful.popup {
+popup = awful.popup {
     widget = popupWidget, 
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
