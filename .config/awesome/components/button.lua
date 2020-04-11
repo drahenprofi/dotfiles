@@ -100,4 +100,29 @@ button.create_widget = function(widget, command)
     return button
 end
 
+button.create_image = function(image, image_hover)
+    local image_widget = wibox.widget {
+        image = image, 
+        widget = wibox.widget.imagebox
+    }
+    
+    image_widget:connect_signal("mouse::enter", function() image_widget.image = image_hover end)
+    image_widget:connect_signal("mouse::leave", function() image_widget.image = image end)
+
+    return image_widget
+end
+
+button.create_image_onclick = function(image, image_hover, onclick)
+    local image = button.create_image(image, image_hover)
+
+    local container = wibox.widget {
+        image, 
+        widget = wibox.widget.background
+    }
+
+    container:connect_signal("button::press", onclick)
+
+    return container
+end
+
 return button

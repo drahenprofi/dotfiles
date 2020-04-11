@@ -13,8 +13,8 @@ calendar.clock.fg = beautiful.bg_normal
 
 local cal = wibox.widget {
     date = os.date('*t'),
-    font = 'Consolas 12',
-    spacing = 7,
+    font = 'Fira Mono 10',
+    spacing = 8,
     fn_embed = function(widget, flag, date)
         local fg = beautiful.fg_normal
 
@@ -61,7 +61,11 @@ calendar.init = function(s)
     end)
 
     calendar_container:setup {
-        layout = wibox.layout.align.horizontal, 
+        {
+            widget = wibox.widget.separator,
+            color  = '#b8d2f82a',
+            forced_height = 1,
+        },
         {
             widget = wibox.container.margin,
             top = 20, 
@@ -72,7 +76,8 @@ calendar.init = function(s)
                 cal,
                 layout = wibox.layout.fixed.horizontal, 
             }
-        }
+        }, 
+        layout = wibox.layout.fixed.vertical
     }
 end
 
