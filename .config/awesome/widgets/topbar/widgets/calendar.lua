@@ -5,11 +5,15 @@ local gears = require("gears")
 local awful = require("awful")
 
 local calendar = {}
+local clock_format = "%A %B %d, %H:%M"
 
 calendar.clock = wibox.widget.textclock()
 calendar.clock.font = "Roboto Bold 10"
-calendar.clock.format = "<span foreground='" .. beautiful.bg_normal .. "'>  %H:%M  </span>"
+calendar.clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>"
 calendar.clock.fg = beautiful.bg_normal
+
+calendar.clock:connect_signal("mouse::enter", function() calendar.clock.format = "<span foreground='#ffffff'>"..clock_format.."</span>" end)
+calendar.clock:connect_signal("mouse::leave", function() calendar.clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>" end)
 
 local cal = wibox.widget {
     date = os.date('*t'),

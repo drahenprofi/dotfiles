@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local awful = require("awful")
 local gears = require("gears")
+local naughty = require("naughty")
 
 local button = require("components.button")
 
@@ -46,6 +47,9 @@ local popup = awful.popup {
     y = beautiful.bar_height + 5
 }
 
-notifWidget:connect_signal("button::press", function() popup.visible = not popup.visible end)
+notifWidget:connect_signal("button::press", function() 
+    popup.visible = not popup.visible 
+    --naughty.suspended = popup.visible
+end)
 
 return notifWidget

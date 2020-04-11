@@ -146,6 +146,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Icons
 theme.brightness_icon = icon_path.."brightness.png"
 theme.volume_up_icon = icon_path.."volume_up.png"
+theme.volume_up_grey_icon = icon_path.."volume_up_grey.png"
 theme.volume_down_icon = icon_path.."volume_down.png"
 theme.volume_mute_icon = icon_path.."volume_mute.png"
 theme.volume_off_icon = icon_path.."volume_off.png"
@@ -170,8 +171,11 @@ theme.settings_icon = icon_path.."settings.png"
 theme.settings_grey_icon = icon_path.."settings_grey.png"
 theme.notification_icon = icon_path.."notification.png"
 theme.notification_grey_icon = icon_path.."notification_grey.png"
+theme.notification_none_icon = icon_path.."notifications_none.png"
 theme.clear_icon = icon_path.."clear.png"
 theme.clear_grey_icon = icon_path.."clear_grey.png"
+theme.search_icon = icon_path.."search.png"
+theme.search_grey_icon = icon_path.."search_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

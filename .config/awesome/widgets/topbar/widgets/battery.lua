@@ -6,7 +6,7 @@ local naughty = require("naughty")
 
 
 local battery_text = wibox.widget{
-  markup = "<span foreground='" .. beautiful.bg_normal .. "'>battery text</span>",
+  markup = "0%",
   align  = 'center',
   valign = 'center',
   widget = wibox.widget.textbox, 
@@ -19,12 +19,12 @@ local battery_image = wibox.widget {
 }
 
 local function update_widget(bat, charging)
-  battery_text.markup = "<span foreground='" .. beautiful.bg_normal .. "'>" .. bat .. "%</span>"
+  battery_text.markup = bat .. "%"
 
   if charging then
     battery_image.image = beautiful.battery_charging_icon
   elseif bat > 10 then
-    battery_image.image = beautiful.battery_full_icon_dark
+    battery_image.image = beautiful.battery_full_icon
   else
     battery_image.image = beautiful.battery_alert_icon
   end

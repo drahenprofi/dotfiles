@@ -1,5 +1,5 @@
 -- This returns the "Wow, such empty." message.
-
+local beautiful = require("beautiful")
 local wibox = require('wibox')
 
 local dpi = require('beautiful').xresources.apply_dpi
@@ -16,7 +16,7 @@ local empty_notifbox = wibox.widget {
 			layout = wibox.layout.align.horizontal,
 			nil, 
 			{
-				image = widget_icon_dir .. 'empty-notification' .. '.svg',
+				image = beautiful.notification_none_icon, 
 				resize = true,
 				forced_height = dpi(35),
 				forced_width = dpi(35),
