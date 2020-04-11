@@ -170,6 +170,8 @@ theme.settings_icon = icon_path.."settings.png"
 theme.settings_grey_icon = icon_path.."settings_grey.png"
 theme.notification_icon = icon_path.."notification.png"
 theme.notification_grey_icon = icon_path.."notification_grey.png"
+theme.clear_icon = icon_path.."clear.png"
+theme.clear_grey_icon = icon_path.."clear_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

@@ -55,7 +55,7 @@ end
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
 
 
-local sidepanel = require("widgets.sidepanel")
+--local sidepanel = require("widgets.sidepanel")
 require("widgets.topbar")
 --local mainmenu = require("mainmenu")
 local notifications = require("notifications")
@@ -140,7 +140,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 1, sidepanel.toggle)
+    --awful.button({ }, 1, sidepanel.toggle)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -235,7 +235,7 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey },            "r", function () awful.util.spawn("sh /home/parndt/.config/rofi/launch.sh") end),
 
-    awful.key({ modkey }, "m", sidepanel.toggle),
+    --awful.key({ modkey }, "m", sidepanel.toggle),
      
     awful.key({ modkey }, "x",
               function ()

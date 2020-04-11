@@ -43,7 +43,7 @@ local popup = awful.popup {
     visible = false, 
     ontop = true, 
     x = awful.screen.focused().geometry.width - width - 5, 
-    y = beautiful.bar_height + 5, 
+    y = beautiful.bar_height + 5
 }
 
 notifWidget:connect_signal("button::press", function() popup.visible = not popup.visible end)
