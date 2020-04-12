@@ -181,6 +181,8 @@ theme.search_icon = icon_path.."search.png"
 theme.search_grey_icon = icon_path.."search_grey.png"
 theme.sort_icon = icon_path.."sort.png"
 theme.sort_grey_icon = icon_path.."sort_grey.png"
+theme.add_icon = icon_path.."add.png"
+theme.add_grey_icon = icon_path.."add_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

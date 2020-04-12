@@ -5,8 +5,8 @@ local beautiful = require("beautiful")
 
 local ll = awful.widget.layoutlist {
     base_layout = wibox.widget {
-        spacing         = 5,
-        forced_num_cols = 5,
+        spacing         = 10,
+        forced_num_cols = 4,
         layout          = wibox.layout.grid.vertical,
     },
     widget_template = {
@@ -21,8 +21,8 @@ local ll = awful.widget.layoutlist {
             widget  = wibox.container.margin,
         },
         id              = 'background_role',
-        forced_width    = 48,
-        forced_height   = 48,
+        forced_width    = 32,
+        forced_height   = 32,
         shape           = gears.shape.rounded_rect,
         widget          = wibox.container.background,
     }

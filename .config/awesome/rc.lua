@@ -23,7 +23,6 @@ local utils = require("utils")
 local runprompt = require("widgets.runprompt")
 
 local switcher = require("widgets.awesome-switcher")
-require("daemons")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to

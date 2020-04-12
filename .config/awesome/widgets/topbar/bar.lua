@@ -50,7 +50,6 @@ awful.screen.connect_for_each_screen(function(s)
         bg = color_solid,
     })
 
-    local battery_image, battery_text = battery.get()
     local bar_taglist = taglist.init(s)
     calendar.init(s)
 
@@ -62,45 +61,15 @@ awful.screen.connect_for_each_screen(function(s)
         {   -- Left
             widget(session), 
             widget(workspaces),
-            {
-
-                widget = wibox.container.margin,
-                top = beautiful.bar_item_padding, 
-                bottom = beautiful.bar_item_padding,
-                left = 4,
-                right = 4,
-                {
-                    widget = wibox.container.background,
-                    bg = beautiful.misc2, 
-                    shape = function(cr, width, height)
-                        gears.shape.rounded_rect(cr, width, height, beautiful.bar_item_radius)
-                    end,
-                    {
-                        widget = wibox.container.margin,
-                        top = 2, 
-                        bottom = 2,
-                        left = 6,
-                        right = 6,
-                        {
-                            bar_taglist,
-                            layout = wibox.layout.fixed.horizontal, 
-                        }
-                    }
-                }
-            },
+            widget(bar_taglist),
             layout = wibox.layout.fixed.horizontal, 
         }, 
         {       
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
-            widget(volume), 
-            widget(wibox.widget {
-                battery_image, 
-                battery_text, 
-                spacing = 2, 
-                layout = wibox.layout.fixed.horizontal
-            }), 
+            widget(volume),
+            widget(battery()), 
             widget(wibox.widget {
                 widget = wibox.container.margin,
                 top = 1, 

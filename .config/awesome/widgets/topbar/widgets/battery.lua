@@ -1,43 +1,110 @@
+-------------------------------------------------
+-- Battery Widget for Awesome Window Manager
+-- Shows the battery status using the ACPI tool
+-- More details could be found here:
+-- https://github.com/streetturtle/awesome-wm-widgets/tree/master/battery-widget
+
+-- @author Pavel Makhov
+-- @copyright 2017 Pavel Makhov
+-------------------------------------------------
+
 local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
+local watch = require("awful.widget.watch")
+local wibox = require("wibox")
+local gfs = require("gears.filesystem")
+local dpi = require('beautiful').xresources.apply_dpi
 
+-- acpi sample outputs
+-- Battery 0: Discharging, 75%, 01:51:38 remaining
+-- Battery 0: Charging, 53%, 00:57:43 until charged
 
-local battery_text = wibox.widget{
-  markup = "<span foreground='#cccccc'>0%</span>",
-  align  = 'center',
-  valign = 'center',
-  widget = wibox.widget.textbox, 
-  font = "Roboto Bold 10"
-}
+local HOME = os.getenv("HOME")
 
-local battery_image = wibox.widget {
-  image  = beautiful.battery_full_grey_icon,
-  widget = wibox.widget.imagebox
-}
+local battery_widget = {}
+local function worker(args)
+    local icon_widget = wibox.widget {
+        id = "icon",
+        image = beautiful.battery_alert_icon, 
+        widget = wibox.widget.imagebox,
+    }
+    local level_widget = wibox.widget {
+        markup = "0%", 
+        font = "Roboto Bold 10",
+        widget = wibox.widget.textbox
+    }
 
-local function update_widget(bat, charging)
-  battery_text.markup = bat .. "%"
+    battery_widget = wibox.widget {
+        icon_widget,
+        level_widget,
+        spacing = dpi(2),
+        layout = wibox.layout.fixed.horizontal,
+    }
 
-  --[[if charging then
-    battery_image.image = beautiful.battery_charging_icon
-  elseif bat > 10 then
-    battery_image.image = beautiful.battery_full_grey_icon
-  else
-    battery_image.image = beautiful.battery_alert_icon
-  end]]--
+    local function show_battery_warning()
+        naughty.notify {
+            icon = beautiful.battery_alert_icon,
+            icon_size = 100,
+            text = "Battery running low!",
+            title = "Warning",
+            timeout = 25, -- show the warning for a longer time
+            hover_timeout = 0.5,
+        }
+    end
+    local last_battery_check = os.time()
+    local batteryType = beautiful.battery_full_icon
+
+    watch("acpi -i", 10,
+    function(widget, stdout, stderr, exitreason, exitcode)
+        local battery_info = {}
+        local capacities = {}
+        for s in stdout:gmatch("[^\r\n]+") do
+            local status, charge_str, time = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
+            if status ~= nil then
+                table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
+            else
+                local cap_str = string.match(s, '.+:.+last full capacity (%d+)')
+                table.insert(capacities, tonumber(cap_str))
+            end
+        end
+
+        local capacity = 0
+        for i, cap in ipairs(capacities) do
+            capacity = capacity + cap
+        end
+
+        local charge = 0
+        local count = 0
+        for _, batt in ipairs(battery_info) do
+            charge = charge + batt.charge
+            count = count + 1
+        end
+
+        charge = math.floor(charge / count)
+
+        if (charge >= 0 and charge < 10) then
+            batteryType = beautiful.battery_alert_icon
+            if enable_battery_warning and status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300 then
+                -- if 5 minutes have elapsed since the last warning
+                last_battery_check = os.time()
+
+                show_battery_warning()
+        end
+        elseif (charge >= 10 and charge < 40) then batteryType = beautiful.battery_full_icon
+        elseif (charge >= 40 and charge < 60) then batteryType = beautiful.battery_full_icon
+        elseif (charge >= 60 and charge < 80) then batteryType = beautiful.battery_full_icon
+        elseif (charge >= 80 and charge <= 100) then batteryType = beautiful.battery_full_icon
+        elseif status == 'Charging' then
+            batteryType = beautiful.battery_charging_icon
+        end
+
+        icon_widget.image = batteryType
+        level_widget.markup = charge.."%"
+    end,
+    icon_widget)
+
+    return battery_widget
 end
 
-awesome.connect_signal("daemons::battery", function(value)
-  update_widget(value)
-end)
-
-local battery = {
-  get = function()
-    return battery_image, battery_text
-  end
-}
-
-return battery
+return setmetatable(battery_widget, { __call = function(_, ...) return worker(...) end })

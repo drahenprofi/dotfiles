@@ -4,8 +4,6 @@ local wibox = require('wibox')
 
 local dpi = require('beautiful').xresources.apply_dpi
 
-local config_dir = require('gears').filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. 'widgets/notif-center/icons/'
 
 local empty_notifbox = wibox.widget {
 	{
@@ -30,26 +28,11 @@ local empty_notifbox = wibox.widget {
 			align = 'center',
 			valign = 'center',
 			widget = wibox.widget.textbox
-		},
-		{
-			text = 'Come back later.',
-			font = 'Roboto Medium 10',
-			align = 'center',
-			valign = 'center',
-			widget = wibox.widget.textbox
-		},
+		}
 	},
 	margins = dpi(20),
 	widget = wibox.container.margin
 
-}
-
-
-local separator_for_empty_msg =  wibox.widget
-{
-	orientation = 'vertical',
-	opacity = 0.0,
-	widget = wibox.widget.separator
 }
 
 -- Make empty_notifbox center

@@ -31,7 +31,7 @@ local createClientUI = function(client, tag)
                 }, 
                 {
                     forced_height = 24, 
-                    font = "Roboto Regular 11", 
+                    font = "Roboto Medium 11", 
                     valign = "center",
                     markup = client.name, 
                     widget = wibox.widget.textbox
@@ -48,7 +48,7 @@ local createClientUI = function(client, tag)
         widget = wibox.container.background
     }
 
-    widget:connect_signal("mouse::enter", function() widget.bg = beautiful.bg_very_light end)
+    widget:connect_signal("mouse::enter", function() widget.bg = beautiful.bg_light end)
     widget:connect_signal("mouse::leave", function() widget.bg = beautiful.bg_normal end)
 
     widget:connect_signal("button::press", function()
@@ -87,7 +87,18 @@ end
 
 local createSettingsUI = function() 
     local newWorkspace = button.create_text("#cccccc", "#ffffff", "New workspace", "Roboto Regular 10")
+    newWorkspace:connect_signal("button::press", function() 
+        for _, tag in pairs(root.tags()) do
+            if #tag:clients() == 0 then
+               tag:view_only()
+               popup.visible = false
+               break 
+            end
+        end
+    end)
+
     local taskManager = button.create_text("#cccccc", "#ffffff", "Task manager...", "Roboto Regular 10")
+    
     return wibox.widget {
             newWorkspace, 
             taskManager, 
@@ -117,7 +128,13 @@ local popupWidget = wibox.widget {
     },
     {
         {
-            layoutlist, 
+            {
+                nil,
+                layoutlist,
+                nil,
+                expand = "none", 
+                layout = wibox.layout.align.horizontal
+            },
             workspacesLayout,
             {
                 widget = wibox.widget.separator,
