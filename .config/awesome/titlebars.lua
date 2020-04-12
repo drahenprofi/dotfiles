@@ -5,7 +5,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local utils = require("utils")
 local titlebars = {}
 
 local naughty = require("naughty")
