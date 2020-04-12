@@ -2,6 +2,8 @@ local awful = require("awful")
 local gears = require("gears")
 local naughty = require("naughty")
 
+local hotkeys_popup = require("awful.hotkeys_popup")
+
 -- Define mod key
 local modkey = "Mod4"
 local altkey = "Mod1"
@@ -16,8 +18,8 @@ keys.desktopbuttons = gears.table.join(
 )
 
 keys.globalkeys = gears.table.join(
-    --awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-    --          {description="show help", group="awesome"}),
+    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+              {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
