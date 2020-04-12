@@ -1,7 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
+local dpi = require('beautiful').xresources.apply_dpi
 local gears = require("gears")
 
 local button = require("components.button")
@@ -21,8 +21,8 @@ local createClientUI = function(client, tag)
                     nil, 
                     {
                         image = client.icon,
-                        forced_height = 24, 
-                        forced_width = 24,  
+                        forced_height = dpi(20), 
+                        forced_width = dpi(20),  
                         widget = wibox.widget.imagebox
                     }, 
                     nil,
@@ -30,16 +30,16 @@ local createClientUI = function(client, tag)
                     layout = wibox.layout.align.vertical
                 }, 
                 {
-                    forced_height = 24, 
+                    forced_height = dpi(20), 
                     font = "Roboto Medium 11", 
                     valign = "center",
                     markup = client.name, 
                     widget = wibox.widget.textbox
                 }, 
-                spacing = 10, 
+                spacing = dpi(10), 
                 layout = wibox.layout.fixed.horizontal
             }, 
-            margins = 10, 
+            margins = dpi(8), 
             widget = wibox.container.margin, 
         }, 
         shape = function(cr, width, height)
@@ -62,7 +62,7 @@ end
 
 local createTagUI = function(tag, clients)
     local clientsContainer = wibox.layout.fixed.vertical()
-    clientsContainer.spacing = 7
+    clientsContainer.spacing = 5
 
     for _, c in pairs(clients) do
         clientsContainer:add(createClientUI(c, tag))
@@ -98,6 +98,10 @@ local createSettingsUI = function()
     end)
 
     local taskManager = button.create_text("#cccccc", "#ffffff", "Task manager...", "Roboto Regular 10")
+    taskManager:connect_signal("button::press", function() 
+        awful.spawn("lxtask") 
+        popup.visible = false
+    end)
     
     return wibox.widget {
             newWorkspace, 

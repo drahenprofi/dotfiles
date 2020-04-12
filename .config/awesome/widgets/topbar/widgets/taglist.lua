@@ -25,15 +25,16 @@ local taglist_buttons = gears.table.join(
 
 local taglist = {}
 
+local markupSelected = function(tag) return "<span foreground='#ffffff'>  "..tag.name.."  </span>" end
+local markupNormal = function(tag) return "<span foreground='#aaaaaa'>  "..tag.name.."  </span>" end
+
 local update_icon = function(item, tag, index)
     item.visible = true 
 
     if tag.selected then
-        item.markup = "<span foreground='#ffffff'>  "..tag.name.."  </span>"
-    elseif tag.urgent then
-        item.markup = "<span foreground='"..beautiful.highlight.."'>  "..tag.name.."  </span>"
+        item.markup = markupSelected(tag)
     elseif #tag:clients() > 0 then
-        item.markup = "<span foreground='#aaaaaa'>  "..tag.name.."  </span>"
+        item.markup = markupNormal(tag)
     else
         item.visible = false
     end
@@ -48,7 +49,8 @@ taglist.init = function(s)
             {
                 { 
                     font = "Roboto Bold 10",
-                    id = "img_tag",
+                    id = "text_tag",
+                    fg = "#000000",
                     widget = wibox.widget.textbox,
                 },
                 widget = wibox.container.margin
@@ -57,17 +59,34 @@ taglist.init = function(s)
             id     = 'background_role',
             widget = wibox.container.background,
             create_callback = function(item, tag, index, _)
-                update_icon(item:get_children_by_id('img_tag')[1], tag, index)
+                local textbox = item:get_children_by_id('text_tag')[1]
+                update_icon(textbox, tag, index)
+
+                item:connect_signal("mouse::enter", function() 
+                    if textbox.markup ~= markupSelected(tag) then
+                        item.backup = textbox.markup
+                        item.hasBackup = true
+                    else
+                        item.hasBackup = false
+                    end
+
+                    textbox.markup = markupSelected(tag)
+                end)
+
+                item:connect_signal("mouse::leave", function()
+                    if item.hasBackup and not tag.selected then textbox.markup = item.backup end
+                end)
+
             end,
             update_callback = function(item, tag, index, _)
-                update_icon(item:get_children_by_id('img_tag')[1], tag, index)
+                update_icon(item:get_children_by_id('text_tag')[1], tag, index)
             end,
         },
     }
 
     local container = wibox.widget {
         taglist, 
-        button.create_image_onclick(beautiful.add_icon, beautiful.add_icon, function() 
+        button.create_image_onclick(beautiful.add_grey_icon, beautiful.add_icon, function() 
             for _, tag in pairs(root.tags()) do
                 if #tag:clients() == 0 then
                    tag:view_only()

@@ -35,7 +35,7 @@ local rofi_launcher = button.create_image_onclick(beautiful.search_grey_icon, be
     awful.spawn("/home/parndt/.config/rofi/launch.sh")
 end)
 
-beautiful.systray_icon_spacing = 6
+beautiful.systray_icon_spacing = 12
 local systray = wibox.widget.systray()
 
 ------------------------------------------------
@@ -64,7 +64,7 @@ awful.screen.connect_for_each_screen(function(s)
             widget(bar_taglist),
             layout = wibox.layout.fixed.horizontal, 
         }, 
-        {       
+        {   -- Middle
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
