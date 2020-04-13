@@ -84,7 +84,7 @@ naughty.connect_signal("added", function(n)
 	-- Check if there's an icon
 	local appicon = n.icon or n.app_icon
 	if not appicon then
-		appicon = widget_icon_dir .. 'new-notif' .. '.svg'
+		appicon = beautiful.notification_icon
 	end
 
 	local box = require("widgets.notif-center.build-notifbox.notifbox")

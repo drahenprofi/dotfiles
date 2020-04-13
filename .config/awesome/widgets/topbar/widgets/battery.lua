@@ -42,17 +42,20 @@ local function worker(args)
         layout = wibox.layout.fixed.horizontal,
     }
 
-    local function show_battery_warning()
+    local function show_battery_warning(charge)
         naughty.notify {
             icon = beautiful.battery_alert_icon,
             icon_size = 100,
-            text = "Battery running low!",
-            title = "Warning",
+            text = charge.."% left",
+            title = "Battery running low!",
             timeout = 25, -- show the warning for a longer time
             hover_timeout = 0.5,
         }
     end
+
     local last_battery_check = os.time()
+    local warningDisplayed = false
+
     local batteryType = beautiful.battery_full_icon
 
     watch("acpi -i", 10,
@@ -85,11 +88,12 @@ local function worker(args)
 
         if (charge >= 0 and charge < 10) then
             batteryType = beautiful.battery_alert_icon
-            if enable_battery_warning and status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300 then
+            if status ~= 'Charging' and (os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed) then
                 -- if 5 minutes have elapsed since the last warning
                 last_battery_check = os.time()
+                warningDisplayed = true
 
-                show_battery_warning()
+                show_battery_warning(charge)
         end
         elseif (charge >= 10 and charge < 40) then batteryType = beautiful.battery_full_icon
         elseif (charge >= 40 and charge < 60) then batteryType = beautiful.battery_full_icon
