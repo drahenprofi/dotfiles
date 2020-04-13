@@ -183,6 +183,10 @@ theme.sort_icon = icon_path.."sort.png"
 theme.sort_grey_icon = icon_path.."sort_grey.png"
 theme.add_icon = icon_path.."add.png"
 theme.add_grey_icon = icon_path.."add_grey.png"
+theme.left_icon = icon_path.."left.png"
+theme.left_grey_icon = icon_path.."left_grey.png"
+theme.right_icon = icon_path.."right.png"
+theme.right_grey_icon = icon_path.."right_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

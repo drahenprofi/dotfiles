@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local awful = require("awful")
 
+local button = require("components.button")
 local popupLib = require("components.popup")
 
 
@@ -50,9 +51,33 @@ local cal = wibox.widget {
 }
 
 local popupWidget = wibox.widget {
-    nil, 
+    {
+        nil, 
+        button.create_image_onclick(beautiful.left_grey_icon, beautiful.left_icon, function() 
+            local a = cal:get_date()
+            a.month = a.month - 1
+            cal:set_date(nil)
+            cal:set_date(a)
+        end), 
+        nil, 
+        forced_width = 30,
+        expand = "none", 
+        layout = wibox.layout.align.vertical
+    },
     cal,
-    nil, 
+    {
+        nil, 
+        button.create_image_onclick(beautiful.right_grey_icon, beautiful.right_icon, function() 
+            local a = cal:get_date()
+            a.month = a.month + 1
+            cal:set_date(nil)
+            cal:set_date(a)
+        end), 
+        nil, 
+        forced_width = 30,
+        expand = "none", 
+        layout = wibox.layout.align.vertical
+    },
     expand = "none", 
     layout = wibox.layout.align.horizontal, 
 }
@@ -61,6 +86,9 @@ local popup = popupLib.create(awful.screen.focused().geometry.width - width - 5,
     height, width, popupWidget)
 
 clock:connect_signal("button::press", function() 
+    cal:set_date(nil)
+    cal:set_date(os.date('*t'))
+
     popup.visible = not popup.visible 
 end)
 

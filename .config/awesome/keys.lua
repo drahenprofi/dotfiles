@@ -85,7 +85,7 @@ keys.globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     awful.key({ modkey },            "r", function () awful.util.spawn(apps.launcher) end),
-    awful.key({ modkey }, "p",     function () apps.xrandr.xrandr() end),
+    awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr) end),
      
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
