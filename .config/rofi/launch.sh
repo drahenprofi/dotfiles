@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rofi -show drun -theme horizon
+rofi -show drun -drun-display-format {name} -theme horizon

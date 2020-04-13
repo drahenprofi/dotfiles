@@ -5,6 +5,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local gears = require("gears")
 
 local button = require("components.button")
+local popupLib = require("components.popup") 
 local layoutlist = require("widgets.topbar.widgets.layoutlist")
 
 local height = 400
@@ -126,46 +127,24 @@ end
 
 local popupWidget = wibox.widget {
     {
+        nil,
+        layoutlist,
+        nil,
+        expand = "none", 
+        layout = wibox.layout.align.horizontal
+    },
+    workspacesLayout,
+    {
         widget = wibox.widget.separator,
         color  = '#b8d2f82a',
         forced_height = 1,
     },
-    {
-        {
-            {
-                nil,
-                layoutlist,
-                nil,
-                expand = "none", 
-                layout = wibox.layout.align.horizontal
-            },
-            workspacesLayout,
-            {
-                widget = wibox.widget.separator,
-                color  = '#b8d2f82a',
-                forced_height = 1,
-            },
-            createSettingsUI(),
-            spacing = 10, 
-            layout = wibox.layout.fixed.vertical 
-        }, 
-        margins = 10, 
-        widget = wibox.container.margin
-    }, 
-    forced_width = width, 
-    layout = wibox.layout.fixed.vertical
+    createSettingsUI(),
+    spacing = 10, 
+    layout = wibox.layout.fixed.vertical 
 }
 
-popup = awful.popup {
-    widget = popupWidget, 
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-    end,
-    visible = false, 
-    ontop = true, 
-    x = 5, 
-    y = beautiful.bar_height + 5,
-}
+popup = popupLib.create(5, beautiful.bar_height + 5, nil, width, popupWidget)
 
 workspacesWidget:connect_signal("button::press", function() 
     updateWidget()

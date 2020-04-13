@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 
 local button = require("components.button")
+local popupLib = require("components.popup")
 
 local popup = {}
 
@@ -24,38 +25,15 @@ local sessionWidget = wibox.widget {
 }
 
 local popupWidget = wibox.widget {
-    {
-        widget = wibox.widget.separator,
-        color  = '#b8d2f82a',
-        forced_height = 1,
-    },
-    {
-        {
-            poweroff, 
-            reboot, 
-            logout, 
-            settings, 
-            spacing = 20, 
-            layout = wibox.layout.fixed.horizontal
-        }, 
-        margins = 10, 
-        widget = wibox.container.margin
-    }, 
-    forced_height = height, 
-    forced_width = width, 
-    layout = wibox.layout.fixed.vertical
+    poweroff, 
+    reboot, 
+    logout, 
+    settings, 
+    spacing = 20, 
+    layout = wibox.layout.fixed.horizontal
 }
 
-popup = awful.popup {
-    widget = popupWidget, 
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-    end,
-    visible = false, 
-    ontop = true, 
-    x = 5, 
-    y = beautiful.bar_height + 5,
-}
+popup = popupLib.create(5, beautiful.bar_height + 5, height, width, popupWidget)
 
 sessionWidget:connect_signal("button::press", function() popup.visible = not popup.visible end)
 

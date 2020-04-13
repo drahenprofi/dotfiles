@@ -51,8 +51,6 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     local bar_taglist = taglist.init(s)
-    calendar.init(s)
-
 
     s.topbar:setup {
         layout = wibox.layout.align.horizontal, 
@@ -79,7 +77,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal, 
                 }
             }),
-            widget(calendar.clock), 
+            widget(calendar), 
             widget(rofi_launcher), 
             widget(notification),
             layout = wibox.layout.fixed.horizontal, 

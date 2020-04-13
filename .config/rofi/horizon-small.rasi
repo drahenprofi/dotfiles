@@ -19,12 +19,13 @@ configuration {
 window {
     transparency:                   "real";
     background-color:               @background;
-    height:                         100%;
-    width:                          100%;
+    height:                         49%;
+    width:                          30%;
     location:                       northwest;
     anchor:                         northwest;
-    x-offset:                       0;
-    y-offset:                       28;
+    x-offset:                       69.5%;
+    y-offset:                       5%/*28*/;
+    border-radius:                  6px;
 }
 
 prompt {
@@ -33,8 +34,7 @@ prompt {
 
 entry  {
     expand:                         false;
-    width:                          36em;
-    margin:                         40px -270px 20px 450px;
+    width:                          26%;
     border-radius:                  12;
     padding:                        10px 10px 10px 10px;
     background-color:               #ffffff20;
@@ -44,22 +44,17 @@ entry  {
 }
 
 listview {
-    columns:                        4;
-    margin:                         40px 120px 40px 120px;
+    columns:                        3;
+}
+
+mainbox {
+    padding:                        2% 2% 2% 2%;
 }
 
 element {
     orientation:                    vertical;
-    padding:                        16px;
-    margin:                         16px;
-}
-
-mainbox {
-    padding:                        10px 40px 10px 40px;
-}
-
-element {
-    padding:                        8px;
+    margin:                         1%;
+    padding:                        1%;
 }
 
 element normal.urgent, element alternate.urgent {

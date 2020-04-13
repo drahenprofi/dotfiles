@@ -4,20 +4,26 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local awful = require("awful")
 
-local calendar = {}
+local popupLib = require("components.popup")
+
+
+local width = 270
+local height = 180
 local clock_format = "%A %B %d, %H:%M"
 
-calendar.clock = wibox.widget.textclock()
-calendar.clock.font = "Roboto Bold 10"
-calendar.clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>"
-calendar.clock.fg = beautiful.bg_normal
+local calendar = {}
 
-calendar.clock:connect_signal("mouse::enter", function() calendar.clock.format = "<span foreground='#ffffff'>"..clock_format.."</span>" end)
-calendar.clock:connect_signal("mouse::leave", function() calendar.clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>" end)
+local clock = wibox.widget.textclock()
+clock.font = "Roboto Bold 10"
+clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>"
+clock.fg = beautiful.bg_normal
+
+clock:connect_signal("mouse::enter", function() clock.format = "<span foreground='#ffffff'>"..clock_format.."</span>" end)
+clock:connect_signal("mouse::leave", function() clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>" end)
 
 local cal = wibox.widget {
     date = os.date('*t'),
-    font = 'Fira Mono 10',
+    font = 'Fira Mono 11',
     spacing = 8,
     fn_embed = function(widget, flag, date)
         local fg = beautiful.fg_normal
@@ -26,6 +32,8 @@ local cal = wibox.widget {
             fg = beautiful.highlight_alt
         elseif flag == "header" then
             fg = beautiful.highlight
+            widget:set_markup('<b>' .. widget:get_text() .. '</b>')
+        elseif flag == "weekday" then
             widget:set_markup('<b>' .. widget:get_text() .. '</b>')
         end
 
@@ -41,48 +49,19 @@ local cal = wibox.widget {
     widget = wibox.widget.calendar.month
 }
 
-calendar.init = function(s)
-    local calendar_container = wibox {
-        screen = s, 
-        x = awful.screen.focused().geometry.width - 205, 
-        y = beautiful.bar_height + 5, 
-        width = 200, 
-        height = 180,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-        end, 
-        ontop = true, 
-        visible = false
-    }
-    --naughty.notify({text="height: "..cal.height})
+local popupWidget = wibox.widget {
+    nil, 
+    cal,
+    nil, 
+    expand = "none", 
+    layout = wibox.layout.align.horizontal, 
+}
 
-    calendar_container:connect_signal("button::press", function()
-        calendar_container.visible = not calendar_container.visible    
-    end)
+local popup = popupLib.create(awful.screen.focused().geometry.width - width - 5, beautiful.bar_height + 5, 
+    height, width, popupWidget)
 
-    calendar.clock:connect_signal("button::press", function()
-        calendar_container.visible = not calendar_container.visible
-    end)
+clock:connect_signal("button::press", function() 
+    popup.visible = not popup.visible 
+end)
 
-    calendar_container:setup {
-        {
-            widget = wibox.widget.separator,
-            color  = '#b8d2f82a',
-            forced_height = 1,
-        },
-        {
-            widget = wibox.container.margin,
-            top = 20, 
-            bottom = 0,
-            left = 16,
-            right = 16,
-            {
-                cal,
-                layout = wibox.layout.fixed.horizontal, 
-            }
-        }, 
-        layout = wibox.layout.fixed.vertical
-    }
-end
-
-return calendar
+return clock
