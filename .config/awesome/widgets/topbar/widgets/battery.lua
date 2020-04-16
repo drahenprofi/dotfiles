@@ -56,7 +56,7 @@ local function worker(args)
     local last_battery_check = os.time()
     local warningDisplayed = false
 
-    local batteryType = beautiful.battery_full_icon
+    local batteryType = beautiful.battery_full_grey_icon
 
     watch("acpi -i", 10,
     function(widget, stdout, stderr, exitreason, exitcode)
@@ -86,25 +86,23 @@ local function worker(args)
 
         charge = math.floor(charge / count)
 
-        if (charge >= 0 and charge < 10) then
-            batteryType = beautiful.battery_alert_icon
-            if status ~= 'Charging' and (os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed) then
+        if status == 'Charging' then
+            batteryType = beautiful.battery_charging_grey_icon
+        elseif (charge >= 0 and charge < 10) then
+            batteryType = beautiful.battery_alert_grey_icon
+            if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed then
                 -- if 5 minutes have elapsed since the last warning
                 last_battery_check = os.time()
                 warningDisplayed = true
 
                 show_battery_warning(charge)
-        end
-        elseif (charge >= 10 and charge < 40) then batteryType = beautiful.battery_full_icon
-        elseif (charge >= 40 and charge < 60) then batteryType = beautiful.battery_full_icon
-        elseif (charge >= 60 and charge < 80) then batteryType = beautiful.battery_full_icon
-        elseif (charge >= 80 and charge <= 100) then batteryType = beautiful.battery_full_icon
-        elseif status == 'Charging' then
-            batteryType = beautiful.battery_charging_icon
+            end
+        elseif (charge >= 10 and charge <= 100) then 
+            batteryType = beautiful.battery_full_grey_icon
         end
 
         icon_widget.image = batteryType
-        level_widget.markup = charge.."%"
+        level_widget.markup = "<span foreground='#cccccc'>"..charge.."%</span>"
     end,
     icon_widget)
 

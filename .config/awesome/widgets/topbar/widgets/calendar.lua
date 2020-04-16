@@ -9,7 +9,7 @@ local popupLib = require("components.popup")
 
 
 local width = 270
-local height = 180
+local height = 200
 local clock_format = "%A %B %d, %H:%M"
 
 local calendar = {}
@@ -22,15 +22,19 @@ clock.fg = beautiful.bg_normal
 clock:connect_signal("mouse::enter", function() clock.format = "<span foreground='#ffffff'>"..clock_format.."</span>" end)
 clock:connect_signal("mouse::leave", function() clock.format = "<span foreground='#cccccc'>"..clock_format.."</span>" end)
 
+local currentMonth = os.date('*t').month
+
 local cal = wibox.widget {
     date = os.date('*t'),
     font = 'Fira Mono 11',
     spacing = 8,
     fn_embed = function(widget, flag, date)
         local fg = beautiful.fg_normal
+        widget.markup = widget.text
 
-        if flag == "focus" then
+        if flag == "focus" and date.month == currentMonth then
             fg = beautiful.highlight_alt
+            widget:set_markup('<b>' .. widget:get_text() .. '</b>')
         elseif flag == "header" then
             fg = beautiful.highlight
             widget:set_markup('<b>' .. widget:get_text() .. '</b>')

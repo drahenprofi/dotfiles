@@ -9,7 +9,7 @@ local modkey = "Mod4"
 local altkey = "Mod1"
 
 local keys = {}
-local apps = require("apps")
+local apps = require("config.apps")
 
 keys.desktopbuttons = gears.table.join(
     --awful.button({ }, 1, sidepanel.toggle)

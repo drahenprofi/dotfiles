@@ -1,7 +1,3 @@
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -11,7 +7,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 -- titlebars
-local titlebars = require("titlebars")
+local titlebars = require("config.titlebars")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -41,55 +37,10 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
-
-local keys = require("keys")
+local keys = require("config.keys")
 require("widgets.topbar")
 
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
-}
--- }}}
-
--- Rounded corners
-client.connect_signal("manage", function (c, startup)
-    if not c.fullscreen and not c.maximized then
-        c.shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-        end
-    end
-end)
--- Fullscreen clients should not have rounded corners
-local function no_rounded_corners(c)
-    if c.fullscreen or c.maximized then
-        c.shape = function(cr, width, height)
-            gears.shape.rectangle(cr, width, height)
-        end
-    else
-        c.shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-        end
-    end
-end
-client.connect_signal("property::fullscreen", no_rounded_corners)
-client.connect_signal("property::maximized", function(c) 
-    no_rounded_corners(c)    
-end)
+require("config.layout")
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -118,7 +69,7 @@ end)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = require("rules")
+awful.rules.rules = require("config.rules")
 -- }}}
 
 -- {{{ Signals
@@ -191,9 +142,5 @@ client.connect_signal("request::titlebars", function(c)
     )
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
-
 -- autorun programs
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")

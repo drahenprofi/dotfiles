@@ -66,7 +66,6 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
-            widget(volume),
             widget(battery()), 
             widget(wibox.widget {
                 widget = wibox.container.margin,
@@ -77,6 +76,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal, 
                 }
             }),
+            widget(volume),
             widget(calendar), 
             widget(rofi_launcher), 
             widget(notification),
