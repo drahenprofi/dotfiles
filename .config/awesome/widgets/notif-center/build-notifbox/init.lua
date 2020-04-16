@@ -59,6 +59,15 @@ reset_notifbox_layout = function()
 	remove_notifbox_empty = true
 end
 
+remove_notifbox = function(box)
+	notifbox_layout:remove_widgets(box)
+
+	if #notifbox_layout.children == 0 then
+		notifbox_layout:insert(1, empty_notifbox)
+		remove_notifbox_empty = true
+	end
+end
+
 
 -- Add empty notification message on start-up
 notifbox_layout:insert(1, empty_notifbox)
