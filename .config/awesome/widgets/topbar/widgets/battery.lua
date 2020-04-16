@@ -62,8 +62,14 @@ local function worker(args)
     function(widget, stdout, stderr, exitreason, exitcode)
         local battery_info = {}
         local capacities = {}
+
+        local charging = false
+
         for s in stdout:gmatch("[^\r\n]+") do
             local status, charge_str, time = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
+            
+            if status == "Charging" then charging = true end
+
             if status ~= nil then
                 table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
             else
@@ -86,7 +92,7 @@ local function worker(args)
 
         charge = math.floor(charge / count)
 
-        if status == 'Charging' then
+        if charging then
             batteryType = beautiful.battery_charging_grey_icon
         elseif (charge >= 0 and charge < 10) then
             batteryType = beautiful.battery_alert_grey_icon
