@@ -28,7 +28,7 @@ local function worker(args)
 
     local args = args or {}
 
-    local main_color = beautiful.highlight_alt
+    local main_color = beautiful.highlight
     local mute_color = beautiful.fg_normal .. "66"
     
     local height = 4
