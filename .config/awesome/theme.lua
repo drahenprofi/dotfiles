@@ -190,6 +190,8 @@ theme.right_icon = icon_path.."right.png"
 theme.right_grey_icon = icon_path.."right_grey.png"
 theme.delete_icon = icon_path.."delete.png"
 theme.delete_grey_icon = icon_path.."delete_grey.png"
+theme.start_icon = icon_path.."start.png"
+theme.start_grey_icon = icon_path.."start_grey.png"
 
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"

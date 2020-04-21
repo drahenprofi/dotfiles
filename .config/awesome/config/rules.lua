@@ -69,6 +69,19 @@ rules = {
       callback = function (c)
         awful.placement.centered(c,nil)
       end
+    }, 
+    { rule = { class = "Pavucontrol" },
+      properties = { floating  = true },
+      callback = function (c)
+        c.width = 450
+        c.height = 350
+        awful.placement.top_right(c, {
+          margins = {
+            top = beautiful.bar_height + 5, 
+            right = 5
+          }
+        })
+      end
     }
 }
 

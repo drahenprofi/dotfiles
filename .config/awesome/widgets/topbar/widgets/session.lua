@@ -20,7 +20,7 @@ local width = 190
 local height = 48
 
 local sessionWidget = wibox.widget {
-    button.create_image(beautiful.power_grey_icon, beautiful.power_icon), 
+    button.create_image(beautiful.start_grey_icon, beautiful.start_icon), 
     widget = wibox.widget.background
 }
 

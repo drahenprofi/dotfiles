@@ -2,10 +2,11 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
+local naughty = require("naughty")
 
 local button = require("components.button")
 local popupLib = require("components.popup")
-local widget = require("widgets.topbar.widgets.volume-watcher") 
+local widget = require("widgets.topbar.widgets.volume-watcher")
 
 local GET_VOLUME_CMD = 'amixer -D pulse sget Master'
 local INC_VOLUME_CMD = 'amixer -D pulse sset Master 5%+'
@@ -14,7 +15,7 @@ local TOG_VOLUME_CMD = 'amixer -D pulse sset Master toggle'
 
 local popup = {}
 
-local width = 190
+local width = 325
 local height = 48
 
 local volumeWidget = wibox.widget {
@@ -24,8 +25,8 @@ local volumeWidget = wibox.widget {
 
 local popupWidget = wibox.widget {
     widget(), 
-    spacing = 20, 
-    layout = wibox.layout.fixed.horizontal
+    spacing = 5,
+    layout = wibox.layout.align.horizontal
 }
 
 popup = popupLib.create(awful.screen.focused().geometry.width - width - 5, beautiful.bar_height + 5, 

@@ -211,7 +211,11 @@ keys.clientkeys = gears.table.join(
             c:raise()
         end ,
         {description = "(un)maximize horizontally", group = "client"}), 
-    awful.key({ modkey             }, "c", awful.placement.centered)
+    awful.key({ modkey             }, "c", awful.placement.centered), 
+    awful.key({ modkey, "Shift"    }, "c", function(c)
+        c.width = 560
+        c.height = 295
+    end)
 )
 
 keys.clientbuttons = gears.table.join(
