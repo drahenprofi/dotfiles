@@ -4,7 +4,8 @@ local apps = {
     notifications = require("notifications"), 
     switcher = require("widgets.awesome-switcher"), 
     xrandr = "lxrandr", --require("widgets.multi-monitor.xrandr2")
-    screenshot = "scrot"
+    screenshot = "scrot", 
+    volume = "pavucontrol"
 }
 
 return apps

@@ -59,4 +59,12 @@ popup.create = function(x, y, height, width, widget)
     return popupWidget
 end
 
+popup.separator = function() 
+    return wibox.widget {
+        widget = wibox.widget.separator,
+        color  = '#b8d2f82a',
+        forced_height = dpi(1),
+    }
+end
+
 return popup
