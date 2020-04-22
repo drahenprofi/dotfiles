@@ -1,5 +1,6 @@
 local awful = require("awful")
 local gears = require("gears")
+local beautiful = require("beautiful")
 local naughty = require("naughty")
 
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -55,10 +56,16 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
+    -- master height & width
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
+    awful.key({ modkey,           }, "k",     function () awful.tag.incmhfact( 0.05)          end,
+              {description = "increase master height factor", group = "layout"}),
+    awful.key({ modkey,           }, "j",     function () awful.tag.incmhfact(-0.05)          end,
+              {description = "decrease master height factor", group = "layout"}),
+
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
@@ -67,6 +74,8 @@ keys.globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
+
+    -- switch layout
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
@@ -86,6 +95,7 @@ keys.globalkeys = gears.table.join(
 
     awful.key({ modkey },            "r", function () awful.util.spawn(apps.launcher) end),
     awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr) end),
+    awful.key({ modkey, "Shift" }, "p",     function () awful.spawn(apps.screenshot) end),
      
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
@@ -215,6 +225,13 @@ keys.clientkeys = gears.table.join(
     awful.key({ modkey, "Shift"    }, "c", function(c)
         c.width = 560
         c.height = 295
+        
+        awful.placement.top_right(c, {
+            margins = {
+              top = beautiful.bar_height + 5, 
+              right = 5
+            }
+          })
     end)
 )
 

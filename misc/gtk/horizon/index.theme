@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=horizon-dark
+Comment=A Material Design theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=horizon-dark
+MetacityTheme=horizon-dark
+IconTheme=Adwaita
+CursorTheme=Adwaita
+CursorSize=24

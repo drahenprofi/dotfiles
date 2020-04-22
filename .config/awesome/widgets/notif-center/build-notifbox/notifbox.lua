@@ -27,22 +27,26 @@ notifbox.create = function(icon, title, message, width)
                 widget = wibox.widget.imagebox
             }, 
             {
-                nil, 
                 {
+                    nil, 
                     {
-                        font = "Roboto Bold 12", 
-                        markup = title, 
-                        widget = wibox.widget.textbox
+                        {
+                            font = "Roboto Bold 12", 
+                            markup = title, 
+                            widget = wibox.widget.textbox
+                        }, 
+                        {
+                            font = "Roboto Regular 10", 
+                            markup = message, 
+                            widget = wibox.widget.textbox
+                        },
+                        layout = wibox.layout.fixed.vertical
                     }, 
-                    {
-                        font = "Roboto Regular 10", 
-                        markup = message, 
-                        widget = wibox.widget.textbox
-                    },
-                    layout = wibox.layout.fixed.vertical
+                    expand = "none", 
+                    layout = wibox.layout.align.vertical
                 }, 
-                expand = "none", 
-                layout = wibox.layout.align.vertical
+                left = dpi(10), 
+                widget = wibox.container.margin
             }, 
             {
                 {
@@ -64,7 +68,7 @@ notifbox.create = function(icon, title, message, width)
                 margins = dpi(10), 
                 widget = wibox.container.margin
             }, 
-            spacing = dpi(10), 
+            spacing = dpi(20), 
             layout = wibox.layout.align.horizontal
         }, 
         shape = function(cr, width, height)

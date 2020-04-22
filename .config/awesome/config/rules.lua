@@ -82,6 +82,9 @@ rules = {
           }
         })
       end
+    }, 
+    { rule = { class = "Lxappearance" },
+      properties = { floating  = true },
     }
 }
 
