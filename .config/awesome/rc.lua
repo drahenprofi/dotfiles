@@ -6,8 +6,6 @@ require("awful.autofocus")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
--- titlebars
-local titlebars = require("config.titlebars")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -87,60 +85,7 @@ client.connect_signal("manage", function (c)
     end
 end)
 
-local double_tap_timer = nil
-function check_double_tap(double_tap_function)
-    if double_tap_timer then
-        double_tap_timer:stop()
-        double_tap_timer = nil
-        double_tap_function()
-        -- naughty.notify({text = "We got a double tap"})
-        return
-    end
-
-    double_tap_timer = gears.timer.start_new(0.20, function()
-        double_tap_timer = nil
-        return false -- false so the timer doesn't restart automatically
-    end)
-end
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            -- `client`: part of the global scope
-            -- this is not working
-            client.focus = c
-            awful.mouse.client.move(c)
-            c:raise()
-            check_double_tap( function()
-                c.maximized = not c.maximized
-            end)
-        end),
-        awful.button({ }, 3, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    local top_titlebar = awful.titlebar(c, {
-        size = beautiful.titlebar_height,
-        font = beautiful.font,
-        bg_normal = beautiful.titlebar_bg_normal,
-        bg_urgent = beautiful.titlebar_bg_urgent,
-        fg_normal = beautiful.titlebar_fg_normal,
-        fg_urgent = beautiful.titlebar_fg_urgent,
-    })
-
-    top_titlebar:setup(
-        titlebars.normal_tbar({
-            client = c,
-            buttons = buttons,
-        })
-    )
-end)
+require("config.titlebars")
 
 -- autorun programs
 awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")

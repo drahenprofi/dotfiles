@@ -5,7 +5,8 @@ local apps = {
     switcher = require("widgets.awesome-switcher"), 
     xrandr = "lxrandr", --require("widgets.multi-monitor.xrandr2")
     screenshot = "scrot", 
-    volume = "pavucontrol"
+    volume = "pavucontrol", 
+    appearance = "lxappearance"
 }
 
 return apps
