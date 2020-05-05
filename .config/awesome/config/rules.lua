@@ -85,6 +85,17 @@ rules = {
     }, 
     { rule = { class = "Lxappearance" },
       properties = { floating  = true },
+    }, 
+    { rule = { class = "Cisco AnyConnect Secure Mobility Client" },
+      properties = { floating = true }, 
+      callback = function (c)
+        awful.placement.top_right(c, {
+          margins = {
+            top = beautiful.bar_height + 5, 
+            right = 5
+          }
+        })
+      end
     }
 }
 
