@@ -36,7 +36,6 @@ keys.globalkeys = gears.table.join(
       function ()
           apps.switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
       end),
-
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
