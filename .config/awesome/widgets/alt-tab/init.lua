@@ -193,9 +193,14 @@ function _M.preview()
 	local h = w * 0.75 -- widget height
 	local innerMargin = 10
 	local outerMargin = 10
+	local spacing = 10
 	local textboxHeight = w * 0.125
-	local W = (w + 2 * (innerMargin + outerMargin)) * math.min(cols, #_M.altTabTable)
-	local H = (h + textboxHeight + 2 * (innerMargin + outerMargin)) * math.ceil(#_M.altTabTable / cols) 
+	local W = (w + 2 * innerMargin) * math.min(cols, #_M.altTabTable) 
+		+ (math.min(cols, #_M.altTabTable) - 1) * spacing 
+		+ 2 * outerMargin
+	local H = (h + textboxHeight + 2 * (innerMargin)) * math.ceil(#_M.altTabTable / cols) 
+		+ spacing * (math.ceil(#_M.altTabTable / cols) - 1)
+		+ 2 * outerMargin
 
 	local x = (screen[mouse.screen].geometry.width - W) / 2
 	local y = (screen[mouse.screen].geometry.height - H) / 2
@@ -225,8 +230,9 @@ function _M.preview()
 
 	_M.preview_widgets = {}
 
+	--naughty.notify({text = test})
 	-- create all the widgets
-    for i = 1, #leftRightTab do
+	for i = 1, #leftRightTab do
 		local c = leftRightTab[i]
 
 		local preview_img = wibox.widget.base.make_widget()
@@ -236,7 +242,8 @@ function _M.preview()
 		preview_img.draw = function(preview_img, preview_wbox, cr, width, height)
 			local cg = c:geometry()
 			local tx, ty, sx, sy
-			
+			tx = 0 
+			ty = 0
 			if cg.width > cg.height then
 				sx = w / cg.width
 				sy = math.min(sx, h / cg.height)
@@ -248,7 +255,7 @@ function _M.preview()
 			ty = (h - sy * cg.height) / 2
 
 			local tmp = gears.surface(c.content)
-			--cr:translate(0, 0)
+			cr:translate(tx, ty)
 			cr:scale(sx, sy)
 			cr:set_source_surface(tmp, 0, 0)
 			cr:paint()
@@ -290,15 +297,11 @@ function _M.preview()
 		}
 
 		local container = wibox.widget {
-			{
-				client_widget, 
-				shape = function(cr, width, height)
-					gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-				end, 
-				widget = wibox.container.background
-			}, 
-			margins = outerMargin, 
-			widget = wibox.container.margin
+			client_widget, 
+			shape = function(cr, width, height)
+				gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
+			end, 
+			widget = wibox.container.background
 		}
 		
 		container:connect_signal("widget::updated", function() 
@@ -316,7 +319,8 @@ function _M.preview()
 
 	--layout
     preview_layout = wibox.layout.grid()
-    preview_layout.forced_num_cols = cols
+	preview_layout.forced_num_cols = cols
+	preview_layout.spacing = spacing
 
 	for i = 1, #leftRightTab do
 		preview_layout:add(_M.preview_widgets[i])
@@ -324,7 +328,11 @@ function _M.preview()
 
 	_M.preview_wbox:set_widget(wibox.widget {
 		popupLib.separator(), 
-		preview_layout, 
+		{
+			preview_layout,
+			margins = outerMargin, 
+			widget = wibox.container.margin
+		}, 
 		layout = wibox.layout.fixed.vertical
 	})
 end
