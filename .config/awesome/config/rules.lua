@@ -96,6 +96,22 @@ rules = {
           }
         })
       end
+    }, 
+    {
+      rule = {
+        class = "jetbrains-.*",
+        instance = "sun-awt-X11-XWindowPeer",
+        name = "win.*"
+      },
+      properties = {
+          floating = true,
+          focus = true,
+          focusable = false,
+          ontop = true,
+          placement = awful.placement.restore,
+          buttons = {}, 
+          titlebars_enabled = false
+      }
     }
 }
 
