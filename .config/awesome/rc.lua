@@ -87,5 +87,7 @@ end)
 
 require("config.titlebars")
 
+--require("notifications2")
+
 -- autorun programs
 awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")

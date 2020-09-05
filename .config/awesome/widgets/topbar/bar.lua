@@ -58,7 +58,7 @@ awful.screen.connect_for_each_screen(function(s)
         expand = "none",
         {   -- Left
             widget(session), 
-            widget(workspaces),
+            --widget(workspaces),
             widget(bar_taglist),
             layout = wibox.layout.fixed.horizontal, 
         }, 

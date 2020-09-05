@@ -26,7 +26,7 @@ local currentMonth = os.date('*t').month
 
 local cal = wibox.widget {
     date = os.date('*t'),
-    font = 'Fira Mono 11',
+    font = 'Roboto Regular 11',
     spacing = 8,
     fn_embed = function(widget, flag, date)
         local fg = beautiful.fg_normal
