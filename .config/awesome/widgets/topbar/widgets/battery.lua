@@ -45,9 +45,9 @@ local function worker(args)
     local function show_battery_warning(charge)
         naughty.notify {
             icon = beautiful.battery_alert_icon,
-            icon_size = 100,
-            text = charge.."% left",
-            title = "Battery running low!",
+            icon_size = 32,
+            text = charge.."% remaining",
+            title = "Battery may run out soon!",
             timeout = 25, -- show the warning for a longer time
             hover_timeout = 0.5,
         }

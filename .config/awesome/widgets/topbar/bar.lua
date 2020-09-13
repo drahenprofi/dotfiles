@@ -27,9 +27,9 @@ local battery = require("widgets.topbar.widgets.battery")
 local taglist = require("widgets.topbar.widgets.taglist")
 local calendar = require("widgets.topbar.widgets.calendar")
 local session = require("widgets.topbar.widgets.session")
-local notification = require("widgets.topbar.widgets.notification")
 local volume = require("widgets.topbar.widgets.volume")
 local workspaces = require("widgets.topbar.widgets.workspaces") 
+local spotify = require("widgets.topbar.widgets.spotify")
 
 local rofi_launcher = button.create_image_onclick(beautiful.search_grey_icon, beautiful.search_icon, function()
     awful.spawn("/home/parndt/.config/rofi/launch.sh")
@@ -63,6 +63,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         }, 
         {   -- Middle
+            widget(spotify()),
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
@@ -79,7 +80,6 @@ awful.screen.connect_for_each_screen(function(s)
             widget(volume),
             widget(calendar), 
             widget(rofi_launcher), 
-            widget(notification),
             layout = wibox.layout.fixed.horizontal, 
         }
     }

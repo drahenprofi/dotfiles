@@ -112,7 +112,7 @@ rules = {
           buttons = {}, 
           titlebars_enabled = false
       }
-    }
+    }, 
 }
 
 return rules

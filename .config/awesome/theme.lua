@@ -196,6 +196,7 @@ theme.start_grey_icon = icon_path.."start_grey.png"
 -- apps
 theme.firefox_icon = icon_path.."firefox.png"
 theme.spotify_icon = icon_path.."spotify.png"
+theme.spotify_bar_icon = icon_path.."spotify_bar.png"
 theme.folder_icon = icon_path.."folder.png"
 theme.intellij_icon = icon_path.."intellij.png"
 theme.github_icon = icon_path.."github.png"
