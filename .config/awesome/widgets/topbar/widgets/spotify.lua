@@ -4,15 +4,22 @@ local watch = require("awful.widget.watch")
 local gears = require("gears")
 local beautiful = require("beautiful")
 
+local button = require("components.button")
+
 ---------------------------
 -- Spotify commands
 ---------------------------
 
 local spotify_commands = {}
 spotify_commands.status = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus'|egrep -A 1 \"string\"|cut -b 26-|cut -d '\"' -f 1|egrep -v ^$"
-spotify_commands.song = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 \"title\"|egrep -v \"title\"|cut -b 44-|cut -d '\"' -f 1|egrep -v ^$"
-spotify_commands.artist = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 \"artist\"|egrep -v \"artist\"|egrep -v \"array\"|cut -b 27-|cut -d '\"' -f 1|egrep -v ^$"
+--spotify_commands.song = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 \"title\"|egrep -v \"title\"|cut -b 44-|cut -d '\"' -f 1|egrep -v ^$"
+--spotify_commands.artist = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 \"artist\"|egrep -v \"artist\"|egrep -v \"array\"|cut -b 27-|cut -d '\"' -f 1|egrep -v ^$"
 spotify_commands.toggle = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+
+spotify_commands.song = "sp eval | grep SPOTIFY_TITLE | sed 's|SPOTIFY_TITLE=\"||g' | sed 's|\"$||g'"
+spotify_commands.artist = "sp eval | grep SPOTIFY_ARTIST | sed 's|SPOTIFY_ARTIST=\"||g' | sed 's|\"$||g'"
+spotify_commands.prev = "sp prev"
+spotify_commands.next = "sp next"
 
 local spotify = {}
 
@@ -23,12 +30,11 @@ local function worker(args)
     local artist = wibox.widget.textbox("Artist")
     artist.font = "Fira Mono 10"
 
+    local prev = button.create_image_onclick(beautiful.previous_grey_icon, beautiful.previous_icon, function() awful.spawn(spotify_commands.prev) end)
+    local next = button.create_image_onclick(beautiful.next_grey_icon, beautiful.next_icon, function() awful.spawn(spotify_commands.next) end)
+
     function add_song_data()
-        local song_data = wibox.widget({
-            {
-                image = beautiful.spotify_bar_icon,
-                widget = wibox.widget.imagebox
-            },
+        local songData = wibox.widget({
             {
                 artist,
                 widget = wibox.container.place,
@@ -45,19 +51,33 @@ local function worker(args)
             spacing = 8, 
             layout = wibox.layout.fixed.horizontal,
         })
-        return song_data
+
+
+        songData:connect_signal("button::press", function() 
+            awful.spawn(spotify_commands.toggle)
+        end)
+
+        return songData
     end
 
-    spotify = add_song_data()
+    spotify = wibox.widget {
+        {
+            image = beautiful.spotify_bar_icon,
+            widget = wibox.widget.imagebox
+        },
+        prev, 
+        add_song_data(),
+        next,
+        spacing = 8,
+        layout = wibox.layout.fixed.horizontal
+    } 
 
     spotify.playing = false
+    spotify.visible = false
     spotify.current_song = ""
 
-    spotify:connect_signal("button::press", function() 
-        awful.spawn(spotify_commands.toggle)
-    end)
 
-    update_widget = function(widget, song, _, _, _)
+    spotify.update_widget = function(widget, song, _, _, _)
         awful.spawn.easy_async_with_shell(spotify_commands.status, function(out)
             if string.match(out, "Playing") then
                 widget.playing = true
@@ -87,7 +107,7 @@ local function worker(args)
         end)
     end
 
-    watch(spotify_commands.song, 1, update_widget, spotify)
+    watch(spotify_commands.song, 1, spotify.update_widget, spotify)
 
     return spotify
 end

@@ -9,4 +9,9 @@ local apps = {
     appearance = "lxappearance"
 }
 
+user = {
+    terminal = "kitty", 
+    floating_terminal = "kitty"
+}
+
 return apps

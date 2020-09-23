@@ -24,6 +24,7 @@ rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+          "floating_terminal"
         },
         class = {
           "Arandr",
@@ -53,10 +54,8 @@ rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
-    { rule = { class = "firefox" },
-      properties = { titlebars_enabled = false } },
-    { rule = { class = "Chromium" },
-      properties = { titlebars_enabled = false } },
+    { rule_any = { class = { "firefox", "Chromium" }
+      }, properties = { titlebars_enabled = false } },
     
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },

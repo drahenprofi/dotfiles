@@ -8,6 +8,8 @@ local apps = require("config.apps")
 local button = require("components.button")
 local popupLib = require("components.popup")
 
+local dashboard = require("widgets.dashboard")
+
 local popup = {}
 
 local poweroff = button.create_image_onclick(beautiful.power_grey_icon, beautiful.power_icon, function() awful.spawn("poweroff") end)
@@ -94,6 +96,7 @@ local popupWidget = wibox.widget {
 
 popup = popupLib.create(5, beautiful.bar_height + 5, height, width, popupWidget)
 
-sessionWidget:connect_signal("button::press", function() popup.visible = not popup.visible end)
+--sessionWidget:connect_signal("button::press", function() popup.visible = not popup.visible end)
+sessionWidget:connect_signal("button::press", dashboard.toggle)
 
 return sessionWidget
