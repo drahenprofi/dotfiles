@@ -1,0 +1,18 @@
+/*@import url(pages/wikipedia-dark.css)*/
+
+@-moz-document url("about:newtab") {  
+    body {
+        background-color: #1C1E26 !important;
+        color: #dddddd !important;
+    }
+
+    :root {
+
+        --newtab-icon-primary-color: #ffffff;
+    }
+    
+    .top-site-outer {
+        color: #dddddd !important;
+    }
+}
+
