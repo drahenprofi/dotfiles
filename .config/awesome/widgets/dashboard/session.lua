@@ -19,6 +19,6 @@ return wibox.widget {
     poweroff, 
     reboot, 
     logout,
-    spacing = dpi(8),
+    spacing = dpi(18),
     layout = wibox.layout.fixed.horizontal
 }

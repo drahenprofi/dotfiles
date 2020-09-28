@@ -33,6 +33,9 @@ theme.fg_minimize   = "#ffffff"
 
 theme.highlight = "#F43E5C"
 theme.highlight_alt = "#B877DB"
+theme.green = "#29D398"
+theme.yellow = "#F09383"
+theme.blue = "#848c9a"
 theme.misc1 = "#6C6F93"
 theme.misc2 = "#2f3240"
 
@@ -121,6 +124,7 @@ theme.titlebar_minimize_button_focus_hover  = icon_path.."titlebar/minimize/mini
 theme.titlebar_height = dpi(28)
 
 theme.wallpaper = themes_path.."wallpaper.png"
+theme.wallpaper_blur = themes_path.."wallpaper_blur.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = icon_path.."layouts/fairhw.png"
@@ -212,7 +216,7 @@ theme.next_grey_icon = icon_path.."next_grey.png"
 theme.previous_icon = icon_path.."previous.png"
 theme.previous_grey_icon = icon_path.."previous_grey.png"
 
-theme.avatar = icon_path.."fateful.png"
+theme.avatar = icon_path.."avatar.png"
 theme.series_icon = icon_path.."series.png"
 
 return theme

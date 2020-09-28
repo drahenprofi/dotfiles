@@ -4,8 +4,24 @@ local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local text = wibox.widget{
-    markup = '<b><span foreground="'..beautiful.highlight..'">parndt</span></b>',
+local icon = wibox.widget{
+    markup = '<span foreground="'..beautiful.green..'">ﲤ</span>',
+    font = "Fira Mono 72",
+    align  = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+}
+
+local arrow = wibox.widget{
+    markup = '<span foreground="'..beautiful.highlight..'">></span>',
+    font = "Fira Mono 16",
+    align  = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+}
+
+local username = wibox.widget{
+    markup = '<span foreground="'..beautiful.highlight_alt..'">parndt</span>',
     font = "Fira Mono 16",
     align  = 'center',
     valign = 'center',
@@ -18,8 +34,14 @@ local image = wibox.widget {
 }
 
 return wibox.widget {
-    image, 
-    text,
-    spacing = dpi(16),
+    icon,
+    { 
+        --icon,
+        arrow,
+        username, 
+        spacing = dpi(12),
+        layout = wibox.layout.fixed.horizontal
+    },
+    spacing = dpi(12),
     layout = wibox.layout.fixed.vertical
 }

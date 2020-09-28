@@ -30,8 +30,8 @@ local function worker(args)
     local artist = wibox.widget.textbox("Artist")
     artist.font = "Fira Mono 10"
 
-    local prev = button.create_image_onclick(beautiful.previous_grey_icon, beautiful.previous_icon, function() awful.spawn(spotify_commands.prev) end)
-    local next = button.create_image_onclick(beautiful.next_grey_icon, beautiful.next_icon, function() awful.spawn(spotify_commands.next) end)
+    local prev = button.create_image_onclick(beautiful.previous_grey_icon, beautiful.previous_icon, function() awful.spawn(spotify_commands.prev, false) end)
+    local next = button.create_image_onclick(beautiful.next_grey_icon, beautiful.next_icon, function() awful.spawn(spotify_commands.next, false) end)
 
     function add_song_data()
         local songData = wibox.widget({
@@ -54,7 +54,7 @@ local function worker(args)
 
 
         songData:connect_signal("button::press", function() 
-            awful.spawn(spotify_commands.toggle)
+            awful.spawn(spotify_commands.toggle, false)
         end)
 
         return songData
