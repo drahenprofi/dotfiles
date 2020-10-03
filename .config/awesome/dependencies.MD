@@ -1,0 +1,3 @@
++ brightnessctl
++ pamixer
++ sp

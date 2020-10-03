@@ -6,37 +6,45 @@ local gears = require("gears")
 
 local content = {}
 
+local container = {}
+
 local function createDiskRow(disk)
+    local detailText = math.floor(disk.used/1024/1024)
+        .. '/'
+        .. math.floor(disk.size/1024/1024) .. 'GB ('
+        .. math.floor(disk.perc) .. '%) '
+    --local detailText = math.floor((disk.size - disk.used) / 1024 / 1024) .. " GB free"
+
     return wibox.widget{
         {
-            markup = "<span foreground='"..beautiful.highlight_alt.."'>"..disk.mount.."</span>",
+            markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.mount.."</span>",
             font = "Fira Mono Bold 12", 
             forced_width = 64, 
             widget = wibox.widget.textbox
         },
         {
-            max_value = 100,
-            value = tonumber(disk.perc),
-            forced_height = 32,
-            margins = 4, 
-            background_color = beautiful.bg_normal,
-            color = beautiful.green,
-            shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, 4)
-            end,
-            widget = wibox.widget.progressbar,
+          {
+              max_value = 100,
+              value = tonumber(disk.perc),
+              forced_height = 32,
+              margins = 4, 
+              background_color = beautiful.bg_normal,
+              color = beautiful.misc1,
+              shape = function(cr, width, height)
+                  gears.shape.rounded_rect(cr, width, height, 4)
+              end,
+              widget = wibox.widget.progressbar,
 
-        },
-        {
-            text = math.floor(disk.used/1024/1024)
-              .. '/'
-              .. math.floor(disk.size/1024/1024) .. 'GB ('
-              .. math.floor(disk.perc) .. '%)',
-            font = "Roboto Bold 10", 
-            forced_width = 112,
-            align = "right",  
-            widget = wibox.widget.textbox
-        },
+          },
+          {
+              markup = "<span foreground='"..beautiful.fg_dark.."'>"..detailText.."</span>",
+              font = "Roboto Bold 10", 
+              --forced_width = 112,
+              align = "right",  
+              widget = wibox.widget.textbox
+          },
+          layout = wibox.layout.stack
+        }, 
         layout = wibox.layout.align.horizontal
       }
 end
@@ -48,6 +56,17 @@ local function worker(args)
 
     content = wibox.layout.fixed.vertical()
     content.spacing = 8
+
+    container = wibox.widget {
+      --[[{
+        markup = "<span foreground='"..beautiful.fg_dark.."'></span>",
+        font = "Fira Mono 28", 
+        widget = wibox.widget.textbox
+      }, ]]--
+      content, 
+      spacing = 24, 
+      layout = wibox.layout.fixed.horizontal
+    }
 
     watch([[bash -c "df | tail -n +2"]], timeout,
         function(widget, stdout)
@@ -80,9 +99,9 @@ local function worker(args)
         content
     )
 
-    return content
+    return container
 end
 
-return setmetatable(content, { __call = function(_, ...)
+return setmetatable(container, { __call = function(_, ...)
     return worker(...)
 end })

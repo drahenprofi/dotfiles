@@ -27,6 +27,7 @@ theme.bg_light      = "#232530"
 theme.bg_very_light = "#2E303E"
 
 theme.fg_normal     = "#dddddd"
+theme.fg_dark       = "#cccccc"
 theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
@@ -35,7 +36,7 @@ theme.highlight = "#F43E5C"
 theme.highlight_alt = "#B877DB"
 theme.green = "#29D398"
 theme.yellow = "#F09383"
-theme.blue = "#848c9a"
+theme.blue = "#26BBD9"
 theme.misc1 = "#6C6F93"
 theme.misc2 = "#2f3240"
 
@@ -218,5 +219,6 @@ theme.previous_grey_icon = icon_path.."previous_grey.png"
 
 theme.avatar = icon_path.."avatar.png"
 theme.series_icon = icon_path.."series.png"
+theme.laptop_icon = icon_path.."laptop.png"
 
 return theme

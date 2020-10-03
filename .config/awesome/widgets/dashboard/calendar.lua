@@ -16,7 +16,7 @@ local cal = wibox.widget {
     font = 'Roboto Regular 11',
     spacing = 8,
     fn_embed = function(widget, flag, date)
-        local fg = beautiful.fg_normal
+        local fg = beautiful.fg_dark
         local font = "Roboto Regular 11"
         widget.markup = widget.text
 
