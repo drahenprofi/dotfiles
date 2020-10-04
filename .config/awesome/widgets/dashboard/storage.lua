@@ -13,7 +13,6 @@ local function createDiskRow(disk)
         .. '/'
         .. math.floor(disk.size/1024/1024) .. 'GB ('
         .. math.floor(disk.perc) .. '%) '
-    --local detailText = math.floor((disk.size - disk.used) / 1024 / 1024) .. " GB free"
 
     return wibox.widget{
         {
@@ -37,11 +36,14 @@ local function createDiskRow(disk)
 
           },
           {
+            {
               markup = "<span foreground='"..beautiful.fg_dark.."'>"..detailText.."</span>",
               font = "Roboto Bold 10", 
-              --forced_width = 112,
               align = "right",  
               widget = wibox.widget.textbox
+            }, 
+            right = 4, 
+            widget = wibox.container.margin
           },
           layout = wibox.layout.stack
         }, 
@@ -58,11 +60,6 @@ local function worker(args)
     content.spacing = 8
 
     container = wibox.widget {
-      --[[{
-        markup = "<span foreground='"..beautiful.fg_dark.."'></span>",
-        font = "Fira Mono 28", 
-        widget = wibox.widget.textbox
-      }, ]]--
       content, 
       spacing = 24, 
       layout = wibox.layout.fixed.horizontal

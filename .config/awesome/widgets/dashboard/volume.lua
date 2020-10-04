@@ -26,14 +26,14 @@ local function worker(args)
 
     local args = args or {}
 
-    local main_color = beautiful.green
+    local main_color = beautiful.blue
     local mute_color = beautiful.bg_normal
     
     local height = 4
     local image_size = 32
 
     local icon =  wibox.widget {
-        image = beautiful.volume_up_icon, 
+        image = beautiful.volume_up_grey_icon, 
         forced_height = image_size, 
         forced_width = image_size,
         widget = wibox.widget.imagebox
@@ -47,6 +47,7 @@ local function worker(args)
             gears.shape.rounded_rect(cr, width, height, 6)
         end,
         forced_height = height,
+        margins = 4, 
         widget        = wibox.widget.progressbar
     }
 
@@ -57,7 +58,7 @@ local function worker(args)
             direction     = 'east',
             layout        = wibox.container.rotate,
         },
-        spacing = 16, 
+        spacing = 8, 
         layout = wibox.layout.fixed.vertical
     }
 

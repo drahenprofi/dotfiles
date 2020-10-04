@@ -27,7 +27,7 @@ local battery = require("widgets.topbar.widgets.battery")
 local taglist = require("widgets.topbar.widgets.taglist")
 local calendar = require("widgets.topbar.widgets.calendar")
 local session = require("widgets.topbar.widgets.session")
-local volume = require("widgets.topbar.widgets.volume")
+--local volume = require("widgets.topbar.widgets.volume")
 local workspaces = require("widgets.topbar.widgets.workspaces") 
 local spotify = require("widgets.topbar.widgets.spotify")
 
@@ -77,7 +77,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal, 
                 }
             }),
-            widget(volume),
+            --widget(volume),
             widget(calendar), 
             widget(rofi_launcher), 
             layout = wibox.layout.fixed.horizontal, 

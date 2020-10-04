@@ -35,7 +35,8 @@ local function worker(args)
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, 6)
         end,
-        forced_height = 4, 
+        forced_height = 4,
+        margins = 4, 
         widget        = wibox.widget.progressbar
     }
 
@@ -46,7 +47,7 @@ local function worker(args)
             direction     = 'east',
             layout        = wibox.container.rotate,
         },
-        spacing = 16, 
+        spacing = 8, 
         layout = wibox.layout.fixed.vertical
     }
 
