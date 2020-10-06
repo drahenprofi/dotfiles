@@ -9,45 +9,47 @@ local content = {}
 local container = {}
 
 local function createDiskRow(disk)
-    local detailText = math.floor(disk.used/1024/1024)
-        .. '/'
-        .. math.floor(disk.size/1024/1024) .. 'GB ('
-        .. math.floor(disk.perc) .. '%) '
+  --[[local detailText = math.floor(disk.used/1024/1024)
+  .. '/'
+  .. math.floor(disk.size/1024/1024) .. 'GB']]--
+    local detailText = math.floor((disk.size - disk.used)/1024/1024) .. " GB free"
 
     return wibox.widget{
         {
             markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.mount.."</span>",
             font = "Fira Mono Bold 12", 
-            forced_width = 64, 
+            align = "center",
             widget = wibox.widget.textbox
         },
         {
           {
-              max_value = 100,
-              value = tonumber(disk.perc),
-              forced_height = 32,
-              margins = 4, 
-              background_color = beautiful.bg_normal,
-              color = beautiful.misc1,
-              shape = function(cr, width, height)
-                  gears.shape.rounded_rect(cr, width, height, 4)
-              end,
-              widget = wibox.widget.progressbar,
-
-          },
+            min_value = 0, 
+            max_value = 100, 
+            value = disk.perc,
+            start_angle = 3 * math.pi / 2,
+            bg = beautiful.bg_normal, 
+            colors = { beautiful.yellow },
+            --rounded_edge = true, 
+            thickness = 10,
+            widget = wibox.container.arcchart
+          },        
           {
-            {
-              markup = "<span foreground='"..beautiful.fg_dark.."'>"..detailText.."</span>",
-              font = "Roboto Bold 10", 
-              align = "right",  
-              widget = wibox.widget.textbox
-            }, 
-            right = 4, 
-            widget = wibox.container.margin
+            markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.perc.."%</span>",
+            font = "Roboto Bold 10", 
+            align = "center",  
+            widget = wibox.widget.textbox
           },
+          forced_height = 54, 
           layout = wibox.layout.stack
         }, 
-        layout = wibox.layout.align.horizontal
+        {
+          markup = "<span foreground='"..beautiful.fg_dark.."'>"..detailText.."</span>",
+          align = "center", 
+          font = "Roboto Medium 9", 
+          widget = wibox.widget.textbox
+        }, 
+        spacing = 8,
+        layout = wibox.layout.fixed.vertical
       }
 end
 
@@ -56,8 +58,8 @@ local function worker(args)
     local timeout = 60
     local disks = {}
 
-    content = wibox.layout.fixed.vertical()
-    content.spacing = 8
+    content = wibox.layout.fixed.horizontal()
+    content.spacing = 36
 
     container = wibox.widget {
       content, 

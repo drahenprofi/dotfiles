@@ -9,7 +9,7 @@ local naughty = require("naughty")
 local main_color = beautiful.highlight
 local mute_color = beautiful.bg_normal
 
-local image_size = 32
+local image_size = 28
 
 local icon =  wibox.widget {
     image = beautiful.brightness_icon, 
@@ -26,16 +26,20 @@ local progressbar = wibox.widget {
         gears.shape.rounded_rect(cr, width, height, 6)
     end,
     forced_height = 4,
-    margins = 4, 
     widget = wibox.widget.progressbar
 }
 
 local progressbar_container = wibox.widget {
     icon, 
     {
-        progressbar, 
-        direction     = 'east',
-        layout        = wibox.container.rotate,
+        {
+            progressbar, 
+            direction     = 'east',
+            layout        = wibox.container.rotate,
+        },
+        left = 4, 
+        right = 4, 
+        widget = wibox.container.margin
     },
     spacing = 8, 
     layout = wibox.layout.fixed.vertical

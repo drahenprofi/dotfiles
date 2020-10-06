@@ -30,7 +30,7 @@ local function worker(args)
     local mute_color = beautiful.bg_normal
     
     local height = 4
-    local image_size = 32
+    local image_size = 28
 
     local icon =  wibox.widget {
         image = beautiful.volume_up_grey_icon, 
@@ -47,16 +47,20 @@ local function worker(args)
             gears.shape.rounded_rect(cr, width, height, 6)
         end,
         forced_height = height,
-        margins = 4, 
         widget        = wibox.widget.progressbar
     }
 
     local progressbar_container = wibox.widget {
         icon, 
         {
-            progressbar, 
-            direction     = 'east',
-            layout        = wibox.container.rotate,
+            {
+                progressbar, 
+                direction     = 'east',
+                layout        = wibox.container.rotate,
+            },
+            left = 4, 
+            right = 4, 
+            widget = wibox.container.margin
         },
         spacing = 8, 
         layout = wibox.layout.fixed.vertical
@@ -70,13 +74,13 @@ local function worker(args)
         widget.value = volume / 100;
 
         if mute == 'off' then
-            icon.image = beautiful.volume_off_icon
+            icon.image = beautiful.volume_off_grey_icon
         elseif volume > 60 then
-            icon.image = beautiful.volume_up_icon
+            icon.image = beautiful.volume_up_grey_icon
         elseif volume > 15 then 
-            icon.image = beautiful.volume_down_icon
+            icon.image = beautiful.volume_down_grey_icon
         else
-            icon.image = beautiful.volume_mute_icon
+            icon.image = beautiful.volume_mute_grey_icon
         end
 
     end

@@ -138,8 +138,8 @@ dashboard:setup {
                     battery,
                     spacing = 32, 
                     widget = wibox.layout.fixed.horizontal
-                }, 200, 140),
-                drawBox(storage(), 200, 88), 
+                }, 200, 114),
+                drawBox(storage(), 200, 114), 
                 layout = wibox.layout.fixed.vertical
             }, 
             layout = wibox.layout.fixed.horizontal

@@ -152,11 +152,15 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Icons
 theme.brightness_icon = icon_path.."brightness.png"
+theme.brightness_grey_icon = icon_path.."brightness_grey.png"
 theme.volume_up_icon = icon_path.."volume_up.png"
 theme.volume_up_grey_icon = icon_path.."volume_up_grey.png"
 theme.volume_down_icon = icon_path.."volume_down.png"
+theme.volume_down_grey_icon = icon_path.."volume_down_grey.png"
 theme.volume_mute_icon = icon_path.."volume_mute.png"
+theme.volume_mute_grey_icon = icon_path.."volume_mute_grey.png"
 theme.volume_off_icon = icon_path.."volume_off.png"
+theme.volume_off_grey_icon = icon_path.."volume_off_grey.png"
 theme.launcher_icon = icon_path.."apps.png"
 theme.launcher_icon_dark = icon_path.."apps_dark.png"
 theme.tag_active_icon = icon_path.."radio_checked_2.png"
