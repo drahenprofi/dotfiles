@@ -67,7 +67,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
-            widget(battery()), 
+            widget(battery), 
             widget(wibox.widget {
                 widget = wibox.container.margin,
                 top = 1, 

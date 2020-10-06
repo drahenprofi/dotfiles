@@ -36,6 +36,9 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
 local keys = require("config.keys")
+
+require("evil")
+
 require("widgets.topbar")
 
 require("config.layout")

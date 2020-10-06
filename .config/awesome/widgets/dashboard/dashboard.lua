@@ -15,6 +15,7 @@ local time = require("widgets.dashboard.time")
 local storage = require("widgets.dashboard.storage")
 local volume = require("widgets.dashboard.volume")
 local brightness = require("widgets.dashboard.brightness")
+local battery = require("widgets.dashboard.battery")
 --local uptime = require("widgets.dashboard.uptime")
 --local ramPlusCPU = require("widgets.dashboard.rampluscpu")
 
@@ -134,7 +135,8 @@ dashboard:setup {
                 drawBox({
                     volume(),
                     brightness(), 
-                    spacing = 48, 
+                    battery,
+                    spacing = 32, 
                     widget = wibox.layout.fixed.horizontal
                 }, 200, 140),
                 drawBox(storage(), 200, 88), 
