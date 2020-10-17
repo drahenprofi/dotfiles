@@ -62,8 +62,9 @@ local function worker(args)
 
     spotify = wibox.widget {
         {
-            image = beautiful.spotify_bar_icon,
-            widget = wibox.widget.imagebox
+            markup = "<span foreground='"..beautiful.green.."'></span>", 
+            font = "Fira Mono 18", 
+            widget = wibox.widget.textbox
         },
         prev, 
         add_song_data(),
