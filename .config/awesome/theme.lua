@@ -221,8 +221,4 @@ theme.next_grey_icon = icon_path.."next_grey.png"
 theme.previous_icon = icon_path.."previous.png"
 theme.previous_grey_icon = icon_path.."previous_grey.png"
 
-theme.avatar = icon_path.."avatar.png"
-theme.series_icon = icon_path.."series.png"
-theme.laptop_icon = icon_path.."laptop.png"
-
 return theme

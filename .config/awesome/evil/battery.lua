@@ -59,7 +59,7 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
         batteryType = beautiful.battery_charging_grey_icon
     elseif (charge >= 0 and charge < 10) then
         batteryType = beautiful.battery_alert_grey_icon
-        if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed or charge < 2 then
+        if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed or charge < 3 then
             -- if 5 minutes have elapsed since the last warning
             last_battery_check = os.time()
             warningDisplayed = true

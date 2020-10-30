@@ -24,7 +24,6 @@ rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
-          "floating_terminal"
         },
         class = {
           "Arandr",
@@ -37,7 +36,6 @@ rules = {
           "Wpa_gui",
           "veromix",
           "xtightvncviewer",
-          "visualboyadvance-m"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -114,6 +112,22 @@ rules = {
           titlebars_enabled = false
       }
     }, 
+    { rule = { class = "Visualboyadvance-m" },
+      properties = { 
+        floating  = true, 
+      },
+    },
+    { rule = { instance = "floating_terminal" },
+      properties = { 
+        floating  = true, 
+      },
+    }, 
+    { rule = { class = "Spotify" },
+      properties = { 
+        maximized_vertical  = true, 
+        maximized_horizontal  = true, 
+      },
+    },
 }
 
 return rules
