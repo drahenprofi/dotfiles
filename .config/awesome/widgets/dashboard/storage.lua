@@ -29,7 +29,7 @@ local function createDiskRow(disk)
             start_angle = 3 * math.pi / 2,
             bg = beautiful.bg_normal, 
             colors = { beautiful.yellow },
-            --rounded_edge = true, 
+            rounded_edge = true, 
             thickness = 10,
             widget = wibox.container.arcchart
           },        
