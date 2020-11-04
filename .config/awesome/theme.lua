@@ -39,6 +39,7 @@ theme.yellow = "#F09383"
 theme.blue = "#26BBD9"
 theme.misc1 = "#6C6F93"
 theme.misc2 = "#2f3240"
+theme.transparent = "'#282A3600"
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(0)
@@ -77,19 +78,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 )
 
 theme.layoutlist_bg_selected = "#2E303E"
-
--- Notificatons
-theme.notification_margin = dpi(7)
-theme.notification_icon_size = dpi(64)
-theme.notification_fg = "#dddddd"
-theme.notification_opacity = 1
-theme.notification_spacing = dpi(0)
-theme.notification_border_width = dpi(0)
-theme.notification_max_width = dpi(350)
---theme.notification_max_height = dpi(78)
-theme.notification_shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, dpi(5))
-end
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]

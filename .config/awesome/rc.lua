@@ -1,10 +1,7 @@
--- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
 local naughty = require("naughty")
 
 -- {{{ Error handling
@@ -35,13 +32,11 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
-local keys = require("config.keys")
-
+require("config.keys")
 require("evil")
-
 require("widgets.topbar")
-
 require("config.layout")
+require("config.notifications")
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -89,8 +84,6 @@ client.connect_signal("manage", function (c)
 end)
 
 require("config.titlebars")
-
---require("notifications2")
 
 -- autorun programs
 awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")

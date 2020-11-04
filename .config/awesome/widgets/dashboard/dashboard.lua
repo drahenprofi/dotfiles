@@ -26,7 +26,7 @@ local dashboard = wibox({
     y = beautiful.bar_height,
     width = awful.screen.focused().geometry.width, 
     height = awful.screen.focused().geometry.height - beautiful.bar_height,
-    --bgimage = beautiful.wallpaper_blur
+    bgimage = beautiful.wallpaper,
     bg = beautiful.bg_normal
 })
 
@@ -35,7 +35,7 @@ local function drawBox(content, width, height)
     local padding = 16
 
     local container = wibox.container.background()
-    container.bg = beautiful.bg_light
+    container.bg = beautiful.bg_normal
     container.forced_width = dpi(width + margin + padding)
     container.forced_height = dpi(height + margin + padding)
     container.shape = function(cr, width, height)

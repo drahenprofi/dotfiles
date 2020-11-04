@@ -1,7 +1,7 @@
 local apps = {
     terminal = "kitty", 
     launcher = "sh /home/parndt/.config/rofi/launch.sh", 
-    notifications = require("notifications"), 
+    notifications = require("widgets.volume-brightness-notifications"), 
     switcher = require("widgets.alt-tab"), 
     xrandr = "lxrandr", --require("widgets.multi-monitor.xrandr2")
     screenshot = "scrot", 
