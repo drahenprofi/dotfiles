@@ -26,7 +26,22 @@ local dashboard = wibox({
     y = beautiful.bar_height,
     width = awful.screen.focused().geometry.width, 
     height = awful.screen.focused().geometry.height - beautiful.bar_height,
-    bgimage = beautiful.wallpaper,
+    bgimage = function(context, cr, width, height) 
+        local img = gears.surface(beautiful.wallpaper_blur)
+
+        local w, h = gears.surface.get_size(img)
+        local aspect_w = awful.screen.focused().geometry.width / w
+        local aspect_h = awful.screen.focused().geometry.height / h
+
+        aspect_h = math.max(aspect_w, aspect_h)
+        aspect_w = math.max(aspect_w, aspect_h)
+        
+        cr:scale(aspect_w, aspect_h)
+        cr:translate(0, -39)
+        --cr:translate(0, -(beautiful.bar_height * h / aspect_h))
+        cr:set_source_surface(img, 0, 0)
+        cr:paint()
+    end,
     bg = beautiful.bg_normal
 })
 
@@ -119,11 +134,6 @@ dashboard:setup {
                 layout = wibox.layout.fixed.vertical
             }, 
             {
-                drawBox(time, 200, 48),
-                drawBox(calendar, 260, 180), 
-                layout = wibox.layout.fixed.vertical
-            }, 
-            {
                 drawBox({
                     volume(),
                     brightness(), 
@@ -132,6 +142,11 @@ dashboard:setup {
                     widget = wibox.layout.fixed.horizontal
                 }, 200, 114),
                 drawBox(storage(), 200, 114), 
+                layout = wibox.layout.fixed.vertical
+            }, 
+            {
+                drawBox(time, 200, 48),
+                drawBox(calendar, 260, 180), 
                 layout = wibox.layout.fixed.vertical
             }, 
             layout = wibox.layout.fixed.horizontal

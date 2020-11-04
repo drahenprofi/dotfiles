@@ -27,7 +27,7 @@ local function worker(args)
     local args = args or {}
 
     local main_color = beautiful.blue
-    local mute_color = beautiful.bg_normal
+    local mute_color = beautiful.misc2
     
     local height = 4
     local image_size = 28

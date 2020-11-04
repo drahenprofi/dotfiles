@@ -27,7 +27,7 @@ local function createDiskRow(disk)
             max_value = 100, 
             value = disk.perc,
             start_angle = 3 * math.pi / 2,
-            bg = beautiful.bg_normal, 
+            bg = beautiful.misc2, 
             colors = { beautiful.yellow },
             rounded_edge = true, 
             thickness = 10,
