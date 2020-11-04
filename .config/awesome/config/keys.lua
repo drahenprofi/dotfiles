@@ -96,7 +96,16 @@ keys.globalkeys = gears.table.join(
 
     awful.key({ modkey },            "r", function () awful.util.spawn(apps.launcher, false) end),
     awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr) end),
-    awful.key({ modkey, "Shift" }, "p",     function () awful.spawn(apps.screenshot, false) end),
+    awful.key({ modkey, "Shift" }, "p",     function () 
+        awful.spawn.easy_async_with_shell(apps.screenshot, function(stdout)
+            local fileName = string.gsub(stdout, "\n", "")
+            naughty.notify({
+                title = "Screenshot captured!",
+                text = fileName, 
+                icon = beautiful.camera_icon
+            })
+        end)
+    end),
      
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
