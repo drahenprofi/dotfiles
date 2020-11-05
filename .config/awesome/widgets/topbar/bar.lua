@@ -3,6 +3,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
 
+local apps = require("config.apps")
+
 local color_solid = beautiful.bg_normal 
 
 local button = require("components.button")
@@ -23,16 +25,14 @@ end
 
 -- Init widgets
 ------------------------------------------------
-local battery = require("widgets.topbar.widgets.battery")
-local taglist = require("widgets.topbar.widgets.taglist")
-local calendar = require("widgets.topbar.widgets.calendar")
-local session = require("widgets.topbar.widgets.session")
---local volume = require("widgets.topbar.widgets.volume")
-local workspaces = require("widgets.topbar.widgets.workspaces") 
-local spotify = require("widgets.topbar.widgets.spotify")
+local session = require("widgets.topbar.session")
+local taglist = require("widgets.topbar.taglist")
+local battery = require("widgets.topbar.battery")
+local clock = require("widgets.topbar.clock")
+local spotify = require("widgets.topbar.spotify")
 
 local rofi_launcher = button.create_image_onclick(beautiful.search_grey_icon, beautiful.search_icon, function()
-    awful.spawn("/home/parndt/.config/rofi/launch.sh")
+    awful.spawn(apps.launcher, false)
 end)
 
 beautiful.systray_icon_spacing = 12
@@ -58,7 +58,6 @@ awful.screen.connect_for_each_screen(function(s)
         expand = "none",
         {   -- Left
             widget(session), 
-            --widget(workspaces),
             widget(bar_taglist),
             layout = wibox.layout.fixed.horizontal, 
         }, 
@@ -77,8 +76,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal, 
                 }
             }),
-            --widget(volume),
-            widget(calendar), 
+            widget(clock), 
             widget(rofi_launcher), 
             layout = wibox.layout.fixed.horizontal, 
         }

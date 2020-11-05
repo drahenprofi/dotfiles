@@ -6,8 +6,6 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
 local button = require("components.button")
-local popupLib = require("components.popup")
-
 
 local popup = {}
 

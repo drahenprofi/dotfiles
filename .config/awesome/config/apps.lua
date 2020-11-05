@@ -3,8 +3,8 @@ local apps = {
     launcher = "sh /home/parndt/.config/rofi/launch.sh", 
     notifications = require("widgets.volume-brightness-notifications"), 
     switcher = require("widgets.alt-tab"), 
-    xrandr = "lxrandr", --require("widgets.multi-monitor.xrandr2")
-    screenshot = "scrot 'screenshot_%Y-%m-%d.png' -e 'echo $f'", 
+    xrandr = "lxrandr", 
+    screenshot = "scrot -e 'echo $f'", 
     volume = "pavucontrol", 
     appearance = "lxappearance"
 }
