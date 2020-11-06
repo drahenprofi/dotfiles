@@ -46,7 +46,7 @@ local cal = wibox.widget {
 local calendarWidget = wibox.widget {
     {
         nil, 
-        button.create_image_onclick(beautiful.left_grey_icon, beautiful.left_icon, function() 
+        button.create_image_onclick(beautiful.previous_grey_icon, beautiful.previous_icon, function() 
             local a = cal:get_date()
             a.month = a.month - 1
             cal:set_date(nil)
@@ -60,7 +60,7 @@ local calendarWidget = wibox.widget {
     cal,
     {
         nil, 
-        button.create_image_onclick(beautiful.right_grey_icon, beautiful.right_icon, function() 
+        button.create_image_onclick(beautiful.next_grey_icon, beautiful.next_icon, function() 
             local a = cal:get_date()
             a.month = a.month + 1
             cal:set_date(nil)

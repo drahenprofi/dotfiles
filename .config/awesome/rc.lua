@@ -21,11 +21,11 @@ beautiful.init(awful.util.getdir("config") .. "theme.lua" )
 
 -- init configs
 require("config.wallpaper")
+require("config.layout")
 require("config.rules")
 require("config.tags")
 require("config.keys")
 require("config.notifications")
-require("config.layout")
 require("config.titlebars")
 
 -- init daemons

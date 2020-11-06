@@ -6,8 +6,11 @@ local gears = require("gears")
 local button = require("components.button")
 local dashboard = require("widgets.dashboard")
 
+local color = beautiful.blue
+local color_hover = beautiful.blue_light
+
 local sessionWidget = wibox.widget {
-    button.create_image(beautiful.start_grey_icon, beautiful.start_icon), 
+    button.create_text(color, color_hover, "", "Fira Mono 20"), 
     widget = wibox.widget.background
 }
 
