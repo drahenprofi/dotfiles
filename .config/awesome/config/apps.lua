@@ -6,7 +6,11 @@ local apps = {
     xrandr = "lxrandr", 
     screenshot = "scrot -e 'echo $f'", 
     volume = "pavucontrol", 
-    appearance = "lxappearance"
+    appearance = "lxappearance", 
+    browser = "firefox", 
+    fileexplorer = "thunar",
+    musicplayer = "spotify", 
+    code = "intellij-idea-ultimate-edition"
 }
 
 user = {

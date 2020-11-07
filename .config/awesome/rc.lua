@@ -31,8 +31,9 @@ require("config.titlebars")
 -- init daemons
 require("evil")
 
--- init topbar
+-- init widgets
 require("widgets.topbar")
+require("widgets.dashboard")
 
 require("awful.autofocus")
 

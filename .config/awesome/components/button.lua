@@ -93,7 +93,7 @@ button.create_image_onclick = function(image, image_hover, onclick)
     return container
 end
 
-button.create_text = function(color, color_hover, text, font)
+button.create_text = function(color, color_hover, text, font, onclick)
     local textWidget = wibox.widget {
         font = font, 
         markup = "<span foreground='"..color.."'>"..text.."</span>", 
@@ -102,6 +102,10 @@ button.create_text = function(color, color_hover, text, font)
 
     textWidget:connect_signal("mouse::enter", function() textWidget.markup = "<span foreground='"..color_hover.."'>"..text.."</span>" end)
     textWidget:connect_signal("mouse::leave", function() textWidget.markup = "<span foreground='"..color.."'>"..text.."</span>" end)
+
+    if onclick ~= nil then
+        textWidget:connect_signal("button::press", onclick)
+    end
 
     return textWidget
 end

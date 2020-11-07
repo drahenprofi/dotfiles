@@ -25,6 +25,7 @@ theme.bg_minimize   = "#aaaaaa"--theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 theme.bg_light      = "#232530"
 theme.bg_very_light = "#2E303E"
+theme.bg_dark       = "#1A1C23" 
 
 theme.fg_normal     = "#dddddd"
 theme.fg_dark       = "#cccccc"
@@ -34,14 +35,25 @@ theme.fg_minimize   = "#ffffff"
 
 theme.highlight = "#F43E5C"
 theme.highlight_alt = "#B877DB"
-theme.green = "#29D398"
-theme.yellow = "#F09383"
-theme.yellow_light = "#FAB795"
-theme.blue = "#26BBD9"
-theme.blue_light = "#3FC6DE"
+
 theme.misc1 = "#6C6F93"
 theme.misc2 = "#2f3240"
 theme.transparent = "'#282A3600"
+
+-- terminal colors
+theme.blue = "#26BBD9"
+theme.blue_light = "#3FC6DE"
+theme.cyan = "#59E3E3"
+theme.cyan_light = "#6BE6E6"
+theme.green = "#29D398"
+theme.green_light = "#3FDAA4"
+theme.purple = "#EE64AE"
+theme.purple_light = "#F075B7"
+theme.red = "#E95678"
+theme.red_light = "#EC6A88"
+theme.yellow = "#FAB795"
+theme.yellow_light = "#FBC3A7"
+
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(0)
