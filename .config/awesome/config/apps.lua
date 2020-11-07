@@ -4,13 +4,12 @@ local apps = {
     notifications = require("widgets.volume-brightness-notifications"), 
     switcher = require("widgets.alt-tab"), 
     xrandr = "lxrandr", 
-    screenshot = "scrot -e 'echo $f'", 
+    screenshot = "scrot -p -e 'echo $f'", 
     volume = "pavucontrol", 
     appearance = "lxappearance", 
     browser = "firefox", 
     fileexplorer = "thunar",
     musicplayer = "spotify", 
-    code = "intellij-idea-ultimate-edition"
 }
 
 user = {

@@ -12,36 +12,17 @@ local icon = wibox.widget{
     widget = wibox.widget.textbox
 }
 
-local arrow = wibox.widget{
-    markup = '<span foreground="'..beautiful.highlight..'">></span>',
-    font = "Fira Mono 16",
-    align  = 'center',
-    valign = 'center',
-    widget = wibox.widget.textbox
-}
-
 local username = wibox.widget{
-    markup = '<span foreground="'..beautiful.highlight_alt..'">parndt</span>',
-    font = "Fira Mono 16",
+    markup = '<span foreground="'..beautiful.highlight..'">parndt</span>@<span foreground="'..beautiful.highlight..'">rouge</span>',
+    font = "Fira Mono 14",
     align  = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
-}
-
-local image = wibox.widget {
-    image = beautiful.avatar, 
-    widget = wibox.widget.imagebox
 }
 
 return wibox.widget {
     icon,
-    { 
-        --icon,
-        arrow,
-        username, 
-        spacing = dpi(12),
-        layout = wibox.layout.fixed.horizontal
-    },
+    username, 
     spacing = dpi(12),
     layout = wibox.layout.fixed.vertical
 }

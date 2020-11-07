@@ -13,16 +13,15 @@ local createAppWidget = function(fg, fg_hover, text, onclick)
     local textbox = wibox.widget {
         markup = "<span foreground='"..fg.."'>"..text.."</span>",
         font = "Fira Mono 28",
+        align = "center",
+        valign = "center",
+        forced_width = dpi(56), 
+        forced_height = dpi(56), 
         widget = wibox.widget.textbox
     }
 
     local container = wibox.widget {
-        {
-            textbox,
-            left = dpi(16), 
-            right = dpi(16), 
-            widget = wibox.container.margin
-        },  
+        textbox,
         bg = beautiful.bg_normal, 
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, dpi(8))
@@ -32,11 +31,13 @@ local createAppWidget = function(fg, fg_hover, text, onclick)
 
     container:connect_signal("mouse::enter", function()
         textbox.markup = "<span foreground='"..fg_hover.."'>"..text.."</span>"
+        textbox.font = "Fira Mono 36"
         container.bg = beautiful.bg_dark
     end)
 
     container:connect_signal("mouse::leave", function()
         textbox.markup = "<span foreground='"..fg.."'>"..text.."</span>"
+        textbox.font = "Fira Mono 28" 
         container.bg = beautiful.bg_normal
     end)
 
@@ -48,11 +49,10 @@ local createAppWidget = function(fg, fg_hover, text, onclick)
     return container
 end
 
-local browser = createAppWidget(beautiful.yellow, beautiful.yellow_light, "", apps.browser)
+local browser = createAppWidget(beautiful.red, beautiful.red_light, "", apps.browser)
 local terminal = createAppWidget(beautiful.fg_normal, beautiful.fg_focus, "", apps.terminal)
 local fileexplorer = createAppWidget(beautiful.blue, beautiful.blue_light, "", apps.fileexplorer)
 local musicplayer = createAppWidget(beautiful.green, beautiful.green_light, "", apps.musicplayer)
-local code = createAppWidget(beautiful.red, beautiful.red_light, "", apps.code)
 
 return wibox.widget {
     {
@@ -64,7 +64,6 @@ return wibox.widget {
                 terminal, 
                 fileexplorer, 
                 musicplayer,
-                code, 
                 spacing = dpi(8),
                 layout = wibox.layout.fixed.vertical
             }, 

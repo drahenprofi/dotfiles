@@ -21,12 +21,12 @@ local cal = wibox.widget {
         widget.markup = widget.text
 
         if flag == "focus" and date.month == currentMonth then
-            fg = beautiful.highlight_alt
+            fg = beautiful.blue
             widget:set_markup('<b>' .. widget:get_text() .. '</b>')
         elseif flag == "header" then
             fg = beautiful.highlight
-            widget.font = "Roboto Bold 14"
-            widget:set_markup('<b>' .. widget:get_text() .. '</b>')
+            widget.font = "Roboto Medium 14"
+            widget:set_markup(widget:get_text())
         elseif flag == "weekday" then
             widget:set_markup('<b>' .. string.upper(widget:get_text()) .. '</b>')
         end

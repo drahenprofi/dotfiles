@@ -10,7 +10,7 @@ minutes.font = "Fira Mono Bold 38"
 minutes.format = "%M"
 
 local point = wibox.widget.textbox()
-point.markup = "<span foreground='"..beautiful.highlight.."'>:</span>"
+point.markup = "<span foreground='"..beautiful.red.."'>:</span>"
 point.font = "Roboto Bold 32"
 
 return wibox.widget {

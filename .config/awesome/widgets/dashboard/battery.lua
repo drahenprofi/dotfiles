@@ -6,7 +6,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local naughty = require("naughty")
 
-local main_color = beautiful.highlight
+local main_color = beautiful.red
 local mute_color = beautiful.misc2
 
 local image_size = 28
