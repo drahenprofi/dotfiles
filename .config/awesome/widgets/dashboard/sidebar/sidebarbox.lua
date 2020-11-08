@@ -1,15 +1,12 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local beautiful = require("beautiful")
 local gears = require("gears")
+local beautiful = require("beautiful")
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local button = require("components.button")
-local apps = require("config.apps")
-
-local createAppWidget = function(fg, fg_hover, text, onclick)
+return function(fg, fg_hover, text, onclick)
     local textbox = wibox.widget {
         markup = "<span foreground='"..fg.."'>"..text.."</span>",
         font = "Fira Mono 28",
@@ -48,33 +45,3 @@ local createAppWidget = function(fg, fg_hover, text, onclick)
 
     return container
 end
-
-local browser = createAppWidget(beautiful.red, beautiful.red_light, "", apps.browser)
-local terminal = createAppWidget(beautiful.fg_normal, beautiful.fg_focus, "", apps.terminal)
-local fileexplorer = createAppWidget(beautiful.blue, beautiful.blue_light, "", apps.fileexplorer)
-local musicplayer = createAppWidget(beautiful.green, beautiful.green_light, "", apps.musicplayer)
-
-return wibox.widget {
-    {
-        nil, 
-        {
-            nil, 
-            {
-                browser, 
-                terminal, 
-                fileexplorer, 
-                musicplayer,
-                spacing = dpi(8),
-                layout = wibox.layout.fixed.vertical
-            }, 
-            nil,
-            expand = "none",
-            layout = wibox.layout.align.vertical
-        },
-        nil, 
-        expand = "none", 
-        layout = wibox.layout.align.horizontal
-    }, 
-    forced_width = dpi(64),
-    widget = wibox.container.background, 
-}

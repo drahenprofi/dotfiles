@@ -6,7 +6,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local naughty = require("naughty")
 
-local main_color = beautiful.red
+local main_color = beautiful.highlight
 local mute_color = beautiful.misc2
 
 local image_size = 28
@@ -30,7 +30,7 @@ local progressbar = wibox.widget {
 }
 
 local progressbar_container = wibox.widget {
-    icon, 
+    nil,
     {
         {
             progressbar, 
@@ -39,10 +39,11 @@ local progressbar_container = wibox.widget {
         },
         left = 4, 
         right = 4, 
+        bottom = 8,
         widget = wibox.container.margin
     },
-    spacing = 8, 
-    layout = wibox.layout.fixed.vertical
+    icon, 
+    layout = wibox.layout.align.vertical
 }
 
 awesome.connect_signal("evil::battery", function(battery)

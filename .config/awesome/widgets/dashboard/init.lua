@@ -8,8 +8,8 @@ local naughty = require("naughty")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local sidebar = require("widgets.dashboard.sidebar")
-local session = require("widgets.dashboard.session")
+local leftbar = require("widgets.dashboard.sidebar.left")
+local rightbar = require("widgets.dashboard.sidebar.right")
 local avatar = require("widgets.dashboard.avatar")
 local calendar = require("widgets.dashboard.calendar")
 local time = require("widgets.dashboard.time")
@@ -95,8 +95,6 @@ local function drawBox(content, width, height)
         widget = wibox.container.margin
     }
 
-    box.tag = "box"
-
     return box
 end
 
@@ -133,14 +131,13 @@ end
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
 
 dashboard:setup {
-    sidebar,
+    leftbar,
     {
         nil, {
             nil, 
             {
                 {
-                    drawBox(avatar, 144, 190),
-                    drawBox(session, 144, 38),
+                    drawBox(avatar, 164, 268),
                     layout = wibox.layout.fixed.vertical
                 }, 
                 {
@@ -167,6 +164,7 @@ dashboard:setup {
         expand = "none",
         layout = wibox.layout.align.horizontal
     }, 
+    rightbar,
     layout = wibox.layout.align.horizontal
 }
 

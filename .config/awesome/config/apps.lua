@@ -9,7 +9,6 @@ local apps = {
     appearance = "lxappearance", 
     browser = "firefox", 
     fileexplorer = "thunar",
-    musicplayer = "spotify", 
 }
 
 user = {

@@ -25,16 +25,16 @@ require("config.layout")
 require("config.rules")
 require("config.tags")
 require("config.keys")
-require("config.notifications")
 require("config.titlebars")
 
 -- init daemons
 require("evil")
 
 -- init widgets
-require("widgets.topbar")
 require("widgets.dashboard")
+require("widgets.topbar")
 
+require("config.notifications")
 require("awful.autofocus")
 
 -- {{{ Signals

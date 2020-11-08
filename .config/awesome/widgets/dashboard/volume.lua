@@ -51,7 +51,7 @@ local function worker(args)
     }
 
     local progressbar_container = wibox.widget {
-        icon, 
+        nil,
         {
             {
                 progressbar, 
@@ -60,10 +60,11 @@ local function worker(args)
             },
             left = 4, 
             right = 4, 
+            bottom = 8,
             widget = wibox.container.margin
-        },
-        spacing = 8, 
-        layout = wibox.layout.fixed.vertical
+        }, 
+        icon, 
+        layout = wibox.layout.align.vertical
     }
 
     local update_bar = function(widget, stdout, _, _, _)

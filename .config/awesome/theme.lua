@@ -34,7 +34,6 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.highlight = "#F43E5C"
-theme.highlight_alt = "#B877DB"
 
 theme.misc1 = "#6C6F93"
 theme.misc2 = "#2f3240"
