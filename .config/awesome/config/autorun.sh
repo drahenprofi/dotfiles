@@ -7,5 +7,5 @@ function run {
   fi
 }
 
-run compton -b
+run picom -b
 run nm-applet --no-agent
