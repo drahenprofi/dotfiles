@@ -9,8 +9,8 @@ local dpi = xresources.apply_dpi
 local apps = require("config.apps")
 local sidebarbox = require("widgets.dashboard.sidebar.sidebarbox")
 
-local poweroff = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "襤", "poweroff")
-local reboot = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "ﰇ", "reboot")
+local poweroff = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "襤", function() awful.spawn("poweroff") end)
+local reboot = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "ﰇ", function() awful.spawn("reboot") end)
 local logout = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "﫼", awesome.quit)
 
 return wibox.widget {

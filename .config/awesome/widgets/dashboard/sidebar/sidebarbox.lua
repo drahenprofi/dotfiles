@@ -39,7 +39,7 @@ return function(fg, fg_hover, text, onclick)
     end)
 
     container:connect_signal("button::press", function() 
-        awful.spawn(onclick, false)
+        onclick()
         awesome.emit_signal("dashboard::toggle")
     end)
 

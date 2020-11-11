@@ -129,6 +129,17 @@ rules = {
         maximized_horizontal  = true, 
       },
     },
+    {
+      -- intellij-idea
+      rule = {
+        class = "jetbrains-.*",
+        name = "win.*"
+      },
+      properties = {
+        titlebars_enabled = false,
+        floating = true
+      }
+    }
 }
 
 awful.rules.rules = rules
