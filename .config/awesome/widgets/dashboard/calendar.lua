@@ -17,11 +17,12 @@ local cal = wibox.widget {
     spacing = 8,
     fn_embed = function(widget, flag, date)
         local fg = beautiful.fg_dark
+        local bg = beautiful.bg_normal
         local font = "Roboto Regular 11"
         widget.markup = widget.text
 
         if flag == "focus" and date.month == currentMonth then
-            fg = beautiful.blue
+            fg = beautiful.cyan
             widget:set_markup('<b>' .. widget:get_text() .. '</b>')
         elseif flag == "header" then
             fg = beautiful.highlight
