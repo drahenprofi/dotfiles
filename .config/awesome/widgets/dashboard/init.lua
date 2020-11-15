@@ -145,7 +145,7 @@ dashboard:setup {
                         volume,
                         brightness, 
                         battery,
-                        spacing = 16, 
+                        spacing = dpi(16), 
                         widget = wibox.layout.fixed.vertical
                     }, 200, 114),
                     drawBox(storage(), 200, 114), 

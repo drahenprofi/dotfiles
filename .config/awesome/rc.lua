@@ -33,6 +33,7 @@ require("evil")
 -- init widgets
 require("widgets.dashboard")
 require("widgets.topbar")
+require("widgets.popup")
 
 require("config.notifications")
 require("awful.autofocus")

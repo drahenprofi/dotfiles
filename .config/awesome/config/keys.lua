@@ -109,55 +109,32 @@ keys.globalkeys = gears.table.join(
      
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
-        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%  ; pamixer --get-volume", function(stdout)
-            local volume = stdout
-            awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
-                local muted = false
-                if stdout == "true" then 
-                    muted = true
-                end
-                
-                apps.notifications.volume(tonumber(volume), muted)
-            end)
+        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%", function(stdout)
+            awesome.emit_signal("popup::volume")
         end)
     end),
     awful.key({}, "XF86AudioRaiseVolume", function ()
-        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3% ; pamixer --get-volume", function(stdout)
-            local volume = stdout
-            awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
-                local muted = false
-                if stdout == "true" then 
-                    muted = true
-                end
-                
-                apps.notifications.volume(tonumber(volume), muted)
-            end)
+        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3%", function(stdout)
+            awesome.emit_signal("popup::volume")
         end)
     end),
     awful.key({}, "XF86AudioMute", function ()
-        awful.spawn.easy_async_with_shell("pamixer -t ; pamixer --get-muted", function(stdout)
-            local muted = false
-            if stdout == "true" then 
-                muted = true
-            end
-                
-            apps.notifications.volume(0, muted)
+        awful.spawn.easy_async_with_shell("pamixer -t", function(stdout)
+            awesome.emit_signal("popup::volume")
         end)
     end),
 
     -- Brightness
    awful.key({ }, "XF86MonBrightnessDown", function ()
-       awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
-           local brightness = stdout:gsub("%D+", "")
-           apps.notifications.brightness(brightness, false)
+       awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null", function(stdout)
+           awesome.emit_signal("popup::brightness")
        end)
    end),
    awful.key({ }, "XF86MonBrightnessUp", function ()
-       awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null ; echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", function(stdout)
-           local brightness = stdout:gsub("%D+", "")
-           apps.notifications.brightness(brightness, false)
+       awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null", function(stdout)
+            awesome.emit_signal("popup::brightness")
+        end)
     end)
-end)
 )
 
 -- Bind all key numbers to tags.

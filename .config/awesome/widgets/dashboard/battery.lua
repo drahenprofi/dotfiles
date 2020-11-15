@@ -12,7 +12,7 @@ local mute_color = beautiful.misc2
 local image_size = 24
 
 local icon =  wibox.widget {
-    font = "Fira Mono 16",
+    font = "Fira Mono 14",
     valign = "center", 
     align = "center",
     forced_height = image_size, 
