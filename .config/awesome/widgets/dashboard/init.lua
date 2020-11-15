@@ -142,11 +142,11 @@ dashboard:setup {
                 }, 
                 {
                     drawBox({
-                        volume(),
-                        brightness(), 
+                        volume,
+                        brightness, 
                         battery,
-                        spacing = 32, 
-                        widget = wibox.layout.fixed.horizontal
+                        spacing = 16, 
+                        widget = wibox.layout.fixed.vertical
                     }, 200, 114),
                     drawBox(storage(), 200, 114), 
                     layout = wibox.layout.fixed.vertical

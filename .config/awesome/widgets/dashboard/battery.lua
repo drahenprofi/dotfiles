@@ -9,13 +9,15 @@ local naughty = require("naughty")
 local main_color = beautiful.highlight
 local mute_color = beautiful.misc2
 
-local image_size = 28
+local image_size = 24
 
 local icon =  wibox.widget {
-    image = beautiful.brightness_icon, 
+    font = "Fira Mono 16",
+    valign = "center", 
+    align = "center",
     forced_height = image_size, 
     forced_width = image_size,
-    widget = wibox.widget.imagebox
+    widget = wibox.widget.textbox
 }
 
 local progressbar = wibox.widget {
@@ -30,25 +32,24 @@ local progressbar = wibox.widget {
 }
 
 local progressbar_container = wibox.widget {
-    nil,
     {
-        {
-            progressbar, 
-            direction     = 'east',
-            layout        = wibox.container.rotate,
-        },
-        left = 4, 
-        right = 4, 
-        bottom = 8,
+        icon,
+        direction     = 'west',
+        layout        = wibox.container.rotate,
+    },
+    {
+        progressbar,
+        top = 4, 
+        bottom = 4,
         widget = wibox.container.margin
     },
-    icon, 
-    layout = wibox.layout.align.vertical
+    spacing = 16,
+    layout = wibox.layout.fixed.horizontal
 }
 
 awesome.connect_signal("evil::battery", function(battery)
-    progressbar.value = battery.charge
-    icon.image = battery.image
+    progressbar.value = battery.value
+    icon.text = battery.image
 end)
 
 return progressbar_container

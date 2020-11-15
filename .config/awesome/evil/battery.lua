@@ -30,7 +30,7 @@ end
 local last_battery_check = os.time()
 local warningDisplayed = false
 
-local batteryType = beautiful.battery_full_grey_icon
+local icon = ""
 
 watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
     local battery_info = {}
@@ -66,9 +66,9 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
     charge = math.floor(charge / count)
 
     if charging then
-        batteryType = beautiful.battery_charging_grey_icon
+        icon = ""
     elseif (charge >= 0 and charge < 10) then
-        batteryType = beautiful.battery_alert_grey_icon
+        icon = ""
         if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed or charge < 3 then
             -- if 5 minutes have elapsed since the last warning
             last_battery_check = os.time()
@@ -76,13 +76,31 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
 
             show_battery_warning(charge)
         end
-    elseif (charge >= 10 and charge <= 100) then 
-        batteryType = beautiful.battery_full_grey_icon
+    elseif (charge < 20) then 
+        icon = ""
+    elseif charge < 30 then
+        icon = ""
+    elseif charge < 40 then
+        icon = ""
+    elseif charge < 50 then
+        icon = ""
+    elseif charge < 60 then
+        icon = ""
+    elseif charge < 70 then
+        icon = ""
+    elseif charge < 80 then
+        icon = ""
+    elseif charge < 90 then
+        icon = ""
+    elseif charge < 100 then
+        icon = ""
+    else
+        icon = ""
     end
     
     awesome.emit_signal("evil::battery", {
-        charge = charge,
-        image = batteryType
+        value = charge,
+        image = icon
     })
 end,
 nil)
