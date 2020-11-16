@@ -5,6 +5,7 @@ local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local gears = require("gears")
 local naughty = require("naughty")
+local dpi = require('beautiful').xresources.apply_dpi
 
 local main_color = beautiful.highlight
 local mute_color = beautiful.misc2
@@ -25,7 +26,10 @@ local progressbar = wibox.widget {
     color		  = main_color,
     background_color = mute_color,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, 6)
+        gears.shape.rounded_rect(cr, width, height, 4)
+    end,
+    bar_shape = function(cr, width, height)
+        gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, dpi(50))
     end,
     forced_height = 4,
     widget = wibox.widget.progressbar
@@ -39,8 +43,8 @@ local progressbar_container = wibox.widget {
     },
     {
         progressbar,
-        top = 4, 
-        bottom = 4,
+        top = 6, 
+        bottom = 6,
         widget = wibox.container.margin
     },
     spacing = 16,

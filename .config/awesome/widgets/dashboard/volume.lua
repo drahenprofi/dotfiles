@@ -4,6 +4,7 @@ local spawn = require("awful.spawn")
 local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local gears = require("gears")
+local dpi = require('beautiful').xresources.apply_dpi
 
 local INC_VOLUME_CMD = 'amixer -D pulse sset Master 5%+'
 local DEC_VOLUME_CMD = 'amixer -D pulse sset Master 5%-'
@@ -29,7 +30,10 @@ local progressbar = wibox.widget {
     color		  = main_color,
     background_color = mute_color,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, 6)
+        gears.shape.rounded_rect(cr, width, height, 4)
+    end,
+    bar_shape = function(cr, width, height)
+        gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, dpi(50))
     end,
     forced_height = 4,
     widget        = wibox.widget.progressbar
@@ -39,8 +43,8 @@ local progressbar_container = wibox.widget {
     icon,
     {
         progressbar,
-        top = 4, 
-        bottom = 4,
+        top = 6, 
+        bottom = 6,
         widget = wibox.container.margin
     },
     spacing = 16,

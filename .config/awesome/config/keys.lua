@@ -213,10 +213,10 @@ keys.clientkeys = gears.table.join(
         c.width = 450
         c.height = 250
         
-        awful.placement.top_left(c, {
+        awful.placement.bottom_right(c, {
             margins = {
-              top = beautiful.bar_height + 10, 
-              left = 10
+              bottom = 10, 
+              right = 10
             }
           })
     end)
