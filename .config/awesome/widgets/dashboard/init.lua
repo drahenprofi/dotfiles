@@ -1,12 +1,12 @@
-local wibox = require("wibox")
 local awful = require("awful")
-local beautiful = require("beautiful")
+local wibox = require("wibox")
 local gears = require("gears")
+local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 
 local naughty = require("naughty")
 
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
+local apps = require("config.apps")
 
 local leftbar = require("widgets.dashboard.sidebar.left")
 local rightbar = require("widgets.dashboard.sidebar.right")
@@ -98,22 +98,45 @@ local function drawBox(content, width, height)
     return box
 end
 
-
-
+local keygrabber
 local function getKeygrabber()
-    local keygrabber = awful.keygrabber {
-        keybindings = {
-            {{}, "Escape", function() 
+    return awful.keygrabber {
+        keypressed_callback = function(_, mod, key) 
+            if key == "Escape" then
                 dashboard.visible = false
                 keygrabber:stop()
-            end}
-        }
-    }
+                return
+            end
+            
+            -- don't do anything for non-alphanumeric characters or stuff like F1, Backspace, etc
+            if key:match("%W") or string.len(key) > 1 and key ~= "Escape" then
+                return 
+            end
 
-    return keygrabber
+            local launchedAppWithLauncher = false
+            -- spawn launcher with input arguments
+            awful.spawn.with_line_callback(apps.launcher .. " " .. key, {
+                stdout = function(line)
+                    -- this line is emitted by debug rofi when an app is launched
+                    if string.match(line, "Parsed command") then
+                        launchedAppWithLauncher = true
+                        dashboard.visible = false
+                    end
+                end, 
+                output_done = function()
+                    -- restart the keygrabber when no app was launched
+                    if not launchedAppWithLauncher then
+                        keygrabber = getKeygrabber()
+                        keygrabber:start()
+                    end
+                end
+            })
+            keygrabber:stop()
+        end,
+    }
 end
 
-local keygrabber = getKeygrabber()
+keygrabber = getKeygrabber()
 
 dashboard.toggle = function()
     calendar.reset()

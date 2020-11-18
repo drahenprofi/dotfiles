@@ -1,8 +1,9 @@
+local awful = require("awful")
 local watch = require("awful.widget.watch")
 
 local GET_VOLUME_CMD = 'amixer -D pulse sget Master'
 
-watch(GET_VOLUME_CMD, 1, function(widget, stdout, _, _, _)
+local handleVolume = function(stdout)
     local mute = string.match(stdout, "%[(o%D%D?)%]")   -- \[(o\D\D?)\] - [on] or [off]
     local volume = string.match(stdout, "(%d?%d?%d)%%") -- (\d?\d?\d)\%)
     volume = tonumber(string.format("% 3d", volume))
@@ -23,5 +24,8 @@ watch(GET_VOLUME_CMD, 1, function(widget, stdout, _, _, _)
         value = volume,
         image = icon
     })
-end, 
-nil)
+end
+
+watch(GET_VOLUME_CMD, 1, function(_, stdout, _, _, _)
+    handleVolume(stdout)
+end, nil)

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rofi -show drun -drun-display-format {name} -theme horizon
+G_MESSAGES_DEBUG=Dialogs.DRun rofi -show drun -drun-display-format {name} -theme horizon -filter "$1" 

@@ -16,7 +16,7 @@ local createPopup = function(color)
         value         = 1,
         color		  = color,
         background_color = beautiful.misc2,
-        forced_width = dpi(120),
+        forced_width = dpi(100),
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
         end,
@@ -50,7 +50,7 @@ local createPopup = function(color)
             widget  = wibox.container.margin
         },
         y            = awful.screen.focused().geometry.height / 2 - 72,
-        x            = awful.screen.focused().geometry.width - 72,
+        x            = awful.screen.focused().geometry.width - 48,
         shape        = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
         end,
