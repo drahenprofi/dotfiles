@@ -17,8 +17,7 @@ configuration {
 
 
 window {
-    transparency:                   "real";
-    background-color:               @background;
+    transparency:                   "/home/parndt/.config/awesome/wallpaper_blur.png";
     height:                         100%;
     width:                          100%;
     location:                       northwest;
@@ -37,7 +36,7 @@ entry  {
     margin:                         40px -270px 20px 450px;
     border-radius:                  12;
     padding:                        10px 10px 10px 10px;
-    background-color:               #ffffff20;
+    background-color:               @background;
     border:                         0px 0px solid 0px 0px;
     border-color:                   @text-color;
     font:                           "Consolas 12";
@@ -56,10 +55,6 @@ element {
 
 mainbox {
     padding:                        10px 40px 10px 40px;
-}
-
-element {
-    padding:                        8px;
 }
 
 element normal.urgent, element alternate.urgent {
