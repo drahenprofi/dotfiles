@@ -11,7 +11,7 @@ local sidebarbox = require("widgets.dashboard.sidebar.sidebarbox")
 
 local countIndicator = function()
     return wibox.widget {
-        bg = beautiful.fg_dark,
+        bg = beautiful.highlight,
         shape = function(cr, width, height)
             gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, dpi(50))
         end,

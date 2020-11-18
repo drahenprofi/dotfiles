@@ -32,17 +32,14 @@ local dashboard = wibox({
 
         local w, h = gears.surface.get_size(img)
         local aspect_w = awful.screen.focused().geometry.width / w
-        local aspect_h = awful.screen.focused().geometry.height / h
+        local aspect_h = (awful.screen.focused().geometry.height - beautiful.bar_height) / h
 
-        aspect_h = math.max(aspect_w, aspect_h)
-        aspect_w = math.max(aspect_w, aspect_h)
+        --aspect_h = math.max(aspect_w, aspect_h)
+        --aspect_w = math.max(aspect_w, aspect_h)
         
         cr:scale(aspect_w, aspect_h)
 
-        -- this only works on my resolution
-        -- i didn't figure out how to solve it programmatically
-        cr:translate(0, -39)
-        --cr:translate(0, -(beautiful.bar_height * h / aspect_h))
+        --cr:translate(0, -(beautiful.bar_height * 1 / aspect_h))
         
         cr:set_source_surface(img, 0, 0)
         cr:paint()
