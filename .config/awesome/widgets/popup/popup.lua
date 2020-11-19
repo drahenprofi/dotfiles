@@ -84,7 +84,13 @@ local createPopup = function(color)
 
     popup.update = function(value, image)
         icon.markup = "<span foreground='"..beautiful.fg_normal.."'>"..image.."</span>"
-	    progressbar.value = value / 100
+        progressbar.value = value / 100
+    end
+
+    popup.updateValue = function(value)
+        if value ~= nil then
+            progressbar.value = progressbar.value + (value / 100)
+        end
     end
 
     return popup

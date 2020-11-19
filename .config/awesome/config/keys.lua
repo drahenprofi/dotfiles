@@ -110,12 +110,12 @@ keys.globalkeys = gears.table.join(
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%", function(stdout)
-            awesome.emit_signal("popup::volume")
+            awesome.emit_signal("popup::volume", {amount = -3})
         end)
     end),
     awful.key({}, "XF86AudioRaiseVolume", function ()
         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3%", function(stdout)
-            awesome.emit_signal("popup::volume")
+            awesome.emit_signal("popup::volume", {amount = 3})
         end)
     end),
     awful.key({}, "XF86AudioMute", function ()
@@ -127,12 +127,12 @@ keys.globalkeys = gears.table.join(
     -- Brightness
    awful.key({ }, "XF86MonBrightnessDown", function ()
        awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null", function(stdout)
-           awesome.emit_signal("popup::brightness")
+           awesome.emit_signal("popup::brightness", {amount = -10})
        end)
    end),
    awful.key({ }, "XF86MonBrightnessUp", function ()
        awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null", function(stdout)
-            awesome.emit_signal("popup::brightness")
+            awesome.emit_signal("popup::brightness", {amount = 10})
         end)
     end)
 )
