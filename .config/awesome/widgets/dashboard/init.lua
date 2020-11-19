@@ -11,6 +11,7 @@ local apps = require("config.apps")
 local leftbar = require("widgets.dashboard.sidebar.left")
 local rightbar = require("widgets.dashboard.sidebar.right")
 local avatar = require("widgets.dashboard.avatar")
+local uptime = require("widgets.dashboard.uptime")
 local calendar = require("widgets.dashboard.calendar")
 local time = require("widgets.dashboard.time")
 local storage = require("widgets.dashboard.storage")
@@ -157,7 +158,8 @@ dashboard:setup {
             nil, 
             {
                 {
-                    drawBox(avatar, 164, 268),
+                    drawBox(avatar, 216, 200),
+                    drawBox(uptime, 216, 28),
                     layout = wibox.layout.fixed.vertical
                 }, 
                 {
@@ -172,7 +174,7 @@ dashboard:setup {
                     layout = wibox.layout.fixed.vertical
                 }, 
                 {
-                    drawBox(time, 200, 48),
+                    drawBox(time, 260, 48),
                     drawBox(calendar, 260, 180), 
                     layout = wibox.layout.fixed.vertical
                 }, 

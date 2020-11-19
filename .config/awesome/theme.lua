@@ -112,14 +112,13 @@ theme.layout_cornersw = icon_path.."layouts/cornersww.png"
 theme.layout_cornerse = icon_path.."layouts/cornersew.png"
 
 -- Icons
+theme.avatar = icon_path.."avatar.png"
 theme.battery_alert_icon = icon_path.."battery_alert.png"
-
 theme.notification_icon = icon_path.."notification.png"
 theme.search_icon = icon_path.."search.png"
 theme.search_grey_icon = icon_path.."search_grey.png"
 theme.add_icon = icon_path.."add.png"
 theme.add_grey_icon = icon_path.."add_grey.png"
-
 theme.next_icon = icon_path.."next.png"
 theme.next_grey_icon = icon_path.."next_grey.png"
 theme.previous_icon = icon_path.."previous.png"
