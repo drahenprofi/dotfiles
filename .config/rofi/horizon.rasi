@@ -8,7 +8,7 @@ configuration {
 * {
     background-color:               transparent;
     background:                     #1C1E26;
-    background-alt:                 #2E303E47;
+    background-alt:                 #1C1E26BF;
     text-color:                     #D8DEE9;
     selected-text-color:            #D8DEE9;
     primary:                        #A3BE8C;
@@ -26,6 +26,10 @@ window {
     y-offset:                       28;
 }
 
+mainbox {
+    padding:                        10px 40px 10px 40px;
+}
+
 prompt {
     enabled:                        false;
 }
@@ -33,28 +37,26 @@ prompt {
 entry  {
     expand:                         false;
     width:                          36em;
-    margin:                         40px -270px 20px 450px;
-    border-radius:                  12;
+    margin:                         40px -270px 32px 450px;
+    border-radius:                  12px;
     padding:                        10px 10px 10px 10px;
     background-color:               @background;
-    border:                         0px 0px solid 0px 0px;
-    border-color:                   @text-color;
     font:                           "Consolas 12";
 }
 
 listview {
     columns:                        4;
-    margin:                         40px 120px 40px 120px;
+    margin:                         0px 120px 40px 120px;
+    background-color: @background-alt;
+    border: 0px;
+    border-radius: 12px;
 }
 
 element {
     orientation:                    vertical;
     padding:                        16px;
     margin:                         16px;
-}
-
-mainbox {
-    padding:                        10px 40px 10px 40px;
+    border-radius: 4px;
 }
 
 element normal.urgent, element alternate.urgent {
@@ -62,12 +64,12 @@ element normal.urgent, element alternate.urgent {
 }
 
 element normal.active, element alternate.active {
-    background-color:               @background-alt;
+    background-color:               @background;
     color:                          @selected-text-color;
 }
 
 element selected {
-    background-color:               @background-alt;
+    background-color:               @background;
     color:                          @selected-text-color;
 }
 
@@ -76,7 +78,7 @@ element selected.urgent {
 }
 
 element selected.active {
-    background-color:               @background-alt;
+    background-color:               @background;
     color:                          @selected-text-color;
 }
 
