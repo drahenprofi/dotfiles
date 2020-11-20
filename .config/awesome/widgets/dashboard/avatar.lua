@@ -24,7 +24,7 @@ local icon = wibox.widget {
         end,
         widget = wibox.container.background
     },
-    left = dpi(24), right = dpi(24),
+    left = dpi(44), right = dpi(44),
     widget = wibox.container.margin
 }
 

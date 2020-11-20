@@ -158,8 +158,8 @@ dashboard:setup {
             nil, 
             {
                 {
-                    drawBox(avatar, 216, 200),
-                    drawBox(uptime, 216, 28),
+                    drawBox(avatar, 260, 200),
+                    drawBox(uptime, 260, 28),
                     layout = wibox.layout.fixed.vertical
                 }, 
                 {
