@@ -19,25 +19,33 @@ local cal = wibox.widget {
         local fg = beautiful.fg_dark
         local font = "Roboto Regular 11"
         widget.markup = widget.text
+        widget.align = "center"
 
         if flag == "focus" and date.month == currentMonth then
-            fg = beautiful.cyan
             widget:set_markup('<b>' .. widget:get_text() .. '</b>')
+
+            return wibox.widget {
+                widget,
+                bg = beautiful.green,
+                fg = beautiful.bg_normal,
+                shape = function(cr, width, height)
+                    gears.shape.rounded_rect(cr, width, height, 4)
+                end,
+                widget = wibox.container.background
+            }
         elseif flag == "header" then
             fg = beautiful.highlight
-            widget.font = "Roboto Medium 14"
+            widget.font = "Roboto Medium 12"
             widget:set_markup(widget:get_text())
         elseif flag == "weekday" then
             widget:set_markup('<b>' .. string.upper(widget:get_text()) .. '</b>')
         end
+    
 
         return wibox.widget {
-            {
-                widget,
-                widget  = wibox.container.margin
-            },
+            widget,
             fg = fg,
-            widget             = wibox.container.background
+            widget = wibox.container.background
         }
     end,
     widget = wibox.widget.calendar.month

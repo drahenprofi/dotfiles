@@ -7,7 +7,7 @@ hours.format = "%H"
 
 local minutes = wibox.widget.textclock()
 minutes.font = "Fira Mono Bold 38"
-minutes.format = "<span foreground='"..beautiful.red_light.."'>%M</span>"
+minutes.format = "<span foreground='"..beautiful.red.."'>%M</span>"
 
 return wibox.widget {
     hours, 
