@@ -129,6 +129,8 @@ end
 button.create_text = function(color, color_hover, text, font, onclick)
     local textWidget = wibox.widget {
         font = font, 
+        align = "center",
+        valign = "center",
         markup = "<span foreground='"..color.."'>"..text.."</span>", 
         widget = wibox.widget.textbox
     }

@@ -76,6 +76,10 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
+    -- useless gaps
+    awful.key({ modkey }, "g",     function () beautiful.useless_gap = beautiful.useless_gap + 5 end,
+        {description = "increase useless gaps", group = "layout"}),
+
     -- switch layout
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
@@ -213,12 +217,12 @@ keys.clientkeys = gears.table.join(
         c.width = 450
         c.height = 250
         
-        awful.placement.bottom_right(c, {
+        --[[awful.placement.bottom_right(c, {
             margins = {
               bottom = 10, 
               right = 10
             }
-          })
+          })]]--
     end)
 )
 
