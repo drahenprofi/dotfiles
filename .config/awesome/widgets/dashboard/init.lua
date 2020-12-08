@@ -8,6 +8,7 @@ local naughty = require("naughty")
 
 local apps = require("config.apps")
 
+local drawBox = require("widgets.dashboard.drawBox")
 local leftbar = require("widgets.dashboard.sidebar.left")
 local rightbar = require("widgets.dashboard.sidebar.right")
 local avatar = require("widgets.dashboard.avatar")
@@ -48,54 +49,6 @@ local dashboard = wibox({
     end,
     bg = beautiful.bg_normal
 })
-
-local function drawBox(content, width, height)
-    local margin = 8
-    local padding = 16
-
-    local container = wibox.container.background()
-    container.bg = beautiful.bg_normal
-    container.forced_width = dpi(width + margin + padding)
-    container.forced_height = dpi(height + margin + padding)
-    container.shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(8))
-    end
-
-    container:connect_signal("button::press", function()end)
-    
-    local box = wibox.widget {
-        {
-            {
-                {
-                    widget = wibox.widget.separator,
-                    color  = '#b8d2f82a',
-                    forced_height = dpi(1),
-                },
-                {
-                    {
-                        nil,
-                        {
-                            nil,
-                            content,
-                            layout = wibox.layout.align.vertical,
-                            expand = "none"
-                        },
-                        layout = wibox.layout.align.horizontal,
-                        expand = "none"
-                    }, 
-                    margins = dpi(padding),
-                    widget = wibox.container.margin
-                }, 
-                layout = wibox.layout.fixed.vertical
-            },
-            widget = container
-        },
-        margins = dpi(margin),
-        widget = wibox.container.margin
-    }
-
-    return box
-end
 
 local keygrabber
 local function getKeygrabber()
@@ -160,8 +113,8 @@ dashboard:setup {
                 nil, 
                 {
                     {
-                        drawBox(avatar, 200, 196),
-                        drawBox(screenshot, 200, 32),
+                        drawBox(avatar, 168, 196),
+                        screenshot,
                         layout = wibox.layout.fixed.vertical
                     }, 
                     {

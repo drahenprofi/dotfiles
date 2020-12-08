@@ -5,6 +5,8 @@ local dpi = beautiful.xresources.apply_dpi
 
 local apps = require("config.apps")
 
+local drawBox = require("widgets.dashboard.drawBox")
+
 local text = wibox.widget {
     text = "Take screenshot", 
     font = "Roboto Medium 12",
@@ -20,15 +22,37 @@ local icon = wibox.widget {
 local widget = wibox.widget {
     icon, 
     text,
-    spacing = dpi(24),
+    spacing = dpi(16),
     layout = wibox.layout.fixed.horizontal
 }
 
-widget:connect_signal("button::press", function()
+local container = drawBox(widget, 168, 32)
+
+container:connect_signal("button::press", function()
     awesome.emit_signal("dashboard::toggle")
-    -- TODO
     awful.spawn.easy_async_with_shell("sleep 1; ".. apps.screenshot, function(stdout)
+        -- TODO
     end)
 end)
 
-return widget
+local old_cursor, old_wibox
+container:connect_signal("mouse::enter", function()
+    container.set_background(beautiful.bg_dark)
+
+    -- change cursor
+    local wb = mouse.current_wibox
+    old_cursor, old_wibox = wb.cursor, wb
+    wb.cursor = "hand2" 
+end)
+
+container:connect_signal("mouse::leave", function()
+    container.set_background(beautiful.bg_normal)
+
+     -- reset cursor
+     if old_wibox then
+        old_wibox.cursor = old_cursor
+        old_wibox = nil
+    end
+end)
+
+return container

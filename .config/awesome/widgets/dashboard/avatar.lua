@@ -25,7 +25,7 @@ local avatar = wibox.widget {
         end,
         widget = wibox.container.background
     }, 
-    left = dpi(24), right = dpi(24),
+    left = dpi(12), right = dpi(12),
     widget = wibox.container.margin
 }
 

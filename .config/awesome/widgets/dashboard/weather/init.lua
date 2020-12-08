@@ -2,12 +2,9 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local dpi = beautiful.xresources.apply_dpi
 
 local json = require("lib.json")
-
-
 
 local OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?q=Berlin&units=metric&appid="
 
@@ -77,8 +74,6 @@ end
 local api_key_path = awful.util.getdir("config") .. "widgets/dashboard/weather/openweathermap.txt"
 awful.spawn.easy_async_with_shell("cat "..api_key_path, function(stdout)
     local api_key = stdout:gsub("\n", "")
-
-    naughty.notify{text=get_command(api_key)}
 
     -- wait for wifi to connect
     awful.spawn.easy_async_with_shell("sleep 10", function()
