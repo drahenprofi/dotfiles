@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local awful = require("awful")
 
-local button = require("components.button")
+local button = require("lib.button")
 
 
 local calendar = {}

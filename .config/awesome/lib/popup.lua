@@ -34,7 +34,7 @@ popup.create = function(x, y, height, width, widget)
         y = y
     }
 
-    local mouseInPopup = false
+    --[[local mouseInPopup = false
     local timer = gears.timer {
         timeout   = 1.25,
         single_shot = true,
@@ -54,7 +54,7 @@ popup.create = function(x, y, height, width, widget)
 
     popupWidget:connect_signal("mouse::enter", function()
         mouseInPopup = true
-    end)
+    end)]]--
 
     return popupWidget
 end

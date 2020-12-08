@@ -15,7 +15,7 @@ local logout = sidebarbox(beautiful.fg_normal, beautiful.fg_focus, "﫼", awesom
 
 return wibox.widget {
     {
-        nil, 
+        nil,
         {
             nil, 
             {
@@ -27,11 +27,11 @@ return wibox.widget {
             }, 
             nil,
             expand = "none",
-            layout = wibox.layout.align.vertical
+            layout = wibox.layout.align.horizontal
         },
         nil, 
         expand = "none", 
-        layout = wibox.layout.align.horizontal
+        layout = wibox.layout.align.vertical
     }, 
     forced_width = dpi(64),
     widget = wibox.container.background, 

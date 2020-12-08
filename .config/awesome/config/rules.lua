@@ -55,7 +55,7 @@ rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
-    { rule_any = { class = { "firefox", "Chromium" }
+    { rule_any = { class = { "firefox", "Chromium", "Spotify" }
       }, properties = { titlebars_enabled = false } },
     
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -125,8 +125,7 @@ rules = {
     }, 
     { rule = { class = "Spotify" },
       properties = { 
-        maximized_vertical  = true, 
-        maximized_horizontal  = true, 
+        maximized = true
       },
     },
     {

@@ -23,6 +23,8 @@ return function(fg, fg_hover, text, onclick)
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, dpi(8))
         end,
+        shape_border_width = dpi(1),
+        shape_border_color = beautiful.bg_light,
         widget = wibox.container.background
     }
 

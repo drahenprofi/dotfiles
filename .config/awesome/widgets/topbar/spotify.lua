@@ -4,7 +4,7 @@ local watch = require("awful.widget.watch")
 local gears = require("gears")
 local beautiful = require("beautiful")
 
-local button = require("components.button")
+local button = require("lib.button")
 
 ---------------------------
 -- Spotify commands

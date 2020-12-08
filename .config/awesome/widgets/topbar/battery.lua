@@ -12,7 +12,7 @@ local icon_widget = wibox.widget {
 }
 local level_widget = wibox.widget {
     markup = "0%", 
-    font = "Roboto Bold 10",
+    font = "Roboto Medium 10",
     widget = wibox.widget.textbox
 }
 
@@ -37,6 +37,14 @@ battery_widget = wibox.widget {
 awesome.connect_signal("evil::battery", function(battery)
     icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.image.."</span>"
     level_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.value.."%</span>"
+
+    if battery.value > 50 then
+        battery_widget.bg = beautiful.green
+    elseif battery.value > 10 then
+        battery_widget.bg = beautiful.yellow
+    else 
+        battery_widget.bg = beautiful.red
+    end
 end)
 
 return battery_widget

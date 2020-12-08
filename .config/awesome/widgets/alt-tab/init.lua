@@ -23,7 +23,7 @@ local unpack = unpack or table.unpack
 local surface = cairo.ImageSurface(cairo.Format.RGB24,20,20)
 local cr = cairo.Context(surface)
 
-local popupLib = require("components.popup")
+local popupLib = require("lib.popup")
 
 local _M = {}
 

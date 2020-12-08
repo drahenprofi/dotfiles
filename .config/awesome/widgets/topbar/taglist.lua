@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 local wibox = require("wibox")
 local naughty = require("naughty")
 
-local button = require("components.button")
+local button = require("lib.button")
 
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),

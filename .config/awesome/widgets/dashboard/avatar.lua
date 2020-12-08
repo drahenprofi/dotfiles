@@ -1,3 +1,4 @@
+local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
@@ -5,15 +6,15 @@ local naughty = require("naughty")
 
 local dpi = require("beautiful.xresources").apply_dpi
 
---[[local icon = wibox.widget{
+local weed = wibox.widget{
     markup = '<span foreground="'..beautiful.green..'">ﲤ</span>',
-    font = "Fira Mono 88",
+    font = "Fira Mono 48",
     align  = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
-}]]--
+}
 
-local icon = wibox.widget {
+local avatar = wibox.widget {
     {
         {
             image = beautiful.avatar,
@@ -23,8 +24,8 @@ local icon = wibox.widget {
             gears.shape.rounded_rect(cr, width, height, dpi(200))
         end,
         widget = wibox.container.background
-    },
-    left = dpi(44), right = dpi(44),
+    }, 
+    left = dpi(24), right = dpi(24),
     widget = wibox.container.margin
 }
 
@@ -36,9 +37,27 @@ local username = wibox.widget{
     widget = wibox.widget.textbox
 }
 
+local uptime = wibox.widget {
+    font = "Roboto Regular 9",
+    align = "center",
+    valign = "center",
+    widget = wibox.widget.textbox
+}
+
+awful.widget.watch("uptime -p | sed 's/^...//'", 60, function(_, stdout)
+    -- Remove trailing whitespaces
+    local out = stdout:gsub('^%s*(.-)%s*$', '%1')--:gsub(", ", ",\n")
+    uptime.text = out
+end)
+
 return wibox.widget {
-    icon,
-    username, 
+    avatar, 
+    {
+        username, 
+        uptime, 
+        spacing = dpi(2),
+        layout = wibox.layout.fixed.vertical
+    }, 
     spacing = dpi(16),
     layout = wibox.layout.fixed.vertical
 }

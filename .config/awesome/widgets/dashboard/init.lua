@@ -11,13 +11,14 @@ local apps = require("config.apps")
 local leftbar = require("widgets.dashboard.sidebar.left")
 local rightbar = require("widgets.dashboard.sidebar.right")
 local avatar = require("widgets.dashboard.avatar")
-local uptime = require("widgets.dashboard.uptime")
 local calendar = require("widgets.dashboard.calendar")
 local time = require("widgets.dashboard.time")
 local storage = require("widgets.dashboard.storage")
 local volume = require("widgets.dashboard.volume")
 local brightness = require("widgets.dashboard.brightness")
 local battery = require("widgets.dashboard.battery")
+local screenshot = require("widgets.dashboard.screenshot")
+local weather = require("widgets.dashboard.weather")
 
 local dashboard = wibox({
     visible = false, 
@@ -152,42 +153,60 @@ end
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
 
 dashboard:setup {
-    leftbar,
     {
-        nil, {
-            nil, 
-            {
+        leftbar,
+        {
+            nil, {
+                nil, 
                 {
-                    drawBox(avatar, 260, 200),
-                    drawBox(uptime, 260, 28),
-                    layout = wibox.layout.fixed.vertical
-                }, 
-                {
-                    drawBox({
-                        volume,
-                        brightness, 
-                        battery,
-                        spacing = dpi(16), 
-                        widget = wibox.layout.fixed.vertical
-                    }, 200, 114),
-                    drawBox(storage(), 200, 114), 
-                    layout = wibox.layout.fixed.vertical
-                }, 
-                {
-                    drawBox(time, 260, 48),
-                    drawBox(calendar, 260, 180), 
-                    layout = wibox.layout.fixed.vertical
-                }, 
-                layout = wibox.layout.fixed.horizontal
-            },
+                    {
+                        drawBox(avatar, 200, 196),
+                        drawBox(screenshot, 200, 32),
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+                    {
+                        drawBox({
+                            volume,
+                            brightness, 
+                            battery,
+                            spacing = dpi(16), 
+                            widget = wibox.layout.fixed.vertical
+                        }, 200, 114),
+                        drawBox(storage(), 200, 114), 
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+                    {
+                        drawBox(time, 260, 48),
+                        drawBox(calendar, 260, 180), 
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+                    layout = wibox.layout.fixed.horizontal
+                },
+                expand = "none",
+                layout = wibox.layout.align.vertical
+            }, 
             expand = "none",
-            layout = wibox.layout.align.vertical
+            layout = wibox.layout.align.horizontal
         }, 
+        rightbar,
+        layout = wibox.layout.align.horizontal
+    }, 
+    {
+        nil,
+        nil,
+        {
+            {
+                weather,
+                right = dpi(32),
+                widget = wibox.container.margin
+            },
+            expand = "none", 
+            layout = wibox.layout.align.vertical
+        },
         expand = "none",
         layout = wibox.layout.align.horizontal
     }, 
-    rightbar,
-    layout = wibox.layout.align.horizontal
+    layout = wibox.layout.stack
 }
 
 return dashboard

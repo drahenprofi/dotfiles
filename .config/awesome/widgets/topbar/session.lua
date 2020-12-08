@@ -1,6 +1,6 @@
 local beautiful = require("beautiful")
 
-local button = require("components.button")
+local button = require("lib.button")
 
 local color = beautiful.red
 local color_hover = beautiful.red_light

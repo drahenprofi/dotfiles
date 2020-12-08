@@ -34,7 +34,7 @@ require("evil")
 require("widgets.dashboard")
 require("widgets.topbar")
 require("widgets.popup")
-require("widgets.prompt")
+--require("widgets.prompt")
 
 require("config.notifications")
 require("awful.autofocus")
