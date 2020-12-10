@@ -4,13 +4,13 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 
-local sidebar = require("widgets.dashboard.sidebar.left")
+local dock = require("widgets.dock.dock")
 
 local width = 62
 local openerWidth = 8
 local height = 376
 
-local dock = wibox({
+local dock_container = wibox({
     visible = true, 
     ontop = true,
     type = "dock", 
@@ -33,9 +33,9 @@ local dock_opener = wibox.widget {
 local auto_hide = false
 local set_position = function()
     if auto_hide then
-        dock.x = -width 
+        dock_container.x = -width 
     else 
-        dock.x = 0
+        dock_container.x = 0
     end
 end
 
@@ -50,7 +50,7 @@ local get_auto_hide = function(tag)
 end
 
 dock_opener:connect_signal("mouse::enter", function()
-    dock.x = 0
+    dock_container.x = 0
 end)
 
 local timer = gears.timer {
@@ -59,11 +59,11 @@ local timer = gears.timer {
     callback  = set_position
 }
 
-sidebar:connect_signal("mouse::leave", function() 
+dock:connect_signal("mouse::leave", function() 
     timer:again()
 end)
 
-sidebar:connect_signal("mouse::enter", function()
+dock:connect_signal("mouse::enter", function()
     timer:stop()
 end)
 
@@ -84,8 +84,8 @@ tag.connect_signal("property::layout", function(t) update(t) end)
 tag.connect_signal("property::selected", function(t) update(t) end)
 
 
-dock:setup {
-    sidebar, 
+dock_container:setup {
+    dock, 
     dock_opener,
     layout = wibox.layout.fixed.horizontal
 }

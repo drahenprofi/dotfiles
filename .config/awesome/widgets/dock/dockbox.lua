@@ -7,7 +7,7 @@ local naughty = require("naughty")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local sidebarbox = require("widgets.dashboard.sidebar.sidebarbox")
+local dockbox = require("lib.dockbox")
 
 local countIndicator = function()
     return wibox.widget {
@@ -89,7 +89,11 @@ return function(fg, fg_hover, text, app)
             expand = "none",
             widget = wibox.layout.align.vertical
         },
-        sidebarbox(fg, fg_hover, text, findApp),
+        dockbox(fg, fg_hover, text, function() 
+            findApp()
+
+            awesome.emit_signal("dashboard::close")
+        end),
         spacing = dpi(2),
         layout = wibox.layout.fixed.horizontal
     }

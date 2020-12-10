@@ -9,8 +9,8 @@ local naughty = require("naughty")
 local apps = require("config.apps")
 
 local drawBox = require("widgets.dashboard.drawBox")
-local leftbar = require("widgets.dashboard.sidebar.left")
-local rightbar = require("widgets.dashboard.sidebar.right")
+local leftdock = require("widgets.dashboard.docks.left")
+local rightdock = require("widgets.dashboard.docks.right")
 local avatar = require("widgets.dashboard.avatar")
 local calendar = require("widgets.dashboard.calendar")
 local time = require("widgets.dashboard.time")
@@ -102,12 +102,19 @@ dashboard.toggle = function()
     end
 end
 
+dashboard.close = function()
+    calendar.reset()
+    dashboard.visible = false
+    keygrabber:stop()
+end
+
 -- listen to signal emitted by other widgets
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
+awesome.connect_signal("dashboard::close", dashboard.close)
 
 dashboard:setup {
     {
-        leftbar,
+        leftdock,
         {
             nil, {
                 nil, 
@@ -141,7 +148,7 @@ dashboard:setup {
             expand = "none",
             layout = wibox.layout.align.horizontal
         }, 
-        rightbar,
+        rightdock,
         layout = wibox.layout.align.horizontal
     }, 
     {
