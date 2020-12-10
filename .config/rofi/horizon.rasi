@@ -8,7 +8,7 @@ configuration {
 * {
     background-color:               transparent;
     background:                     #1C1E26;
-    background-alt:                 #1C1E26BF;
+    background-alt:                 #232530;
     text-color:                     #D8DEE9;
     selected-text-color:            #D8DEE9;
     primary:                        #A3BE8C;
@@ -46,8 +46,8 @@ entry  {
 
 listview {
     columns:                        4;
-    margin:                         0px 120px 40px 120px;
-    background-color: @background-alt;
+    margin:                         0px 120px 80px 120px;
+    background-color: @background;
     border: 0px;
     border-radius: 12px;
 }
@@ -64,12 +64,12 @@ element normal.urgent, element alternate.urgent {
 }
 
 element normal.active, element alternate.active {
-    background-color:               @background;
+    background-color:               @background-alt;
     color:                          @selected-text-color;
 }
 
 element selected {
-    background-color:               @background;
+    background-color:               @background-alt;
     color:                          @selected-text-color;
 }
 
@@ -78,7 +78,7 @@ element selected.urgent {
 }
 
 element selected.active {
-    background-color:               @background;
+    background-color:               @background-alt;
     color:                          @selected-text-color;
 }
 

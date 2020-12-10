@@ -36,7 +36,6 @@ local cal = wibox.widget {
         elseif flag == "header" then
             fg = beautiful.highlight
             widget.font = "Roboto Medium 12"
-            widget:set_markup(widget:get_text())
         elseif flag == "weekday" then
             widget:set_markup('<b>' .. string.upper(widget:get_text()) .. '</b>')
         end

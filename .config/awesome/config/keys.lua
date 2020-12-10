@@ -13,7 +13,7 @@ local keys = {}
 local apps = require("config.apps")
 
 keys.desktopbuttons = gears.table.join(
-    -- awful.button({ }, 1, function() awesome.emit_signal("dashboard::toggle") end)
+    awful.button({ }, 1, function() awesome.emit_signal("dashboard::toggle") end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 )
@@ -98,8 +98,8 @@ keys.globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    awful.key({ modkey },            "r", function () awesome.emit_signal("dashboard::toggle") end),
-    awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr) end),
+    awful.key({ modkey }, "r", function () awful.spawn(apps.launcher, false) end),
+    awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr, false) end),
     awful.key({ modkey, "Shift" }, "p",     function () 
         awful.spawn.easy_async_with_shell(apps.screenshot, function(stdout)
             local fileName = string.gsub(stdout, "\n", "")

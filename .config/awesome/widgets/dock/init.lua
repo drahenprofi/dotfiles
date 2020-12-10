@@ -31,8 +31,9 @@ local dock_opener = wibox.widget {
 }
 
 local auto_hide = false
+local mouse_in_dock = false
 local set_position = function()
-    if auto_hide then
+    if auto_hide and not mouse_in_dock then
         dock_container.x = -width 
     else 
         dock_container.x = 0
@@ -54,16 +55,18 @@ dock_opener:connect_signal("mouse::enter", function()
 end)
 
 local timer = gears.timer {
-    timeout   = 1.25,
+    timeout   = 0.75,
     single_shot = true,
     callback  = set_position
 }
 
 dock:connect_signal("mouse::leave", function() 
+    mouse_in_dock = false
     timer:again()
 end)
 
 dock:connect_signal("mouse::enter", function()
+    mouse_in_dock = true
     timer:stop()
 end)
 
