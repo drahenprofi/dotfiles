@@ -33,3 +33,6 @@ This is basically a write down for myself, in case I have to reinstall.
 ![Screenshot 1](misc/screenshots/screen1.png)
 
 ![Screenshot 2](misc/screenshots/screen2.png)
+
+![Screenshot 3](misc/screenshots/screen3.png)
+
