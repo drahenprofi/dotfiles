@@ -50,7 +50,7 @@
 
 .tab-background {
   border-radius: 4px 4px 0px 0px !important;
-  background-color: #232530 !important;
+  background-color: #1C1E26 !important;
 }
 
 #tabbrowser-tabs:not([movingtab]) > .tabbrowser-arrowscrollbox > 
@@ -61,7 +61,7 @@
 .tab-background[selected="true"]:-moz-lwtheme,
 .tabbrowser-tab:hover > .tab-stack > 
 .tab-background:not([selected="true"]):not([multiselected]) {
-  background-color: #2E303E !important;
+  background-color: #1C1E26 !important;
 }
 
 .titlebar-buttonbox-container {
@@ -111,8 +111,8 @@
 
 .tab-content[selected="true"] {
   border-radius: 4px 4px 0px 0px !important;
-  border-bottom: 2px solid #F43E5C !important;
-  background-color: #2E303E !important;
+  border-bottom: 1px solid #F43E5C !important;
+  background-color: #1C1E26 !important;
 }
 
 .tab-line {
