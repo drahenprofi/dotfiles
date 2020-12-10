@@ -17,26 +17,15 @@ local level_widget = wibox.widget {
 }
 
 battery_widget = wibox.widget {
-    {
-        {
-            icon_widget,
-            level_widget,
-            spacing = dpi(4),
-            layout = wibox.layout.fixed.horizontal,
-        },
-        left = dpi(4), right = dpi(4),
-        widget = wibox.container.margin
-    }, 
-    bg = beautiful.blue,
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(4))
-    end,
-    widget = wibox.container.background
+    icon_widget,
+    level_widget,
+    spacing = dpi(4),
+    layout = wibox.layout.fixed.horizontal,
 }
 
 awesome.connect_signal("evil::battery", function(battery)
-    icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.image.."</span>"
-    level_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.value.."%</span>"
+    icon_widget.markup = "<span foreground='"..beautiful.fg_dark.."'>"..battery.image.."</span>"
+    level_widget.markup = "<span foreground='"..beautiful.fg_dark.."'>"..battery.value.."%</span>"
 end)
 
 return battery_widget
