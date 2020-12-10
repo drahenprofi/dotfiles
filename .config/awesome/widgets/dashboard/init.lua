@@ -18,7 +18,7 @@ local storage = require("widgets.dashboard.storage")
 local volume = require("widgets.dashboard.volume")
 local brightness = require("widgets.dashboard.brightness")
 local battery = require("widgets.dashboard.battery")
-local screenshot = require("widgets.dashboard.screenshot")
+local settings = require("widgets.dashboard.settings")
 local weather = require("widgets.dashboard.weather")
 
 local dashboard = wibox({
@@ -114,7 +114,7 @@ dashboard:setup {
                 {
                     {
                         drawBox(avatar, 168, 196),
-                        screenshot,
+                        settings,
                         layout = wibox.layout.fixed.vertical
                     }, 
                     {

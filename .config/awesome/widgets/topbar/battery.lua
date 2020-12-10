@@ -27,7 +27,7 @@ battery_widget = wibox.widget {
         left = dpi(4), right = dpi(4),
         widget = wibox.container.margin
     }, 
-    bg = beautiful.yellow,
+    bg = beautiful.blue,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, dpi(4))
     end,
@@ -37,14 +37,6 @@ battery_widget = wibox.widget {
 awesome.connect_signal("evil::battery", function(battery)
     icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.image.."</span>"
     level_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..battery.value.."%</span>"
-
-    if battery.value > 50 then
-        battery_widget.bg = beautiful.green
-    elseif battery.value > 10 then
-        battery_widget.bg = beautiful.yellow
-    else 
-        battery_widget.bg = beautiful.red
-    end
 end)
 
 return battery_widget

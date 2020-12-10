@@ -15,31 +15,26 @@ local function drawBox(content, width, height)
     container.shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, dpi(8))
     end
+
+    container.shape_border_width = dpi(1)
+    container.shape_border_color = beautiful.bg_light
     
     local box = wibox.widget {
         {
             {
                 {
-                    widget = wibox.widget.separator,
-                    color  = '#b8d2f82a',
-                    forced_height = dpi(1),
-                },
-                {
+                    nil,
                     {
                         nil,
-                        {
-                            nil,
-                            content,
-                            layout = wibox.layout.align.vertical,
-                            expand = "none"
-                        },
-                        layout = wibox.layout.align.horizontal,
-                        expand = "none"
-                    }, 
-                    margins = dpi(padding),
-                    widget = wibox.container.margin
+                        content,
+                        expand = "none",
+                        layout = wibox.layout.align.vertical,
+                    },
+                    expand = "none",
+                    layout = wibox.layout.align.horizontal,
                 }, 
-                layout = wibox.layout.fixed.vertical
+                margins = dpi(padding),
+                widget = wibox.container.margin
             },
             widget = container
         },

@@ -8,14 +8,14 @@ local apps = require("config.apps")
 local drawBox = require("widgets.dashboard.drawBox")
 
 local text = wibox.widget {
-    text = "Take screenshot", 
+    text = "Settings", 
     font = "Roboto Medium 12",
     widget = wibox.widget.textbox
 }
 
 local icon = wibox.widget {
-    markup = "<span foreground='"..beautiful.cyan.."'></span>",
-    font = "Fira Mono 32",
+    markup = "<span foreground='"..beautiful.misc1.."'>漣</span>",
+    font = "Fira Mono 24",
     widget = wibox.widget.textbox
 }
 
@@ -30,9 +30,7 @@ local container = drawBox(widget, 168, 32)
 
 container:connect_signal("button::press", function()
     awesome.emit_signal("dashboard::toggle")
-    awful.spawn.easy_async_with_shell("sleep 1; ".. apps.screenshot, function(stdout)
-        -- TODO
-    end)
+    awful.spawn(apps.settings, false)
 end)
 
 local old_cursor, old_wibox

@@ -8,6 +8,7 @@ local apps = {
     appearance = "lxappearance", 
     browser = "firefox", 
     fileexplorer = "thunar",
+    settings = "code /home/parndt/awesome/"
 }
 
 user = {

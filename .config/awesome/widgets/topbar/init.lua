@@ -31,6 +31,7 @@ local taglist = require("widgets.topbar.taglist")
 local battery = require("widgets.topbar.battery")
 local clock = require("widgets.topbar.clock")
 local spotify = require("widgets.topbar.spotify")
+local launcher = require("widgets.topbar.launcher")
 
 beautiful.systray_icon_spacing = dpi(12)
 local systray = wibox.widget.systray()
@@ -75,6 +76,7 @@ awful.screen.connect_for_each_screen(function(s)
                 }
             }),
             widget(clock), 
+            widget(launcher),
             layout = wibox.layout.fixed.horizontal, 
         }
     }

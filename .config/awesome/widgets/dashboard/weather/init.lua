@@ -12,6 +12,33 @@ local get_command = function(api_key)
     return "curl -X GET '"..OPEN_WEATHER_URL..api_key.."'"
 end
 
+local get_icon = function(condition)
+    local icon
+
+    if (condition == "Thunderstorm") then
+        icon = "朗"
+    elseif (condition == "Drizzle") then
+        icon = "殺"
+    elseif (condition == "Rain") then
+        icon = "歹"
+    elseif (condition == "Snow") then
+        icon = "流"
+    elseif (condition == "Clear") then
+        local time = os.date("*t")
+        if time.hour > 6 and time.hour < 18 then
+            icon = "滛"
+        else
+            icon = "望"
+        end
+    elseif (condition == "Clouds") then
+        icon = "摒"
+    else
+        icon = "敖"
+    end
+
+    return icon
+end
+
 local temperature = wibox.widget {
     font = "Fira Mono Bold 14",
     widget = wibox.widget.textbox
@@ -52,21 +79,8 @@ local update_widget = function(widget, stdout, stderr)
     temperature.markup = "<span foreground='"..beautiful.bg_normal.."'>"..tostring(result.main.temp).." °C</span>"
     description.markup = "<span foreground='"..beautiful.bg_normal.."'>"..result.weather[1].description.."</span>" 
     
-    local icon = ""
-
-    if (result.weather[1].main == "Thunderstorm") then
-        icon = ""
-    elseif (result.weather[1].main == "Drizzle") then
-        icon = ""
-    elseif (result.weather[1].main == "Rain") then
-        icon = ""
-    elseif (result.weather[1].main == "Snow") then
-        icon = ""
-    elseif (result.weather[1].main == "Clear") then
-        icon = ""
-    elseif (result.weather[1].main == "Clouds") then
-        icon = ""
-    end
+    local condition = result.weather[1].main
+    local icon = get_icon(condition)
 
     icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..icon.."</span>"
 end

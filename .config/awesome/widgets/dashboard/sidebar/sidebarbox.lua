@@ -52,10 +52,7 @@ return function(fg, fg_hover, text, onclick)
         end
     end)
 
-    container:connect_signal("button::press", function() 
-        onclick()
-        awesome.emit_signal("dashboard::toggle")
-    end)
+    container:connect_signal("button::press", onclick)
 
     return container
 end
