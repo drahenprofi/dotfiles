@@ -8,8 +8,8 @@ local apps = require("config.apps")
 local drawBox = require("widgets.dashboard.drawBox")
 
 local text = wibox.widget {
-    text = "Settings", 
-    font = "Roboto Medium 12",
+    text = "SETTINGS", 
+    font = "Roboto Bold 12",
     widget = wibox.widget.textbox
 }
 
