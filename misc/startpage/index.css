@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.container {
+    background-color: #1C1E26;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    background-color: #232530;
+    padding: 2em;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchContainer {
+    text-align: center;
+    margin-left: 6em;
+    margin-right: 6em;
+}
+
+.search {
+    width: 100%;
+}
+
+.linksContainer {
+    display: flex;
+}
+
+.linksContainer a {
+    color: #D5D8DA;
+    font-size: 5em;
+    margin: .5em;
+}
+
+.linksContainer a:hover, a:active {
+    color: #F2F3F3;
+}

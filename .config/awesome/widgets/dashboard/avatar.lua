@@ -38,6 +38,7 @@ local username = wibox.widget{
 }
 
 local uptime = wibox.widget {
+    text = "up 0 minutes",
     font = "Roboto Regular 9",
     align = "center",
     valign = "center",

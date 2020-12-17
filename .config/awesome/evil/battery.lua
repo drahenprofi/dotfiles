@@ -6,6 +6,7 @@ local wibox = require("wibox")
 local gfs = require("gears.filesystem")
 local dpi = require('beautiful').xresources.apply_dpi
 
+local notification
 local function show_battery_warning(charge)
     local bg = beautiful.bg_normal
     local fg = beautiful.fg_normal
@@ -15,7 +16,11 @@ local function show_battery_warning(charge)
         fg = beautiful.bg_normal
     end
 
-    naughty.notify {
+    if notification ~= nil then 
+        naughty.destroy(notification, naughty.notificationClosedReason.dismissedByUser)
+    end
+
+    notification = naughty.notify {
         icon = beautiful.battery_alert_icon,
         icon_size = 32,
         text = charge.."% remaining",

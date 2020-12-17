@@ -57,9 +57,9 @@ theme.yellow_light = "#FBC3A7"
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(0)
-theme.border_normal = "#2b3539"
-theme.border_focus  = "#2b3539"
-theme.border_marked = "#2b3539"
+theme.border_normal = theme.bg_very_light
+theme.border_focus  = theme.bg_very_light
+theme.border_marked = theme.bg_very_light
 theme.rounded_corners = true
 theme.border_radius = dpi(6) -- set roundness of corners
 
