@@ -141,8 +141,11 @@ button.create_text = function(color, color_hover, text, font, onclick)
         
         -- change cursor
         local wb = mouse.current_wibox
-        old_cursor, old_wibox = wb.cursor, wb
-        wb.cursor = "hand2" 
+
+        if wb then
+            old_cursor, old_wibox = wb.cursor, wb
+            wb.cursor = "hand2"
+        end 
     end)
     textWidget:connect_signal("mouse::leave", function() 
         textWidget.markup = "<span foreground='"..color.."'>"..text.."</span>" 
