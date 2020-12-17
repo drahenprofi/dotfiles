@@ -8,13 +8,8 @@ local dpi = beautiful.xresources.apply_dpi
 local button = require("lib.button")
 
 local create_shortcut = function(c, icon, location)
-    local shortcut = button.create_text(beautiful.fg_dark, beautiful.fg_focus, icon, "Fira Mono 24", function()
-        --awful.spawn("thunar "..location, false)
-        awful.spawn.easy_async_with_shell("xdotool key ctrl+l", function()
-            awful.spawn.easy_async_with_shell("xdotool type --delay 0 " .. location, function() 
-                awful.spawn.with_shell("xdotool key Return")
-            end)
-        end)
+    local shortcut = button.create_text(beautiful.fg_dark, beautiful.red, icon, "Fira Mono 24", function()
+        awful.spawn.with_shell("xdotool key ctrl+l; xdotool type --delay 0 "..location.."; xdotool key Return;")
     end)
 
     shortcut.forced_width = dpi(32)
@@ -24,6 +19,7 @@ local create_shortcut = function(c, icon, location)
 end
 
 local create_thunar_titlebar = function (c)
+    if c.type ~= "normal" then return end
 
     awful.titlebar(c, { position = "left", size = dpi(64), bg_normal = beautiful.bg_normal }):setup {
         {

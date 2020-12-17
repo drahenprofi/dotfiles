@@ -5,7 +5,10 @@ You can temporarily disable this custom CSS by clicking on the “Pause” butto
 Changes are applied instantly and globally, for the whole application.
 */
 
-#location-toolbar  {
+.thunar #location-toolbar  {
 	border: 0;
 }
 
+.thunar .standard-view {
+	border: 0;
+}

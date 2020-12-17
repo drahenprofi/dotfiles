@@ -27,6 +27,7 @@ This is basically a write down for myself, in case I have to reinstall.
 + `pamixer` - Control volume
 + `sp` - Get Spotify information
 + `nerd-fonts-fira-mono` - Icons
++ `xdotool` - Spawn key combinations
 
 ### Screenshots
 
