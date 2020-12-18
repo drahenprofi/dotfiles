@@ -29,11 +29,17 @@ local create_thunar_titlebar = function (c)
                 {
                     create_shortcut(c, "", "/home/parndt"),
                     create_shortcut(c, "", "trash:///"),
-                    create_shortcut(c, "", "/data"),
+                    create_shortcut(c, "", "/data"),
+                    {
+                        -- separator
+                        bg = beautiful.red,
+                        forced_height = dpi(1), 
+                        widget = wibox.container.background
+                    }, 
                     create_shortcut(c, "", "/data/downloads"),
-                    create_shortcut(c, "", "/data/documents"),
-                    create_shortcut(c, "", "/data/music"),
+                    create_shortcut(c, "", "/data/documents"),
                     create_shortcut(c, "", "/data/pictures"),
+                    create_shortcut(c, "ﱘ", "/data/music"),
                     create_shortcut(c, "", "/data/uni/BA"),
                     spacing = dpi(10),
                     layout = wibox.layout.fixed.vertical
