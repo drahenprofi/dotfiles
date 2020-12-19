@@ -25,8 +25,8 @@ require("config.layout")
 require("config.rules")
 require("config.tags")
 require("config.keys")
-require("config.titlebars")
-
+--require("config.titlebars")
+require("decorations")
 -- init daemons
 require("evil")
 
