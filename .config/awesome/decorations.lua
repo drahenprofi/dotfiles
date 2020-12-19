@@ -366,22 +366,23 @@ local add_decorations = function(c)
         bgimage = right_border_img,
         widget = wibox.container.background,
     }
+
     local corner_bottom_left_img = flip(
                                        create_corner_top_left {
-            color = beautiful.bg_very_light,
-            radius = 6,
-            height = 6,
+            color = beautiful.bg_normal,
+            radius = 3,
+            height = 3,
             background_source = background_fill_top,
             stroke_offset_inner = 1.5,
             stroke_offset_outer = 0.5,
             stroke_source_outer = gradient(
                 beautiful.border_outer, beautiful.border_outer,
-                6),
+                3, 0, 0.25),
             stroke_source_inner = gradient(
                 beautiful.border_inner, beautiful.border_inner,
-                6),
-            stroke_width_inner = 1,
-            stroke_width_outer = 1,
+                3),
+            stroke_width_inner = 1.5,
+            stroke_width_outer = 2,
         }, "vertical")
     local corner_bottom_right_img = flip(
                                         corner_bottom_left_img, "horizontal")
@@ -418,5 +419,5 @@ end
 client.connect_signal("request::titlebars", function(c)
     add_decorations(c)
 
-    c:connect_signal("request::activate", add_decorations)
+    --c:connect_signal("request::activate", add_decorations)
 end)

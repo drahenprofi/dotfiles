@@ -24,7 +24,7 @@ awful.layout.layouts = {
 -- }}}
 
 -- Rounded corners
-client.connect_signal("manage", function (c, startup)
+--[[client.connect_signal("manage", function (c, startup)
     if not c.fullscreen and not c.maximized then
         c.shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
@@ -47,3 +47,4 @@ client.connect_signal("property::fullscreen", no_rounded_corners)
 client.connect_signal("property::maximized", function(c) 
     no_rounded_corners(c)    
 end)
+]]--
