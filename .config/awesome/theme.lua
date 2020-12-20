@@ -62,8 +62,6 @@ theme.border_focus  = theme.bg_very_light
 theme.border_marked = theme.bg_very_light
 theme.rounded_corners = true
 theme.border_radius = dpi(6) -- set roundness of corners
-theme.border_inner = theme.misc2
-theme.border_outer = theme.bg_dark
 
 
 -- bar config
