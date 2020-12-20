@@ -6,6 +6,7 @@ local rad = math.rad
 local floor = math.floor
 local max = math.max
 local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 
 local stroke_inner_bottom_lighten_mul = 0.4
 local stroke_inner_sides_lighten_mul = 0.4
@@ -42,46 +43,15 @@ local get_titlebar = function(c)
     }
 
     local right = {
-        layout = wibox.layout.fixed.horizontal,
         {
-            widget = wibox.container.margin,
-            top = 7,
-            bottom = 7,
-            left = 0,
-            right = 10,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                awful.titlebar.widget.minimizebutton(c)
-            }
-        },
-        {
-            widget = wibox.container.place,
-            {
-                widget = wibox.container.margin,
-                top = 7,
-                bottom = 7,
-                left = 0,
-                right = 10,
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    awful.titlebar.widget.maximizedbutton(c),
-                }
-            }
-        },
-        {
-            widget = wibox.container.place,
-            {
-                widget = wibox.container.margin,
-                top = 7,
-                bottom = 7,
-                left = 0,
-                right = 10,
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    awful.titlebar.widget.closebutton(c),
-                }
-            },
-        },
+            awful.titlebar.widget.minimizebutton(c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.closebutton(c),
+            spacing = dpi(8),
+            layout = wibox.layout.fixed.horizontal,
+        }, 
+        top = dpi(8), bottom = dpi(7), right = dpi(7),
+        widget = wibox.container.margin
     }
 
 
@@ -423,18 +393,34 @@ local add_decorations = function(c)
     }
     -- The right side border
     local right_border_img = flip(left_border_img, "horizontal")
-    local left_side_border = awful.titlebar(
-                                 c, {
+
+    if c.class == "Thunar" and c.type == "normal" then
+        local custom_titlebar = require("config.titlebars.thunar")(c)
+
+        awful.titlebar(c, {
+            position = "left",
+            size = 48,
+            bg = transparent,
+            widget = wibox.container.background,
+        }):setup{
+            custom_titlebar,
+            bgimage = left_border_img,
+            --buttons = resize_button,
+            widget = wibox.container.background,
+        }
+    else
+        awful.titlebar(c, {
             position = "left",
             size = 2,
             bg = client_color,
             widget = wibox.container.background,
-        })
-    left_side_border:setup{
-        bgimage = left_border_img,
-        buttons = resize_button,
-        widget = wibox.container.background,
-    }
+        }):setup{
+            bgimage = left_border_img,
+            buttons = resize_button,
+            widget = wibox.container.background,
+        }
+    end
+
     local right_side_border = awful.titlebar(
                                   c, {
             position = "right",
@@ -495,7 +481,25 @@ local add_decorations = function(c)
         buttons = resize_button,
     }
 
+    local set_border_visibility = function(visible)
+        if visible then
+            --awful.titlebar.show(c, "bottom")
+            --awful.titlebar.show(c, "left")
+            --awful.titlebar.show(c, "right")
+        else
+            --awful.titlebar.hide(c, "bottom")
+            --awful.titlebar.hide(c, "left")
+            --awful.titlebar.hide(c, "right")
+        end
+    end
+
     add_window_shade(c, titlebar.widget, bottom.widget)
+
+    set_border_visibility(not c.maximized)
+
+    c:connect_signal("property::maximized", function(c)
+        set_border_visibility(not c.maximized)
+    end)
 
     --[[if _private.no_titlebar_maximized then
         c:connect_signal(
@@ -529,17 +533,5 @@ local add_decorations = function(c)
 end
 
 client.connect_signal("request::titlebars", function(c)
-    if c.maximized then
-        add_titlebar_only(c)
-    else
-        add_decorations(c)
-    end
-end)
-
-client.connect_signal("property::maxmimized", function(c)
-    if c.maximized then
-        add_titlebar_only(c)
-    else
-        add_decorations(c)
-    end
+    add_decorations(c)
 end)
