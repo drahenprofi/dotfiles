@@ -13,61 +13,7 @@ local stroke_inner_sides_lighten_mul = 0.4
 local stroke_outer_top_darken_mul = 0.7
 local bottom_edge_height = 3
 
-local get_titlebar = function(c)
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            client.focus = c
-            awful.mouse.client.move(c)
-            c:raise()
-        end),
-        awful.button({ }, 3, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.resize(c)
-        end)
-    )
-    
-    local left = {
-        buttons = buttons,
-        layout  = wibox.layout.fixed.horizontal,
-    }
-
-    local middle = {
-        {
-            align = "center",
-            font = beautiful.font,
-            widget = awful.titlebar.widget.titlewidget(c),
-        },
-        buttons = buttons,
-        layout  = wibox.layout.flex.horizontal,
-    }
-
-    local right = {
-        {
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton(c),
-            spacing = dpi(8),
-            layout = wibox.layout.fixed.horizontal,
-        }, 
-        top = dpi(8), bottom = dpi(7), right = dpi(7),
-        widget = wibox.container.margin
-    }
-
-
-    local titlebar = {
-        {
-            left,
-            middle,
-            right,
-            layout = wibox.layout.align.horizontal,
-        },
-        --bg = beautiful.bg_normal,
-        widget = wibox.container.background,
-    }
-
-    return titlebar
-end
+local get_titlebar = require("decorations.titlebar")
 
 -- Flips the given surface around the specified axis
 local function flip(surface, axis)
@@ -327,179 +273,22 @@ local add_decorations = function(c)
                                     lighten(1),
                                     client_color, titlebar_height, 0,
                                     0.5)
-    -- The top left corner of the titlebar
-    local corner_top_left_img = create_corner_top_left {
-        background_source = background_fill_top,
-        color = client_color,
-        height = titlebar_height,
-        radius = beautiful.border_radius,
-        stroke_offset_inner = 1.5,
-        stroke_width_inner = 1,
-        stroke_offset_outer = 0.5,
-        stroke_width_outer = 1,
-        stroke_source_inner = gradient(
-            stroke_color_inner_top, stroke_color_inner_sides, titlebar_height),
-        stroke_source_outer = gradient(
-            stroke_color_outer_top, stroke_color_outer_sides, titlebar_height),
-    }
-    -- The top right corner of the titlebar
-    local corner_top_right_img = flip(corner_top_left_img, "horizontal")
-
-    -- The middle part of the titlebar
-    local top_edge = create_edge_top_middle {
-        background_source = background_fill_top,
-        color = client_color,
-        height = titlebar_height,
-        stroke_color_inner = stroke_color_inner_top,
-        stroke_color_outer = stroke_color_outer_top,
-        stroke_offset_inner = 1.25,
-        stroke_offset_outer = 0.5,
-        stroke_width_inner = 2,
-        stroke_width_outer = 1,
-        width = c.screen.geometry.width,
-    }
-    -- Create the titlebar
-    local titlebar = awful.titlebar(
-                         c, {size = titlebar_height, bg = "transparent"})
-    -- Arrange the graphics
-    titlebar.widget = {
-        wibox.widget.imagebox(corner_top_left_img, false),
-        {    
-            get_titlebar(c),
-            bgimage = top_edge,
-            widget = wibox.container.background,
-        },
-        wibox.widget.imagebox(corner_top_right_img, false),
-        layout = wibox.layout.align.horizontal,
-    }
-
-    local resize_button = {
+    --[[local resize_button = {
         awful.widget.button(
             {}, 1, function()
                 c:activate{context = "mouse_click", action = "mouse_resize"}
             end),
-    }
+    }]]--
 
-    -- The left side border
-    local left_border_img = create_edge_left {
-        client_color = client_color,
-        height = c.screen.geometry.height,
-        stroke_offset_outer = 0.5,
-        stroke_width_outer = 1,
-        stroke_color_outer = stroke_color_outer_sides,
-        stroke_offset_inner = 1.5,
-        stroke_width_inner = 1.5,
-        inner_stroke_color = stroke_color_inner_sides,
-    }
-    -- The right side border
-    local right_border_img = flip(left_border_img, "horizontal")
-
-    if c.class == "Thunar" and c.type == "normal" then
-        local custom_titlebar = require("config.titlebars.thunar")(c)
-
-        awful.titlebar(c, {
-            position = "left",
-            size = 48,
-            bg = transparent,
-            widget = wibox.container.background,
-        }):setup{
-            custom_titlebar,
-            bgimage = left_border_img,
-            --buttons = resize_button,
-            widget = wibox.container.background,
-        }
+    -- https://www.reddit.com/r/awesomewm/comments/ggru8u/custom_rule_properties/
+    if c.class == "firefox" or c.class == "Spotify" then
+        require("decorations.top-alternate")(c, background_fill_top, client_color, stroke_color_inner_top, stroke_color_outer_top, stroke_color_inner_sides, stroke_color_outer_sides)
     else
-        awful.titlebar(c, {
-            position = "left",
-            size = 2,
-            bg = client_color,
-            widget = wibox.container.background,
-        }):setup{
-            bgimage = left_border_img,
-            buttons = resize_button,
-            widget = wibox.container.background,
-        }
+        require("decorations.top")(c, background_fill_top, client_color, stroke_color_inner_top, stroke_color_outer_top, stroke_color_inner_sides, stroke_color_outer_sides)
     end
-
-    local right_side_border = awful.titlebar(
-                                  c, {
-            position = "right",
-            size = 2,
-            bg = client_color,
-            widget = wibox.container.background,
-        })
-    right_side_border:setup{
-        bgimage = right_border_img,
-        buttons = resize_button,
-        widget = wibox.container.background,
-    }
-    local corner_bottom_left_img = flip(
-                                       create_corner_top_left {
-            color = client_color,
-            radius = bottom_edge_height,
-            height = bottom_edge_height,
-            background_source = background_fill_top,
-            stroke_offset_inner = 1.5,
-            stroke_offset_outer = 0.5,
-            stroke_source_outer = gradient(
-                stroke_color_outer_bottom, stroke_color_outer_sides,
-                bottom_edge_height, 0, 0.25),
-            stroke_source_inner = gradient(
-                stroke_color_inner_bottom, stroke_color_inner_sides,
-                bottom_edge_height),
-            stroke_width_inner = 1.5,
-            stroke_width_outer = 2,
-        }, "vertical")
-    local corner_bottom_right_img = flip(
-                                        corner_bottom_left_img, "horizontal")
-    local bottom_edge = flip(
-                            create_edge_top_middle {
-            color = client_color,
-            height = bottom_edge_height,
-            background_source = background_fill_top,
-            stroke_color_inner = stroke_color_inner_bottom,
-            stroke_color_outer = stroke_color_outer_bottom,
-            stroke_offset_inner = 1.25,
-            stroke_offset_outer = 0.5,
-            stroke_width_inner = 1,
-            stroke_width_outer = 1,
-            width = c.screen.geometry.width,
-        }, "vertical")
-    local bottom = awful.titlebar(
-                       c, {
-            size = bottom_edge_height,
-            bg = "transparent",
-            position = "bottom",
-        })
-    bottom.widget = wibox.widget {
-        wibox.widget.imagebox(corner_bottom_left_img, false),
-        -- {widget = wcontainer_background, bgimage = bottom_edge},
-        wibox.widget.imagebox(bottom_edge, false),
-
-        wibox.widget.imagebox(corner_bottom_right_img, false),
-        layout = wibox.layout.align.horizontal,
-        buttons = resize_button,
-    }
-
-    local set_border_visibility = function(visible)
-        if visible then
-            --awful.titlebar.show(c, "bottom")
-            --awful.titlebar.show(c, "left")
-            --awful.titlebar.show(c, "right")
-        else
-            --awful.titlebar.hide(c, "bottom")
-            --awful.titlebar.hide(c, "left")
-            --awful.titlebar.hide(c, "right")
-        end
-    end
-
-    add_window_shade(c, titlebar.widget, bottom.widget)
-
-    set_border_visibility(not c.maximized)
-
-    c:connect_signal("property::maximized", function(c)
-        set_border_visibility(not c.maximized)
-    end)
+    require("decorations.left")(c, client_color, stroke_color_outer_sides, stroke_color_inner_sides)
+    require("decorations.right")(c, client_color, stroke_color_outer_sides, stroke_color_inner_sides)
+    require("decorations.bottom")(c, client_color, background_fill_top, stroke_color_outer_bottom, stroke_color_inner_bottom, stroke_color_outer_sides, stroke_color_inner_sides)
 
     --[[if _private.no_titlebar_maximized then
         c:connect_signal(
