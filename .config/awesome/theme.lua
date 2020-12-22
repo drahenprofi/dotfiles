@@ -71,24 +71,24 @@ theme.bar_item_radius = dpi(10)
 theme.bar_item_padding = dpi(3)
 
 -- regular
-theme.titlebar_close_button_normal = icon_path.."titlebar/close/close_1.svg"
-theme.titlebar_close_button_focus = icon_path.."titlebar/close/close_2.svg"
-theme.titlebar_maximized_button_normal_inactive = icon_path.."titlebar/maximize/maximize_1.svg"
-theme.titlebar_maximized_button_focus_inactive  = icon_path.."titlebar/maximize/maximize_2.svg"
-theme.titlebar_maximized_button_normal_active = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_active  = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_minimize_button_normal = icon_path.."titlebar/minimize/minimize_1.svg"
-theme.titlebar_minimize_button_focus  = icon_path.."titlebar/minimize/minimize_2.svg"
+theme.titlebar_close_button_normal = icon_path.."titlebar/close/close_1.png"
+theme.titlebar_close_button_focus = icon_path.."titlebar/close/close_2.png"
+theme.titlebar_maximized_button_normal_inactive = icon_path.."titlebar/maximize/maximize_1.png"
+theme.titlebar_maximized_button_focus_inactive  = icon_path.."titlebar/maximize/maximize_2.png"
+theme.titlebar_maximized_button_normal_active = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_maximized_button_focus_active  = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_minimize_button_normal = icon_path.."titlebar/minimize/minimize_1.png"
+theme.titlebar_minimize_button_focus  = icon_path.."titlebar/minimize/minimize_2.png"
 
 -- hover
-theme.titlebar_close_button_normal_hover = icon_path.."titlebar/close/close_3.svg"
-theme.titlebar_close_button_focus_hover = icon_path.."titlebar/close/close_3.svg"
-theme.titlebar_maximized_button_normal_inactive_hover = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_inactive_hover  = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_maximized_button_normal_active_hover = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_maximized_button_focus_active_hover  = icon_path.."titlebar/maximize/maximize_3.svg"
-theme.titlebar_minimize_button_normal_hover = icon_path.."titlebar/minimize/minimize_3.svg"
-theme.titlebar_minimize_button_focus_hover  = icon_path.."titlebar/minimize/minimize_3.svg"
+theme.titlebar_close_button_normal_hover = icon_path.."titlebar/close/close_3.png"
+theme.titlebar_close_button_focus_hover = icon_path.."titlebar/close/close_3.png"
+theme.titlebar_maximized_button_normal_inactive_hover = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_maximized_button_focus_inactive_hover  = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_maximized_button_normal_active_hover = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_maximized_button_focus_active_hover  = icon_path.."titlebar/maximize/maximize_3.png"
+theme.titlebar_minimize_button_normal_hover = icon_path.."titlebar/minimize/minimize_3.png"
+theme.titlebar_minimize_button_focus_hover  = icon_path.."titlebar/minimize/minimize_3.png"
 
 theme.titlebar_height = dpi(28)
 
