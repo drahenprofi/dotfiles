@@ -1,7 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 
-local shapes = require("decorations.shapes")
+local shapes = require("lib.shapes")
 
 local edge_height = 3
 
@@ -18,18 +18,18 @@ local set_titlebar = function(c, corner_left_img, edge, corner_right_img)
     }
 end
 
-local top = function(c, background_fill_top, client_color, stroke_color_inner_top, stroke_color_outer_top, stroke_color_inner_sides, stroke_color_outer_sides)
+local top = function(c, args)
     local corner_left_img = shapes.create_corner_top_left {
-        color = client_color,
+        color = args.client_color,
         radius = edge_height,
         height = edge_height,
-        background_source = background_fill_top,
+        background_source = args.background_fill_top,
         stroke_offset_inner = 1.5,
         stroke_offset_outer = 0.5,
         stroke_source_inner = shapes.gradient(
-            stroke_color_inner_top, stroke_color_inner_sides, edge_height),
+            args.stroke_color_inner_top, args.stroke_color_inner_sides, edge_height),
         stroke_source_outer = shapes.gradient(
-            stroke_color_outer_top, stroke_color_outer_sides, edge_height),
+            args.stroke_color_outer_top, args.stroke_color_outer_sides, edge_height),
         stroke_width_inner = 1.5,
         stroke_width_outer = 2,
     }
@@ -37,11 +37,11 @@ local top = function(c, background_fill_top, client_color, stroke_color_inner_to
     local corner_right_img = shapes.flip(corner_left_img, "horizontal")
 
     local edge = shapes.create_edge_top_middle {
-        color = client_color,
+        color = args.client_color,
         height = edge_height,
-        background_source = background_fill_top,
-        stroke_color_inner = stroke_color_inner_top,
-        stroke_color_outer = stroke_color_outer_top,
+        background_source = args.background_fill_top,
+        stroke_color_inner = args.stroke_color_inner_top,
+        stroke_color_outer = args.stroke_color_outer_top,
         stroke_offset_inner = 1.25,
         stroke_offset_outer = 0.5,
         stroke_width_inner = 1,

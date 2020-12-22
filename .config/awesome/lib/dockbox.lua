@@ -6,6 +6,8 @@ local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
+local shapes = require("lib.shapes")
+
 return function(fg, fg_hover, text, onclick)
     local textbox = wibox.widget {
         markup = "<span foreground='"..fg.."'>"..text.."</span>",
