@@ -4,23 +4,18 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
 
+local apply_borders = require("lib.borders")
+
 local function drawBox(content, width, height)
     local margin = 8
-    local padding = 16
+    local padding = 8
 
     local container = wibox.container.background()
     container.bg = beautiful.bg_normal
     container.forced_width = dpi(width + margin + padding)
     container.forced_height = dpi(height + margin + padding)
-    container.shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(8))
-    end
-
-    container.shape_border_width = dpi(1)
-    container.shape_border_color = beautiful.bg_light
     
     local box = wibox.widget {
-        {
             {
                 {
                     nil,
@@ -37,16 +32,15 @@ local function drawBox(content, width, height)
                 widget = wibox.container.margin
             },
             widget = container
-        },
+    }
+
+    local bordered_box = apply_borders(box, width + 2*padding, height + 2*padding, 8)
+
+    return wibox.widget {
+        bordered_box,
         margins = dpi(margin),
         widget = wibox.container.margin
     }
-
-    box.set_background = function(bg)
-        container.bg = bg
-    end
-
-    return box
 end
 
 return drawBox

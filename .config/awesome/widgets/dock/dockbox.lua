@@ -23,7 +23,7 @@ end
 return function(fg, fg_hover, text, app)
     local count = 0
     local countWidget = wibox.layout.fixed.vertical()
-    countWidget.forced_width = dpi(4)
+    countWidget.forced_width = dpi(5)
     countWidget.spacing = dpi(2)
 
     local clientIsApp = function(c)

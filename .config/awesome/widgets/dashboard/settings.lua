@@ -35,7 +35,7 @@ end)
 
 local old_cursor, old_wibox
 container:connect_signal("mouse::enter", function()
-    container.set_background(beautiful.bg_dark)
+    -- container.set_background(beautiful.bg_dark)
 
     -- change cursor
     local wb = mouse.current_wibox
@@ -44,7 +44,7 @@ container:connect_signal("mouse::enter", function()
 end)
 
 container:connect_signal("mouse::leave", function()
-    container.set_background(beautiful.bg_normal)
+    -- container.set_background(beautiful.bg_normal)
 
      -- reset cursor
      if old_wibox then
