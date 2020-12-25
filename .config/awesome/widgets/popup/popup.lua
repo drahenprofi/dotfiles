@@ -4,6 +4,8 @@ local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require('beautiful').xresources.apply_dpi
 
+local apply_borders = require("lib.borders")
+
 local createPopup = function(color)
     local icon = wibox.widget {
         font = "Fira Mono 28",
@@ -30,25 +32,27 @@ local createPopup = function(color)
         layout        = wibox.container.rotate,
     }
 
-    local popup = awful.popup {
-        widget = {
+    local widget = apply_borders({
+        {
             {
-                {
-                    nil, 
-                    progressbar_container,
-                    nil, 
-                    expand = "none",
-                    layout = wibox.layout.align.horizontal
-                }, 
-                icon,
-                spacing = dpi(4),
-                layout = wibox.layout.fixed.vertical,
-            },
-            top = dpi(16),
-            left = dpi(8), 
-            right = dpi(8),
-            widget  = wibox.container.margin
+                nil, 
+                progressbar_container,
+                nil, 
+                expand = "none",
+                layout = wibox.layout.align.horizontal
+            }, 
+            icon,
+            spacing = dpi(4),
+            layout = wibox.layout.fixed.vertical,
         },
+        top = dpi(16),
+        left = dpi(8), 
+        right = dpi(8),
+        widget  = wibox.container.margin
+    }, 26, 176, 8)
+
+    local popup = awful.popup {
+        widget = widget,
         y            = awful.screen.focused().geometry.height / 2 - 72,
         x            = awful.screen.focused().geometry.width - 48,
         shape        = function(cr, width, height)

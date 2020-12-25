@@ -130,13 +130,13 @@ keys.globalkeys = gears.table.join(
 
     -- Brightness
    awful.key({ }, "XF86MonBrightnessDown", function ()
-       awful.spawn.easy_async_with_shell("brightnessctl set 10%- > /dev/null", function(stdout)
-           awesome.emit_signal("popup::brightness", {amount = -10})
+       awful.spawn.easy_async_with_shell("brightnessctl set 3%- > /dev/null", function(stdout)
+           awesome.emit_signal("popup::brightness", {amount = -3})
        end)
    end),
    awful.key({ }, "XF86MonBrightnessUp", function ()
-       awful.spawn.easy_async_with_shell("brightnessctl set +10% > /dev/null", function(stdout)
-            awesome.emit_signal("popup::brightness", {amount = 10})
+       awful.spawn.easy_async_with_shell("brightnessctl set +3% > /dev/null", function(stdout)
+            awesome.emit_signal("popup::brightness", {amount = 3})
         end)
     end)
 )
