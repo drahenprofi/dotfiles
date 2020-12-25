@@ -6,7 +6,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 local dock = require("widgets.dock.dock")
 
-local width = 62
+local width = 68
 local openerWidth = 8
 local height = 376
 
