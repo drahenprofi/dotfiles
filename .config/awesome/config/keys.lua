@@ -103,11 +103,7 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "p",     function () 
         awful.spawn.easy_async_with_shell(apps.screenshot, function(stdout)
             local fileName = string.gsub(stdout, "\n", "")
-            naughty.notify({
-                title = "Screenshot captured!",
-                text = fileName, 
-                icon = beautiful.camera_icon
-            })
+            require("noti").screenshot(fileName)
         end)
     end),
      

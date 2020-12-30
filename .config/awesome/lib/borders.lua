@@ -84,6 +84,8 @@ local apply_borders = function(widget, width, height, radius)
 
     local right_border_img = shapes.flip(left_border_img, "horizontal")
 
+    collectgarbage("collect")
+
     return wibox.widget {
         {
             wibox.widget.imagebox(corner_top_left_img, false),

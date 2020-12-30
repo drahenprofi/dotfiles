@@ -38,8 +38,10 @@ require("widgets.topbar")
 require("widgets.popup")
 require("widgets.dock")
 
-require("config.notifications")
+--require("config.notifications")
 require("awful.autofocus")
+
+require("noti")
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.

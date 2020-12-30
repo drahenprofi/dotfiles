@@ -7,30 +7,7 @@ local gfs = require("gears.filesystem")
 local dpi = require('beautiful').xresources.apply_dpi
 
 local notification
-local function show_battery_warning(charge)
-    local bg = beautiful.bg_normal
-    local fg = beautiful.fg_normal
 
-    if charge < 3 then 
-        bg = beautiful.highlight
-        fg = beautiful.bg_normal
-    end
-
-    if notification ~= nil then 
-        naughty.destroy(notification, naughty.notificationClosedReason.dismissedByUser)
-    end
-
-    notification = naughty.notify {
-        icon = beautiful.battery_alert_icon,
-        icon_size = 32,
-        text = charge.."% remaining",
-        title = "Battery may run out soon!",
-        timeout = 25, -- show the warning for a longer time
-        hover_timeout = 0.5,
-        fg = fg, 
-        bg = bg
-    }
-end
 
 local last_battery_check = os.time()
 local warningDisplayed = false
@@ -79,7 +56,7 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
             last_battery_check = os.time()
             warningDisplayed = true
 
-            show_battery_warning(charge)
+            require("noti").battery(charge)
         end
     elseif (charge < 20) then 
         icon = ""
