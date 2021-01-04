@@ -76,13 +76,13 @@ local weather_widget = wibox.widget {
 local update_widget = function(widget, stdout, stderr)
     local result = json.decode(stdout)
 
-    temperature.markup = "<span foreground='"..beautiful.bg_normal.."'>"..tostring(result.main.temp).." °C</span>"
-    description.markup = "<span foreground='"..beautiful.bg_normal.."'>"..result.weather[1].description.."</span>" 
+    temperature.markup = "<span foreground='"..beautiful.fg_normal.."'>"..tostring(result.main.temp).." °C</span>"
+    description.markup = "<span foreground='"..beautiful.fg_normal.."'>"..result.weather[1].description.."</span>" 
     
     local condition = result.weather[1].main
     local icon = get_icon(condition)
 
-    icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..icon.."</span>"
+    icon_widget.markup = "<span foreground='"..beautiful.fg_normal.."'>"..icon.."</span>"
 end
 
 local api_key_path = awful.util.getdir("config") .. "widgets/dashboard/weather/openweathermap.txt"

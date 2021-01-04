@@ -6,7 +6,7 @@ configuration {
 
 
 * {
-    background-color:               transparent;
+    background-color:               /*transparent*/#1C1E26;
     background:                     #1C1E26;
     background-alt:                 #232530;
     text-color:                     #D8DEE9;
@@ -17,7 +17,7 @@ configuration {
 
 
 window {
-    transparency:                   "/home/parndt/.config/awesome/wallpaper_blur.png";
+    /*transparency:                   "/home/parndt/.config/awesome/wallpaper_blur.png";*/
     height:                         100%;
     width:                          100%;
     location:                       northwest;
@@ -40,7 +40,7 @@ entry  {
     margin:                         40px -270px 32px 450px;
     border-radius:                  12px;
     padding:                        10px 10px 10px 10px;
-    background-color:               @background;
+    background-color:               @background-alt;
     font:                           "Consolas 12";
 }
 
