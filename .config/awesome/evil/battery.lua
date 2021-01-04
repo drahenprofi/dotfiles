@@ -56,7 +56,7 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
             last_battery_check = os.time()
             warningDisplayed = true
 
-            require("noti").battery(charge)
+            require("widgets.notifications").battery(charge)
         end
     elseif (charge < 20) then 
         icon = ""

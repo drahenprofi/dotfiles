@@ -41,7 +41,7 @@ require("widgets.dock")
 --require("config.notifications")
 require("awful.autofocus")
 
-require("noti")
+require("widgets.notifications")
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.

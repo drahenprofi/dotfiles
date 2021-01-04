@@ -103,7 +103,7 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "p",     function () 
         awful.spawn.easy_async_with_shell(apps.screenshot, function(stdout)
             local fileName = string.gsub(stdout, "\n", "")
-            require("noti").screenshot(fileName)
+            require("widgets.notifications").screenshot(fileName)
         end)
     end),
      
