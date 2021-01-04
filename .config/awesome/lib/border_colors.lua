@@ -82,7 +82,7 @@ local get_colors = function(client_color)
         stroke_color_outer_sides = darken(darken_amount),
         stroke_color_outer_bottom = darken(darken_amount),
 
-        background_fill_top = gradient(lighten(1), client_color, titlebar_height, 0, 0.5)
+        background_fill_top = gradient(client_color, client_color, titlebar_height, 0, 0.5)
     }
 end
 

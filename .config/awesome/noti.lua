@@ -20,6 +20,8 @@ local app_config = {
     --['Telegram Desktop'] = { icon = "", title = true },
     --['NetworkManager'] = { icon = "", title = true },
     ["Spotify"] = { icon = "", title = false },
+    ["battery"] = { icon = "", title = true }
+
 }
 
 local urgency_color = {
@@ -31,12 +33,6 @@ local urgency_color = {
 -- Template
 -- ===================================================================
 naughty.connect_signal("request::display", function(n)
-
-    -- Custom icon widget
-    -- It can be used instead of naughty.widget.icon if you prefer your icon to be
-    -- a textbox instead of an image. However, you have to determine its
-    -- text/markup value from the notification before creating the
-    -- naughty.layout.box.
     local custom_notification_icon = wibox.widget {
         font = "Fira Mono 28",
         align = "right",
@@ -209,40 +205,24 @@ notifications.screenshot = function(filename)
         title = "Screenshot captured!",
         app_name = "screenshot",
         actions = { open, show },
-        timeout = 10
+        timeout = 10,
+        urgency = "normal"
     })
 end
 
+local battery_notification
 notifications.battery = function(charge)
     local urgency = "normal"
 
     if charge < 3 then urgency = "critical" end
 
-
-    --[[local function show_battery_warning(charge)
-    local bg = beautiful.bg_normal
-    local fg = beautiful.fg_normal
-
-    if charge < 3 then 
-        bg = beautiful.highlight
-        fg = beautiful.bg_normal
-    end
-
-    if notification ~= nil then 
-        naughty.destroy(notification, naughty.notificationClosedReason.dismissedByUser)
-    end
-
-    notification = naughty.notify {
-        icon = beautiful.battery_alert_icon,
-        icon_size = 32,
-        text = charge.."% remaining",
+    battery_notification = notifications.notify_dwim({
+        app_name = "battery",
         title = "Battery may run out soon!",
-        timeout = 25, -- show the warning for a longer time
-        hover_timeout = 0.5,
-        fg = fg, 
-        bg = bg
-    }
-end]]--
+        text = charge.."% remaining",
+        timeout = 25,
+        urgency = urgency
+    }, battery_notification)
 end
 
 return notifications
