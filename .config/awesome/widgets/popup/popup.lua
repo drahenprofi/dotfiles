@@ -49,7 +49,7 @@ local createPopup = function(color)
         left = dpi(8), 
         right = dpi(8),
         widget  = wibox.container.margin
-    }, 26, 176, 8)
+    }, 30, 176, 6)
 
     local popup = awful.popup {
         widget = widget,
