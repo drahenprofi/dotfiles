@@ -2,17 +2,6 @@
 
 Arch Linux dotfiles
 
-## Details
-
-+ **OS**: Arch Linux
-+ **WM**: AwesomeWM
-+ **Shell**: `zsh` with `oh-my-zsh`
-+ **Fonts**: Fira Mono and Roboto
-+ **Terminal**: kitty
-+ **File Manager**: Thunar
-+ **Launcher**: rofi
-+ **Browser**: Firefox
-
 ### Dependencies
 
 This is basically a write down for myself, in case I have to reinstall. 
@@ -22,12 +11,15 @@ This is basically a write down for myself, in case I have to reinstall.
 + `rofi` - App launcher
 + `kitty` - Terminal
 + `picom` - Compositor
++ `firefox` - Browser
 + `thunar` - File explorer
 + `brightnessctl` - Control brightness
 + `pamixer` - Control volume
++ `Fira Mono` and `Roboto` - Fonts
 + `sp` - Get Spotify information
 + `nerd-fonts-fira-mono` - Icons
 + `xdotool` - Spawn key combinations
++ `imagemagick` - Blur images
 
 ### Screenshots
 

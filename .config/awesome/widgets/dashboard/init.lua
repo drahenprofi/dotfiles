@@ -30,25 +30,9 @@ local dashboard = wibox({
     y = beautiful.bar_height,
     width = awful.screen.focused().geometry.width, 
     height = awful.screen.focused().geometry.height - beautiful.bar_height,
-    bgimage = function(context, cr, width, height) 
-        local img = gears.surface(beautiful.wallpaper_blur)
-
-        local w, h = gears.surface.get_size(img)
-        local aspect_w = awful.screen.focused().geometry.width / w
-        local aspect_h = (awful.screen.focused().geometry.height) / h
-
-        --aspect_h = math.max(aspect_w, aspect_h)
-        --aspect_w = math.max(aspect_w, aspect_h)
-        
-        cr:scale(aspect_w, aspect_h)
-
-        cr:translate(0, -(beautiful.bar_height * 1 / aspect_h))
-        
-        cr:set_source_surface(img, 0, 0)
-        cr:paint()
-    end,
-    bg = beautiful.bg_normal
 })
+
+require("widgets.dashboard.background")(dashboard)
 
 local keygrabber
 local function getKeygrabber()
