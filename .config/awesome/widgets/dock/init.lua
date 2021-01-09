@@ -30,15 +30,7 @@ local dock_opener = wibox.widget {
     widget = wibox.container.background
 }
 
-local auto_hide = false
 local mouse_in_dock = false
-local set_position = function()
-    if auto_hide and not mouse_in_dock then
-        dock_container.x = -width 
-    else 
-        dock_container.x = 0
-    end
-end
 
 local get_fullscreen = function()
     tag = awful.screen.focused().selected_tag
