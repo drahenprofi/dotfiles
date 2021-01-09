@@ -40,6 +40,18 @@ local set_position = function()
     end
 end
 
+local get_fullscreen = function()
+    tag = awful.screen.focused().selected_tag
+
+    for _, client in pairs(tag:clients()) do
+        if client.fullscreen then
+            return true
+        end
+    end
+
+    return false
+end
+
 local get_auto_hide = function(tag)
     if tag == nil then tag = awful.screen.focused().selected_tag end
 
@@ -54,9 +66,9 @@ local get_auto_hide = function(tag)
 end
 
 local show_cb = function()
-    if not mouse_in_dock then return false end
+    if not mouse_in_dock and get_auto_hide() then return false end
 
-    local delta = 1
+    local delta = 2
 
     if dock_container.x < 0 then
         dock_container.x = dock_container.x + delta
@@ -69,7 +81,7 @@ end
 local hide_cb = function()
     if mouse_in_dock or not get_auto_hide() then return false end
 
-    local delta = 1
+    local delta = 2
 
     if dock_container.x > -width then
         dock_container.x = dock_container.x - delta
@@ -79,23 +91,33 @@ local hide_cb = function()
     end
 end
 
+local show = function()
+    gears.timer.start_new(0.002, show_cb)
+end
+
+local hide = function()
+    gears.timer.start_new(0.002, hide_cb)
+end
+
 dock_opener:connect_signal("mouse::enter", function()
+    if get_fullscreen() then return end
+
     mouse_in_dock = true
-    gears.timer.start_new(0.005, show_cb)
+    show()
 end)
 dock_opener:connect_signal("mouse::leave", function()
     mouse_in_dock = false
-    gears.timer.start_new(0.005, hide_cb)
+    hide()
 end)
 
 dock:connect_signal("mouse::leave", function() 
     mouse_in_dock = false
-    gears.timer.start_new(0.005, hide_cb)
+    hide()
 end)
 
 dock:connect_signal("mouse::enter", function()
     mouse_in_dock = true
-    gears.timer.start_new(0.005, show_cb)
+    show()
 end)
 
 local update = function(tag)
@@ -103,8 +125,11 @@ local update = function(tag)
         tag = awful.screen.focused().selected_tag
     end
 
-    auto_hide = get_auto_hide(tag)
-    set_position()
+    if get_auto_hide(tag) and not mouse_in_dock then
+        hide() 
+    else 
+        show()
+    end
 end
 
 client.connect_signal("manage", function() update() end)
