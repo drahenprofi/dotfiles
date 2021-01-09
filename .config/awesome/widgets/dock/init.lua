@@ -41,6 +41,9 @@ local set_position = function()
 end
 
 local get_auto_hide = function(tag)
+    if tag == nil then tag = awful.screen.focused().selected_tag end
+
+    -- auto hiding if any client on the current tag overlaps the dock
     for _, client in pairs(tag:clients()) do
         if client.x < width then
             return true
@@ -50,24 +53,49 @@ local get_auto_hide = function(tag)
     return false
 end
 
-dock_opener:connect_signal("mouse::enter", function()
-    dock_container.x = 0
-end)
+local show_cb = function()
+    if not mouse_in_dock then return false end
 
-local timer = gears.timer {
-    timeout   = 0.75,
-    single_shot = true,
-    callback  = set_position
-}
+    local delta = 1
+
+    if dock_container.x < 0 then
+        dock_container.x = dock_container.x + delta
+        return true
+    else
+        return false 
+    end
+end
+
+local hide_cb = function()
+    if mouse_in_dock or not get_auto_hide() then return false end
+
+    local delta = 1
+
+    if dock_container.x > -width then
+        dock_container.x = dock_container.x - delta
+        return true
+    else
+        return false
+    end
+end
+
+dock_opener:connect_signal("mouse::enter", function()
+    mouse_in_dock = true
+    gears.timer.start_new(0.005, show_cb)
+end)
+dock_opener:connect_signal("mouse::leave", function()
+    mouse_in_dock = false
+    gears.timer.start_new(0.005, hide_cb)
+end)
 
 dock:connect_signal("mouse::leave", function() 
     mouse_in_dock = false
-    timer:again()
+    gears.timer.start_new(0.005, hide_cb)
 end)
 
 dock:connect_signal("mouse::enter", function()
     mouse_in_dock = true
-    timer:stop()
+    gears.timer.start_new(0.005, show_cb)
 end)
 
 local update = function(tag)
@@ -83,9 +111,9 @@ client.connect_signal("manage", function() update() end)
 client.connect_signal("unmanage", function() update() end)
 client.connect_signal("property::size", function() update() end)
 client.connect_signal("property::position", function() update() end)
+client.connect_signal("tagged", function() update() end)
 tag.connect_signal("property::layout", function(t) update(t) end)
 tag.connect_signal("property::selected", function(t) update(t) end)
-
 
 dock_container:setup {
     dock, 
