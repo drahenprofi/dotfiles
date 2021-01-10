@@ -4,8 +4,6 @@ Arch Linux dotfiles
 
 ### Dependencies
 
-This is basically a write down for myself, in case I have to reinstall. 
-
 + `awesome-git` - Window manager
 + `zsh` and `oh-my-zsh` - Shell
 + `rofi` - App launcher
