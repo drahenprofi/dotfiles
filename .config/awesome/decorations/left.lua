@@ -1,3 +1,13 @@
+--[[
+    
+Copyright (c) 2020 mut-ex <https://github.com/mut-ex>
+
+The following code is a derivative work of the code from the awesome-wm-nice project 
+(https://github.com/mut-ex/awesome-wm-nice/), which is licensed MIT. This code therefore 
+is also licensed under the terms of the MIT License
+
+]]--
+
 local awful = require("awful")
 local wibox = require("wibox")
 

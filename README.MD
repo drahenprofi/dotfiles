@@ -1,6 +1,6 @@
 # Dotfiles
 
-Arch Linux dotfiles
+Arch Linux dotfiles 
 
 ### Dependencies
 
@@ -27,3 +27,6 @@ Arch Linux dotfiles
 
 ![Screenshot 3](misc/screenshots/screen3.png)
 
+### Honorable mentions
+
+The borders and anti-aliased corners are based on the [awesome-wm-nice](https://github.com/mut-ex/awesome-wm-nice/) repository. 
