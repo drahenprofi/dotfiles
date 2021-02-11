@@ -2,6 +2,8 @@
 
 Arch Linux dotfiles 
 
+<img src="misc/screenshots/screenshot.png" alt="img" align="right" width="400px">
+
 ### Dependencies
 
 + `awesome-git` - Window manager
@@ -19,13 +21,7 @@ Arch Linux dotfiles
 + `xdotool` - Spawn key combinations
 + `imagemagick` - Blur images
 
-### Screenshots
 
-![Screenshot 1](misc/screenshots/screen1.png)
-
-![Screenshot 2](misc/screenshots/screen2.png)
-
-![Screenshot 3](misc/screenshots/screen3.png)
 
 ### Honorable mentions
 
