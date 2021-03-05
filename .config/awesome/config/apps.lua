@@ -8,6 +8,7 @@ local apps = {
     appearance = "lxappearance", 
     browser = "firefox", 
     fileexplorer = "thunar",
+    musicplayer = "pragha", 
     settings = "code /home/parndt/awesome/"
 }
 

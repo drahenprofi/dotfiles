@@ -13,6 +13,7 @@ local terminal = box(beautiful.fg_normal, beautiful.fg_focus, "", apps.termin
 local intellij = box(beautiful.red, beautiful.red_light, "", "intellij-idea-ultimate-edition")
 local gimp = box(beautiful.cyan, beautiful.cyan_light, "", "gimp")
 local spotify = box(beautiful.green, beautiful.green_light, "", "spotify")
+local musicplayer = box(beautiful.cyan, beautiful.cyan_light, "", apps.musicplayer)
 
 return wibox.widget {
     {
@@ -24,7 +25,8 @@ return wibox.widget {
                 fileexplorer, 
                 terminal, 
                 intellij, 
-                gimp,
+                --gimp,
+                musicplayer,
                 spotify,
                 spacing = dpi(8),
                 layout = wibox.layout.fixed.vertical
