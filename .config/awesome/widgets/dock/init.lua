@@ -44,14 +44,9 @@ local get_fullscreen = function()
     return false
 end
 
-local get_auto_hide = function(tag)
-    if tag == nil then tag = awful.screen.focused().selected_tag end
-
-    -- auto hiding if any client on the current tag overlaps the dock
-    for _, client in pairs(tag:clients()) do
-        if client.x < width then
-            return true
-        end
+local get_auto_hide = function()
+    if client.focus and client.focus.x < width then 
+        return true
     end
 
     return false
@@ -124,13 +119,14 @@ local update = function(tag)
     end
 end
 
-client.connect_signal("manage", function() update() end)
-client.connect_signal("unmanage", function() update() end)
-client.connect_signal("property::size", function() update() end)
-client.connect_signal("property::position", function() update() end)
-client.connect_signal("tagged", function() update() end)
-tag.connect_signal("property::layout", function(t) update(t) end)
-tag.connect_signal("property::selected", function(t) update(t) end)
+client.connect_signal("focus", update)
+client.connect_signal("manage", update)
+client.connect_signal("unmanage", update)
+client.connect_signal("property::size", update)
+client.connect_signal("property::position", update)
+client.connect_signal("tagged", update)
+tag.connect_signal("property::layout", update)
+tag.connect_signal("property::selected", update)
 
 dock_container:setup {
     dock, 
