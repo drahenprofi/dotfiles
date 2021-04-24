@@ -30,7 +30,8 @@ local session = require("widgets.topbar.session")
 local taglist = require("widgets.topbar.taglist")
 local battery = require("widgets.topbar.battery")
 local clock = require("widgets.topbar.clock")
-local spotify = require("widgets.topbar.spotify")
+--local spotify = require("widgets.topbar.spotify")
+local tasklist = require("widgets.topbar.tasklist")
 local launcher = require("widgets.topbar.launcher")
 
 beautiful.systray_icon_spacing = dpi(12)
@@ -49,6 +50,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     local bar_taglist = taglist.init(s)
+    local bar_tasklist = tasklist.init(s)
 
     s.topbar:setup {
         layout = wibox.layout.align.horizontal, 
@@ -61,7 +63,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal, 
         }, 
         {   -- Middle
-            widget(spotify()),
+            --widget(spotify()),
+            --bar_tasklist,
             layout = wibox.layout.fixed.horizontal, 
         },
         {   -- Right 
