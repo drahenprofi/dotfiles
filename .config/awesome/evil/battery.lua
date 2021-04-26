@@ -50,7 +50,7 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
     if charging then
         icon = ""
     elseif (charge >= 0 and charge < 10) then
-        icon = ""
+        icon = ""
         if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed or charge < 3 then
             -- if 5 minutes have elapsed since the last warning
             last_battery_check = os.time()
@@ -59,23 +59,23 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
             require("widgets.notifications").battery(charge)
         end
     elseif (charge < 20) then 
-        icon = ""
-    elseif charge < 30 then
         icon = ""
-    elseif charge < 40 then
+    elseif charge < 30 then
         icon = ""
-    elseif charge < 50 then
+    elseif charge < 40 then
         icon = ""
-    elseif charge < 60 then
+    elseif charge < 50 then
         icon = ""
-    elseif charge < 70 then
+    elseif charge < 60 then
         icon = ""
-    elseif charge < 80 then
+    elseif charge < 70 then
         icon = ""
-    elseif charge < 90 then
+    elseif charge < 80 then
         icon = ""
-    elseif charge < 100 then
+    elseif charge < 90 then
         icon = ""
+    elseif charge < 100 then
+        icon = ""
     else
         icon = ""
     end

@@ -3,7 +3,7 @@ local beautiful = require("beautiful")
 return {
     firefox = {
         class = "firefox",
-        icon = "",
+        icon = "",
         color = beautiful.yellow,
     }, 
     kitty = {
@@ -13,12 +13,12 @@ return {
     }, 
     thunar = {
         class = "thunar",
-        icon = "",
+        icon = "",
         color = beautiful.blue
     }, 
     spotify = {
         class = "spotify",
-        icon = "", 
+        icon = "阮", 
         color = beautiful.green
     }, 
     intellij = {
