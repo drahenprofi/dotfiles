@@ -92,7 +92,7 @@ theme.titlebar_minimize_button_focus_hover  = icon_path.."titlebar/minimize/mini
 
 theme.titlebar_height = dpi(28)
 
-theme.wallpaper = themes_path.."wallpaper.png"
+theme.wallpaper = themes_path.."wallpaper_scaled.png"
 theme.wallpaper_blur = themes_path.."wallpaper_blur.png"
 
 -- You can use your own layout icons like this:

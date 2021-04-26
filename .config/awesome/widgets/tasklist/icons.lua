@@ -30,5 +30,10 @@ return {
         class = "code-oss",
         icon = "﬏", 
         color = beautiful.blue
+    }, 
+    chromium = {
+        class = "chromium",
+        icon = "",
+        color = beautiful.blue_light
     }
 }

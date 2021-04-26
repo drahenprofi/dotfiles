@@ -20,6 +20,7 @@ local brightness = require("widgets.dashboard.brightness")
 local battery = require("widgets.dashboard.battery")
 local settings = require("widgets.dashboard.settings")
 local weather = require("widgets.dashboard.weather")
+local playerctl = require("widgets.dashboard.playerctl")
 
 local dashboard = wibox({
     visible = false, 
@@ -149,7 +150,25 @@ dashboard:setup {
         },
         expand = "none",
         layout = wibox.layout.align.horizontal
-    }, 
+    },
+    {
+
+        nil, 
+        {
+            nil,
+            nil,
+            {
+                playerctl,
+                bottom = dpi(64),
+                widget = wibox.container.margin
+            }, 
+            expand = "none", 
+            layout = wibox.layout.align.vertical
+        }, 
+        nil, 
+        expand = "none", 
+        layout = wibox.layout.align.horizontal
+    },
     layout = wibox.layout.stack
 }
 
