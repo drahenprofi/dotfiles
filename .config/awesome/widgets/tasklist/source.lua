@@ -1,5 +1,14 @@
 local favourites = require("widgets.tasklist.favourites")
 
+function reverse_table(t)
+    local reversedTable = {}
+    local itemCount = #t
+    for k, v in ipairs(t) do
+        reversedTable[itemCount + 1 - k] = v
+    end
+    return reversedTable
+end
+
 return function()
     -- Get all clients
     local cls = client.get()
@@ -13,5 +22,6 @@ return function()
             table.insert(result, c)
         end
     end
-    return result
+    
+    return reverse_table(result)
 end
