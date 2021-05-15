@@ -34,7 +34,7 @@ local urgency_color = {
 -- ===================================================================
 naughty.connect_signal("request::display", function(n)
     local custom_notification_icon = wibox.widget {
-        font = "Fira Mono 28",
+        font = "FiraMono Nerd Font 28",
         align = "right",
         valign = "center",
         widget = wibox.widget.textbox
