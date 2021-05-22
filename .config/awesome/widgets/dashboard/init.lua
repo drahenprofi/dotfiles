@@ -105,27 +105,41 @@ dashboard:setup {
                 nil, 
                 {
                     {
-                        drawBox(avatar, 168, 196),
-                        settings,
-                        layout = wibox.layout.fixed.vertical
+                        {
+                            drawBox(avatar, 168, 196),
+                            settings,
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        {
+                            drawBox({
+                                volume,
+                                brightness, 
+                                battery,
+                                spacing = dpi(16), 
+                                widget = wibox.layout.fixed.vertical
+                            }, 200, 114),
+                            drawBox(storage(), 200, 114), 
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        {
+                            drawBox(time, 260, 48),
+                            drawBox(calendar, 260, 180), 
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        layout = wibox.layout.fixed.horizontal
                     }, 
                     {
-                        drawBox({
-                            volume,
-                            brightness, 
-                            battery,
-                            spacing = dpi(16), 
-                            widget = wibox.layout.fixed.vertical
-                        }, 200, 114),
-                        drawBox(storage(), 200, 114), 
-                        layout = wibox.layout.fixed.vertical
-                    }, 
-                    {
-                        drawBox(time, 260, 48),
-                        drawBox(calendar, 260, 180), 
-                        layout = wibox.layout.fixed.vertical
-                    }, 
-                    layout = wibox.layout.fixed.horizontal
+                        nil,
+                        {
+                            playerctl,
+                            margins = dpi(8),
+                            widget = wibox.container.margin
+                        },
+                        nil,
+                        expand = "none", 
+                        layout = wibox.layout.align.horizontal
+                    },
+                    layout = wibox.layout.fixed.vertical
                 },
                 expand = "none",
                 layout = wibox.layout.align.vertical
@@ -149,24 +163,6 @@ dashboard:setup {
             layout = wibox.layout.align.vertical
         },
         expand = "none",
-        layout = wibox.layout.align.horizontal
-    },
-    {
-
-        nil, 
-        {
-            {
-                playerctl,
-                top = dpi(48),
-                widget = wibox.container.margin
-            }, 
-            nil,
-            nil,
-            expand = "none", 
-            layout = wibox.layout.align.vertical
-        }, 
-        nil, 
-        expand = "none", 
         layout = wibox.layout.align.horizontal
     },
     layout = wibox.layout.stack

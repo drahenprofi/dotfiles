@@ -4,7 +4,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 
 local Playerctl = lgi.Playerctl
-local player = Playerctl.Player{}
+local player = nil
 
 local art_script = [[
 sh -c '
@@ -37,22 +37,35 @@ update_metadata = function()
     if player:get_title() then
 	    artist = player:get_artist()
         title = player:get_title()
+
+        awful.spawn.easy_async_with_shell(art_script, function(out)
+            -- Get album path
+            local album_path = out:gsub('%\n', '')
+
+            awesome.emit_signal("evil::playerctl", {
+                artist = artist, 
+                title = title, 
+                status = player.playback_status, 
+                image = album_path
+            })
+        end)
     end
-
-    awful.spawn.easy_async_with_shell(art_script, function(out)
-        -- Get album path
-        local album_path = out:gsub('%\n', '')
-
-        awesome.emit_signal("evil::playerctl", {
-            artist = artist, 
-            title = title, 
-            status = player.playback_status, 
-            image = album_path
-        })
-    end)
 end
 
-player.on_metadata = update_metadata
+exit = function()
+    awesome.emit_signal("evil::playerctl", false)
+    player = nil
+end
 --player.on_playback_status =
 
-update_metadata()
+--update_metadata()
+
+awful.widget.watch("playerctl status", 10, function(_, stdout, _, _)
+    out = stdout:gsub('%\n', '')
+    if out ~= "" and player == nil then
+        player = Playerctl.Player{}
+        player.on_metadata = update_metadata
+        player.on_exit = exit
+        update_metadata()
+    end
+end)

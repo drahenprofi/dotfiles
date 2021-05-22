@@ -6,7 +6,11 @@ local dpi = beautiful.xresources.apply_dpi
 
 local apply_borders = require("lib.borders")
 
+local naughty = require("naughty")
+
 local player = lgi.Playerctl.Player{}
+
+local container = {}
 
 local image = wibox.widget {
     resize = true,
@@ -15,7 +19,7 @@ local image = wibox.widget {
 }
 
 local artist = wibox.widget {
-    font = "Roboto Bold 12",
+    font = "Roboto Black 12",
     widget = wibox.widget.textbox
 }
 
@@ -25,7 +29,7 @@ local title = wibox.widget {
 }
 
 local previous = wibox.widget {
-    font = "FiraMono Nerd Font 20",
+    font = "FiraMono Nerd Font 18",
     markup = "玲",
     widget = wibox.widget.textbox
 }
@@ -36,7 +40,7 @@ local play_pause = wibox.widget {
 }
 
 local next = wibox.widget {
-    font = "FiraMono Nerd Font 20",
+    font = "FiraMono Nerd Font 18",
     markup = "怜",
     widget = wibox.widget.textbox
 }
@@ -54,6 +58,10 @@ next:connect_signal("button::press", function()
 end)
 
 awesome.connect_signal("evil::playerctl", function(data)
+    container.visible = data~=false
+
+    if not data then return end
+
     artist.markup = data.artist
     title.markup = data.title
 
@@ -71,39 +79,53 @@ awesome.connect_signal("evil::playerctl", function(data)
 end)
 
 local playerctl_widget = wibox.widget {
-    image,
     {
-        nil,
         {
-            artist, 
-            title,
-            layout = wibox.layout.fixed.vertical
+            image,
+            shape = function(cr, width, height)
+                gears.shape.rounded_rect(cr, width, height, dpi(4))
+            end,
+            widget = wibox.container.background
         },
-        nil,
-        expand = "none", 
-        forced_width = dpi(200),
-        layout = wibox.layout.align.vertical
-    },
-    {
-        previous,
-        play_pause,
-        next,
-        spacing = dpi(20),
+        {
+            nil,
+            {
+                artist, 
+                title,
+                layout = wibox.layout.fixed.vertical
+            },
+            nil,
+            expand = "none", 
+            forced_width = dpi(210),
+            layout = wibox.layout.align.vertical
+        },
+        {
+            previous,
+            play_pause,
+            next,
+            spacing = dpi(20),
+            layout = wibox.layout.fixed.horizontal
+        },
+        spacing = dpi(16),
         layout = wibox.layout.fixed.horizontal
-    },
-    spacing = dpi(16),
-    layout = wibox.layout.fixed.horizontal
+    }, 
+    left = dpi(8), 
+    right = dpi(8),
+    widget = wibox.container.margin
 }
 
-return apply_borders({
+container = apply_borders({
     {
         playerctl_widget,
-        left = dpi(8), 
-        right = dpi(8),
+        margins = dpi(8),
         widget = wibox.container.margin
     },
-    forced_width = dpi(400), 
-    forced_height = dpi(64),
+    forced_width = dpi(420), 
+    forced_height = dpi(80),
     bg = beautiful.bg_normal,
     widget = wibox.container.background
-}, 400, 64, 8)
+}, 420, 80, 8)
+
+container.visible = false
+
+return container
