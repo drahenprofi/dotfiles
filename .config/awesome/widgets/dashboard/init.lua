@@ -155,13 +155,13 @@ dashboard:setup {
 
         nil, 
         {
-            nil,
-            nil,
             {
                 playerctl,
-                bottom = dpi(64),
+                top = dpi(48),
                 widget = wibox.container.margin
             }, 
+            nil,
+            nil,
             expand = "none", 
             layout = wibox.layout.align.vertical
         }, 

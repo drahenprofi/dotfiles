@@ -124,5 +124,6 @@ theme.next_grey_icon = icon_path.."next_grey.png"
 theme.previous_icon = icon_path.."previous.png"
 theme.previous_grey_icon = icon_path.."previous_grey.png"
 theme.camera_icon = icon_path.."camera.png"
+theme.nocover_icon = icon_path.."nocover.png"
 
 return theme
