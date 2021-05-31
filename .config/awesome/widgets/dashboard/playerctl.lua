@@ -10,21 +10,25 @@ local naughty = require("naughty")
 
 local player = lgi.Playerctl.Player{}
 
-local container = {}
-
 local image = wibox.widget {
-    resize = true,
-    forced_height = dpi(100),
+    image = beautiful.nocover_icon,
+    forced_width = dpi(110),
+    forced_height = dpi(110),
     widget = wibox.widget.imagebox
 }
 
 local artist = wibox.widget {
+    markup = "Not playing",
     font = "Roboto Black 12",
+    align = "center",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
 local title = wibox.widget {
     font = "Roboto Regular 10",
+    align = "center",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
@@ -35,7 +39,8 @@ local previous = wibox.widget {
 }
 
 local play_pause = wibox.widget {
-    font = "FiraMono Nerd Font 28",
+    font = "FiraMono Nerd Font 18",
+    markup = "契",
     widget = wibox.widget.textbox
 }
 
@@ -46,24 +51,26 @@ local next = wibox.widget {
 }
 
 previous:connect_signal("button::press", function() 
-    player:previous()
+    awesome.emit_signal("evil::playerctl::previous")
 end)
 
 play_pause:connect_signal("button::press", function() 
-    player:play_pause()
+    awesome.emit_signal("evil::playerctl::play_pause")
 end)
 
 next:connect_signal("button::press", function() 
-    player:next()
+    awesome.emit_signal("evil::playerctl::next")
 end)
 
 awesome.connect_signal("evil::playerctl", function(data)
-    container.visible = data~=false
-
-    if not data then return end
-
+    --container.visible = data~=false
+    
     artist.markup = data.artist
     title.markup = data.title
+
+    if data.artist == "" and data.title == "" then 
+        artist.markup = "Not playing"
+    end
 
     if data.status == "PLAYING" then 
         play_pause.markup = ""
@@ -81,11 +88,11 @@ end)
 local playerctl_widget = wibox.widget {
     {
         {
+            nil,
             image,
-            shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, dpi(4))
-            end,
-            widget = wibox.container.background
+            nil, 
+            expand = "none",
+            layout = wibox.layout.align.horizontal
         },
         {
             nil,
@@ -96,36 +103,38 @@ local playerctl_widget = wibox.widget {
             },
             nil,
             expand = "none", 
-            forced_width = dpi(210),
+            forced_width = dpi(168),
+            forced_height = dpi(60),
             layout = wibox.layout.align.vertical
         },
         {
-            previous,
-            play_pause,
-            next,
-            spacing = dpi(20),
-            layout = wibox.layout.fixed.horizontal
+            nil, 
+            {
+                previous,
+                play_pause,
+                next,
+                spacing = dpi(20),
+                layout = wibox.layout.fixed.horizontal
+            },
+            nil,
+            expand = "none",
+            forced_height = dpi(18),
+            layout = wibox.layout.align.horizontal
         },
-        spacing = dpi(16),
-        layout = wibox.layout.fixed.horizontal
-    }, 
-    left = dpi(8), 
-    right = dpi(8),
+        spacing = dpi(8),
+        layout = wibox.layout.fixed.vertical
+    },
+    top = dpi(4),
+    bottom = dpi(4),
     widget = wibox.container.margin
 }
 
-container = apply_borders({
-    {
-        playerctl_widget,
-        margins = dpi(8),
-        widget = wibox.container.margin
-    },
-    forced_width = dpi(420), 
-    forced_height = dpi(80),
-    bg = beautiful.bg_normal,
-    widget = wibox.container.background
-}, 420, 80, 8)
-
-container.visible = false
-
-return container
+return wibox.widget {
+    apply_borders({
+        playerctl_widget, 
+        bg = beautiful.bg_normal,
+        widget = wibox.container.background
+    }, 184, 212, 8), 
+    margins = dpi(8),
+    widget = wibox.container.margin
+}

@@ -104,9 +104,8 @@ dashboard:setup {
             nil, {
                 nil, 
                 {
-                    {
                         {
-                            drawBox(avatar, 168, 196),
+                            playerctl,
                             settings,
                             layout = wibox.layout.fixed.vertical
                         }, 
@@ -127,19 +126,6 @@ dashboard:setup {
                             layout = wibox.layout.fixed.vertical
                         }, 
                         layout = wibox.layout.fixed.horizontal
-                    }, 
-                    {
-                        nil,
-                        {
-                            playerctl,
-                            margins = dpi(8),
-                            widget = wibox.container.margin
-                        },
-                        nil,
-                        expand = "none", 
-                        layout = wibox.layout.align.horizontal
-                    },
-                    layout = wibox.layout.fixed.vertical
                 },
                 expand = "none",
                 layout = wibox.layout.align.vertical
@@ -164,6 +150,19 @@ dashboard:setup {
         },
         expand = "none",
         layout = wibox.layout.align.horizontal
+    },
+    {
+        {
+            drawBox(avatar, 180, 44),
+            nil,
+            nil,
+            expand = "none", 
+            layout = wibox.layout.align.horizontal
+        },
+        nil,
+        nil,
+        expand = "none",
+        layout = wibox.layout.align.vertical
     },
     layout = wibox.layout.stack
 }

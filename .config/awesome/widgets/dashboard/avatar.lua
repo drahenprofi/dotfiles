@@ -16,32 +16,24 @@ local weed = wibox.widget{
 
 local avatar = wibox.widget {
     {
-        {
-            image = beautiful.avatar,
-            widget = wibox.widget.imagebox
-        },
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, dpi(200))
-        end,
-        widget = wibox.container.background
-    }, 
-    left = dpi(12), right = dpi(12),
-    widget = wibox.container.margin
+        image = beautiful.avatar,
+        widget = wibox.widget.imagebox
+    },
+    shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, dpi(200))
+    end,
+    widget = wibox.container.background
 }
 
 local username = wibox.widget{
     markup = '<span foreground="'..beautiful.highlight..'">parndt</span>@<span foreground="'..beautiful.highlight..'">rouge</span>',
-    font = "Fira Mono 14",
-    align  = 'center',
-    valign = 'center',
+    font = "Fira Mono 12",
     widget = wibox.widget.textbox
 }
 
 local uptime = wibox.widget {
     text = "up 0 minutes",
     font = "Roboto Regular 9",
-    align = "center",
-    valign = "center",
     widget = wibox.widget.textbox
 }
 
@@ -54,11 +46,17 @@ end)
 return wibox.widget {
     avatar, 
     {
-        username, 
-        uptime, 
-        spacing = dpi(2),
-        layout = wibox.layout.fixed.vertical
+        nil,
+        {
+            username, 
+            uptime, 
+            spacing = dpi(2),
+            layout = wibox.layout.fixed.vertical
+        },
+        nil,
+        expand = "none",
+        layout = wibox.layout.align.vertical
     }, 
     spacing = dpi(16),
-    layout = wibox.layout.fixed.vertical
+    layout = wibox.layout.fixed.horizontal
 }

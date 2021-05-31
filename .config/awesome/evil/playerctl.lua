@@ -33,10 +33,12 @@ update_metadata = function()
     local artist = ""
     local title = ""
     local playing = ""
+    local status = ""
 
     if player:get_title() then
 	    artist = player:get_artist()
         title = player:get_title()
+        status = player.playback_status
 
         awful.spawn.easy_async_with_shell(art_script, function(out)
             -- Get album path
@@ -45,7 +47,7 @@ update_metadata = function()
             awesome.emit_signal("evil::playerctl", {
                 artist = artist, 
                 title = title, 
-                status = player.playback_status, 
+                status = status, 
                 image = album_path
             })
         end)
@@ -53,12 +55,15 @@ update_metadata = function()
 end
 
 exit = function()
-    awesome.emit_signal("evil::playerctl", false)
+    awesome.emit_signal("evil::playerctl", {
+        artist = "", 
+        title = "",
+        status = "STOPPED", 
+        image = ""
+    })
+    
     player = nil
 end
---player.on_playback_status =
-
---update_metadata()
 
 awful.widget.watch("playerctl status", 10, function(_, stdout, _, _)
     out = stdout:gsub('%\n', '')
@@ -68,4 +73,16 @@ awful.widget.watch("playerctl status", 10, function(_, stdout, _, _)
         player.on_exit = exit
         update_metadata()
     end
+end)
+
+awesome.connect_signal("evil::playerctl::previous", function()
+    player:previous()
+end)
+
+awesome.connect_signal("evil::playerctl::next", function()
+    player:next()
+end)
+
+awesome.connect_signal("evil::playerctl::play_pause", function()
+    player:play_pause()
 end)
