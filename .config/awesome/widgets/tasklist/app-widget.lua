@@ -42,7 +42,7 @@ local get_app_icon = function(is_template)
             {
                 {
                     id = "custom_icon",
-                    font = "Fira Mono 32",
+                    font = "Fira Mono NerdFont 22",
                     align = "center",
                     valign = "center",
                     widget = wibox.widget.textbox
@@ -54,8 +54,6 @@ local get_app_icon = function(is_template)
             }, 
             top = dpi(4), 
             bottom = dpi(4),
-            left = dpi(6), 
-            right = dpi(6),
             widget = wibox.container.margin
         }, 
         layout = wibox.layout.fixed.horizontal

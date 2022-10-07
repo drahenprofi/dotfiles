@@ -48,9 +48,9 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(apps.terminal) end,
+    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(apps.terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(user.floating_terminal, {floating = true}) end,
+    awful.key({ modkey, }, "Return", function () awful.spawn(user.floating_terminal, {floating = true}) end,
               {description = "open a floating terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),

@@ -29,4 +29,10 @@ return {
         command = "spotify", 
         index = 5
     },
+    discord = {
+        name = "discord", 
+        class = "discord", 
+        command = "discord", 
+        index = 6
+    }
 }

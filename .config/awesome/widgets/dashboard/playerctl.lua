@@ -72,7 +72,7 @@ awesome.connect_signal("evil::playerctl", function(data)
         artist.markup = "Not playing"
     end
 
-    if data.status == "PLAYING" then 
+    if data.status:lower() == "playing" then 
         play_pause.markup = ""
     else 
         play_pause.markup = "契"

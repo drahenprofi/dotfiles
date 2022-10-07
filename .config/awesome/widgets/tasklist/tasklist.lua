@@ -124,11 +124,7 @@ applist = wibox.widget {
 
 container = borders(
     wibox.widget {
-        {
-            applist,
-            right = dpi(4),
-            widget = wibox.container.margin
-        },
+        applist,
         bg = beautiful.bg_normal,
         widget = wibox.container.background
     }, 53, get_height(), 8

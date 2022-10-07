@@ -35,5 +35,10 @@ return {
         class = "chromium",
         icon = "",
         color = beautiful.blue_light
+    },
+    discord = {
+        class = "discord", 
+        icon = "ﭮ",
+        color = beautiful.highlight_alt
     }
 }
