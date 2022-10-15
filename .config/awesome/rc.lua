@@ -34,7 +34,7 @@ require("config.keys")
 require("evil")
 
 -- init widgets
-require("widgets.dashboard")
+require("widgets.dashboard-new")
 require("widgets.topbar")
 require("widgets.popup")
 --require("widgets.dock")
