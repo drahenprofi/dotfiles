@@ -1,0 +1,1 @@
+require("signals.client.titlebars")

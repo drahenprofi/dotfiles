@@ -1,7 +1,7 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 
-local keys = require("config.keys")
+local keys = require("bindings")
 
 rules = {
     -- All clients will match this rule.

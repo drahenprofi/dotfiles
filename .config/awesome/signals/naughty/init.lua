@@ -149,13 +149,11 @@ naughty.connect_signal("request::display", function(n)
     }
 end)
 
--- naughty.disconnect_signal("request::display", naughty.default_notification_handler)
 
 local notifications = {}
 
 -- Notification settings
 -- Icon size
--- naughty.config.defaults['icon_size'] = beautiful.notification_icon_size
 naughty.config.defaults['border_width'] = 0
 
 -- Timeouts
