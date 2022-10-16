@@ -30,7 +30,6 @@ local session = require("widgets.topbar.session")
 local taglist = require("widgets.topbar.taglist")
 local battery = require("widgets.topbar.battery")
 local clock = require("widgets.topbar.clock")
---local spotify = require("widgets.topbar.spotify")
 local tasklist = require("widgets.topbar.tasklist")
 local launcher = require("widgets.topbar.launcher")
 

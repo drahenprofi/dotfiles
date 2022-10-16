@@ -4,21 +4,17 @@ local spawn = require("awful.spawn")
 local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local gears = require("gears")
+local naughty = require("naughty")
 local dpi = require('beautiful').xresources.apply_dpi
 
-local INC_VOLUME_CMD = 'amixer -D pulse sset Master 5%+'
-local DEC_VOLUME_CMD = 'amixer -D pulse sset Master 5%-'
-local TOG_VOLUME_CMD = 'amixer -D pulse sset Master toggle'
-
-
-local main_color = beautiful.blue
+local main_color = beautiful.highlight
 local mute_color = beautiful.misc2
 
 local image_size = 24
 
-local icon =  wibox.widget { 
-    font = "Fira Mono 24",
-    valign = "center",
+local icon =  wibox.widget {
+    font = beautiful.glyph_font.." 13",
+    valign = "center", 
     align = "center",
     forced_height = image_size, 
     forced_width = image_size,
@@ -26,7 +22,7 @@ local icon =  wibox.widget {
 }
 
 local progressbar = wibox.widget {
-    value         = 1,
+    max_value     = 100,
     color		  = main_color,
     background_color = mute_color,
     shape = function(cr, width, height)
@@ -36,11 +32,15 @@ local progressbar = wibox.widget {
         gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, dpi(50))
     end,
     forced_height = 4,
-    widget        = wibox.widget.progressbar
+    widget = wibox.widget.progressbar
 }
 
 local progressbar_container = wibox.widget {
-    icon,
+    {
+        icon,
+        direction     = 'west',
+        layout        = wibox.container.rotate,
+    },
     {
         progressbar,
         top = 6, 
@@ -51,16 +51,9 @@ local progressbar_container = wibox.widget {
     layout = wibox.layout.fixed.horizontal
 }
 
-awesome.connect_signal("evil::volume", function(volume)
-    progressbar.value = volume.value / 100;
-    icon.text = volume.image
-end)
-
-progressbar:connect_signal("button::press", function(_, _, _, button)
-    if (button == 4) then awful.spawn(INC_VOLUME_CMD, false)
-    elseif (button == 5) then awful.spawn(DEC_VOLUME_CMD, false)
-    elseif (button == 1) then awful.spawn(TOG_VOLUME_CMD, false)
-    end
+awesome.connect_signal("evil::battery", function(battery)
+    progressbar.value = battery.value
+    icon.text = battery.image
 end)
 
 return progressbar_container

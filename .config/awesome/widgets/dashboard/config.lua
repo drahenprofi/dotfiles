@@ -13,7 +13,7 @@ local text = wibox.widget {
 
 local icon = wibox.widget {
     markup = "<span foreground='"..beautiful.misc1.."'>漣</span>",
-    font = "Fira Code NerdFont 24",
+    font = beautiful.glyph_font.." Nerd Font 24",
     forced_width = 24,
     widget = wibox.widget.textbox
 }

@@ -1,26 +1,14 @@
 local awful = require("awful")
 local wibox = require("wibox")
-local gears = require("gears")
 local beautiful = require("beautiful")
-local dpi = require("beautiful.xresources").apply_dpi
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
-local naughty = require("naughty")
+local apply_borders = require("lib.borders")
+local content = require("widgets.dashboard.content")
 
-local apps = require("config.apps")
-
-local drawBox = require("widgets.dashboard.drawBox")
-local leftdock = require("widgets.dashboard.docks.left")
-local rightdock = require("widgets.dashboard.docks.right")
-local avatar = require("widgets.dashboard.avatar")
-local calendar = require("widgets.dashboard.calendar")
-local time = require("widgets.dashboard.time")
-local storage = require("widgets.dashboard.storage")
-local volume = require("widgets.dashboard.volume")
-local brightness = require("widgets.dashboard.brightness")
-local battery = require("widgets.dashboard.battery")
-local settings = require("widgets.dashboard.settings")
-local weather = require("widgets.dashboard.weather")
-local playerctl = require("widgets.dashboard.playerctl")
+local height = 663
+local width = 582
 
 local dashboard = wibox({
     visible = false, 
@@ -28,143 +16,68 @@ local dashboard = wibox({
     type = "dock", 
     screen = screen.primary, 
     x = 0, 
-    y = beautiful.bar_height,
+    y = 0,
     width = awful.screen.focused().geometry.width, 
-    height = awful.screen.focused().geometry.height - beautiful.bar_height,
+    height = awful.screen.focused().geometry.height, 
+    bg = "#00000000"
 })
 
-require("widgets.dashboard.background")(dashboard)
-
-local keygrabber
-local function getKeygrabber()
-    return awful.keygrabber {
-        keypressed_callback = function(_, mod, key) 
-            if key == "Escape" then
-                dashboard.visible = false
-                keygrabber:stop()
-                return
-            end
-            
-            -- don't do anything for non-alphanumeric characters or stuff like F1, Backspace, etc
-            if key:match("%W") or string.len(key) > 1 and key ~= "Escape" then
-                return 
-            end
-
-            local launchedAppWithLauncher = false
-            -- spawn launcher with input arguments
-            awful.spawn.with_line_callback(apps.launcher .. " " .. key, {
-                stdout = function(line)
-                    -- this line is emitted by debug rofi when an app is launched
-                    if string.match(line, "Parsed command") then
-                        launchedAppWithLauncher = true
-                        dashboard.visible = false
-                    end
-                end, 
-                output_done = function()
-                    -- restart the keygrabber when no app was launched
-                    if not launchedAppWithLauncher then
-                        keygrabber = getKeygrabber()
-                        keygrabber:start()
-                    end
-                end
-            })
-            keygrabber:stop()
-        end,
-    }
-end
-
-keygrabber = getKeygrabber()
-
 dashboard.toggle = function()
-    calendar.reset()
     dashboard.visible = not dashboard.visible
-
-    keygrabber:stop()
-
-    if dashboard.visible then
-        keygrabber = getKeygrabber()
-        keygrabber:start()
-    end
 end
 
-dashboard.close = function()
-    calendar.reset()
-    dashboard.visible = false
-    keygrabber:stop()
-end
-
--- listen to signal emitted by other widgets
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
-awesome.connect_signal("dashboard::close", dashboard.close)
+awesome.connect_signal("dashboard::close", dashboard.toggle)
 
-dashboard:setup {
-    {
-        leftdock,
-        {
-            nil, {
-                nil, 
-                {
-                        {
-                            playerctl,
-                            settings,
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        {
-                            drawBox({
-                                volume,
-                                brightness, 
-                                battery,
-                                spacing = dpi(16), 
-                                widget = wibox.layout.fixed.vertical
-                            }, 200, 114),
-                            drawBox(storage(), 200, 114), 
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        {
-                            drawBox(time, 260, 48),
-                            drawBox(calendar, 260, 180), 
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        layout = wibox.layout.fixed.horizontal
-                },
-                expand = "none",
-                layout = wibox.layout.align.vertical
-            }, 
-            expand = "none",
-            layout = wibox.layout.align.horizontal
-        }, 
-        rightdock,
-        layout = wibox.layout.align.horizontal
-    }, 
-    {
-        nil,
-        nil,
-        {
-            {
-                weather,
-                right = dpi(32),
-                widget = wibox.container.margin
-            },
-            expand = "none", 
-            layout = wibox.layout.align.vertical
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    },
-    {
-        {
-            drawBox(avatar, 180, 44),
-            nil,
-            nil,
-            expand = "none", 
-            layout = wibox.layout.align.horizontal
-        },
-        nil,
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
-    },
-    layout = wibox.layout.stack
+local background_top = wibox.widget {
+    input_passthrough = true,
+    bg = "#00000000",
+    forced_width = awful.screen.focused().geometry.width,
+    forced_height = beautiful.bar_height + 4,
 }
 
-return dashboard
+local background_bottom = wibox.widget {
+    input_passthrough = true,
+    bg = "#00000000",
+    forced_width = awful.screen.focused().geometry.width,
+    forced_height = awful.screen.focused().geometry.height - beautiful.bar_height - 4,
+}
+
+local background_left = wibox.widget {
+    input_passthrough = true,
+    bg = "#00000000",
+    forced_width = awful.screen.focused().geometry.width / 2 - width / 2,
+    forced_height = height,
+}
+
+local background_right = wibox.widget {
+    input_passthrough = true,
+    bg = "#00000000",
+    forced_width = awful.screen.focused().geometry.width / 2 - width / 2,
+    forced_height = height,
+}
+
+background_top:connect_signal("button::press", dashboard.toggle)
+background_bottom:connect_signal("button::press", dashboard.toggle)
+background_left:connect_signal("button::press", dashboard.toggle)
+background_right:connect_signal("button::press", dashboard.toggle)
+
+dashboard:setup {
+    background_top, 
+    {
+        background_left, 
+        {
+            apply_borders({
+                content, 
+                bg = beautiful.bg_normal,
+                widget = wibox.container.background
+            }, width, height, 8), 
+            forced_width = width,
+            widget = wibox.container.background
+        }, 
+        background_right, 
+        layout = wibox.layout.fixed.horizontal
+    },
+    background_bottom, 
+    layout = wibox.layout.fixed.vertical
+}

@@ -42,7 +42,7 @@ local get_app_icon = function(is_template)
             {
                 {
                     id = "custom_icon",
-                    font = "Fira Mono NerdFont 22",
+                    font = beautiful.glyph_font.." Nerd Font 22",
                     align = "center",
                     valign = "center",
                     widget = wibox.widget.textbox

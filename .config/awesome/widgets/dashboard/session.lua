@@ -8,7 +8,7 @@ local poweroff = button.create_text(
     beautiful.fg_normal, 
     beautiful.fg_focus, 
     "襤", 
-    "Fira Code NerdFont 28",
+    beautiful.glyph_font.." Nerd Font 24",
     function() awful.spawn("poweroff") end
 )
 poweroff.forced_width = 32
@@ -17,7 +17,7 @@ local logout = button.create_text(
     beautiful.fg_normal, 
     beautiful.fg_focus, 
     "﫼", 
-    "Fira Code NerdFont 28",
+    beautiful.glyph_font.." Nerd Font 24",
     function() awesome.quit()  end
 )
 logout.forced_width = 32
@@ -26,7 +26,7 @@ local reboot = button.create_text(
     beautiful.fg_normal, 
     beautiful.fg_focus, 
     "ﰇ", 
-    "Fira Code NerdFont 28",
+    beautiful.glyph_font.." Nerd Font 24",
     function() awful.spawn("reboot") end
 )
 reboot.forced_width = 32

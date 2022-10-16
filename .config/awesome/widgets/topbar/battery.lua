@@ -7,7 +7,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local battery_widget = {}
 
 local icon_widget = wibox.widget {
-    font = "FiraMono Nerd Font 10",
+    font = beautiful.glyph_font.." 10",
     widget = wibox.widget.textbox,
 }
 local level_widget = wibox.widget {

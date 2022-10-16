@@ -16,6 +16,7 @@ local theme = {}
 theme.font          = "Roboto Medium 9"
 theme.titlefont          = "Roboto Bold 9"
 theme.fontname          = "Roboto Medium 9"
+theme.glyph_font = "JetBrains Mono"
 
 
 theme.bg_normal     = "#1C1E26"

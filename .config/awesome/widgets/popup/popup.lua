@@ -8,7 +8,7 @@ local apply_borders = require("lib.borders")
 
 local createPopup = function(color)
     local icon = wibox.widget {
-        font = "Fira Mono 28",
+        font = beautiful.glyph_font.." 28",
         align = "center", 
         valign = "center",
         widget = wibox.widget.textbox

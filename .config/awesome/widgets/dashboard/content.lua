@@ -3,14 +3,14 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local gears = require("gears")
 
-local avatar = require("widgets.dashboard-new.avatar")
-local session = require("widgets.dashboard-new.session")
-local config = require("widgets.dashboard-new.config")
-local playerctl = require("widgets.dashboard-new.playerctl")
-local sliders = require("widgets.dashboard-new.sliders")
-local storage = require("widgets.dashboard-new.storage")
-local calendar = require("widgets.dashboard-new.calendar")
-local weather = require("widgets.dashboard-new.weather")
+local avatar = require("widgets.dashboard.avatar")
+local session = require("widgets.dashboard.session")
+local config = require("widgets.dashboard.config")
+local playerctl = require("widgets.dashboard.playerctl")
+local sliders = require("widgets.dashboard.sliders")
+local storage = require("widgets.dashboard.storage")
+local calendar = require("widgets.dashboard.calendar")
+local weather = require("widgets.dashboard.weather")
 
 local apply_background = function(widget) 
     return wibox.widget {

@@ -2,22 +2,18 @@ local awful = require("awful")
 local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 local gears = require("gears")
 
 local content = {}
 
-local container = {}
-
 local function createDiskRow(disk)
-  --[[local detailText = math.floor(disk.used/1024/1024)
-  .. '/'
-  .. math.floor(disk.size/1024/1024) .. 'GB']]--
     local detailText = math.floor((disk.size - disk.used)/1024/1024) .. " GB free"
 
     return wibox.widget{
         {
             markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.mount.."</span>",
-            font = "Fira Mono Bold 12", 
+            font = "JetBrains Mono Bold 10", 
             align = "center",
             widget = wibox.widget.textbox
         },
@@ -59,15 +55,9 @@ local function worker(args)
     local disks = {}
 
     content = wibox.layout.fixed.horizontal()
-    content.spacing = 36
+    content.spacing = dpi(48)
 
-    container = wibox.widget {
-      content, 
-      spacing = 24, 
-      layout = wibox.layout.fixed.horizontal
-    }
-
-    watch([[bash -c "df | tail -n +2"]], timeout,
+    watch([[bash -c "df | tail -n +4"]], timeout,
         function(widget, stdout)
           for line in stdout:gmatch("[^\r\n$]+") do
             local filesystem, size, used, avail, perc, mount =
@@ -98,9 +88,14 @@ local function worker(args)
         content
     )
 
-    return container
+    return wibox.widget {
+      nil,
+      content, 
+      expand = "none",
+      layout = wibox.layout.align.horizontal
+    }
 end
 
-return setmetatable(container, { __call = function(_, ...)
+return setmetatable(content, { __call = function(_, ...)
     return worker(...)
 end })
