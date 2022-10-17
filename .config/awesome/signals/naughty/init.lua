@@ -209,7 +209,7 @@ notifications.screenshot = function(filename)
 end
 
 local battery_notification
-notifications.battery = function(charge)
+awesome.connect_signal("evil::battery_warning", function(charge)
     local urgency = "normal"
 
     if charge < 3 then urgency = "critical" end
@@ -221,6 +221,6 @@ notifications.battery = function(charge)
         timeout = 25,
         urgency = urgency
     }, battery_notification)
-end
+end)
 
 return notifications

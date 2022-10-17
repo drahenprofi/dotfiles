@@ -7,27 +7,78 @@ local dpi = xresources.apply_dpi
 local apply_borders = require("lib.borders")
 local content = require("widgets.dashboard.content")
 
+local naughty = require("naughty")
+
+local rubato = require("modules.rubato")
+
 local height = 663
 local width = 582
 
+local outer_padding = 24
+
+local busy = false
+
 local dashboard = wibox({
-    visible = false, 
     ontop = true, 
     type = "dock", 
     screen = screen.primary, 
-    x = 0, 
+    x = width, 
     y = 0,
     width = awful.screen.focused().geometry.width, 
     height = awful.screen.focused().geometry.height, 
     bg = "#00000000"
 })
 
+dashboard.open = function()
+    if busy then return end 
+
+    dashboard.visible = true
+    busy = true
+
+    timed = rubato.timed {
+        duration = 0.75, 
+        subscribed = function(pos) 
+            dashboard.x = (width + outer_padding) - pos
+
+            if pos == (width + outer_padding) then
+                busy = false
+            end
+        end
+    }
+
+    timed.target = width + outer_padding
+end
+
+dashboard.close = function()
+    if busy then return end 
+
+    busy = true
+
+    timed = rubato.timed {
+        duration = 0.75, 
+        subscribed = function(pos) 
+            dashboard.x = pos
+            
+            if pos == (width + outer_padding) then
+                dashboard.visible = false 
+                busy = false
+            end
+        end
+    }
+
+    timed.target = width + outer_padding
+end
+
 dashboard.toggle = function()
-    dashboard.visible = not dashboard.visible
+    if dashboard.x >= width then
+        dashboard.open()
+    else
+        dashboard.close()
+    end
 end
 
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
-awesome.connect_signal("dashboard::close", dashboard.toggle)
+awesome.connect_signal("dashboard::close", dashboard.close)
 
 local background_top = wibox.widget {
     input_passthrough = true,
@@ -46,14 +97,14 @@ local background_bottom = wibox.widget {
 local background_left = wibox.widget {
     input_passthrough = true,
     bg = "#00000000",
-    forced_width = awful.screen.focused().geometry.width / 2 - width / 2,
+    forced_width = awful.screen.focused().geometry.width - width - 4,
     forced_height = height,
 }
 
 local background_right = wibox.widget {
     input_passthrough = true,
     bg = "#00000000",
-    forced_width = awful.screen.focused().geometry.width / 2 - width / 2,
+    forced_width = 4,
     forced_height = height,
 }
 

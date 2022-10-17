@@ -12,7 +12,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
 
-local get_titlebar = require("decorations.titlebar")
+local get_titlebar = require("signals.client.titlebars.titlebar")
 local shapes = require("lib.shapes")
 
 local titlebar

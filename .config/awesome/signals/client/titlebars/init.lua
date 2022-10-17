@@ -27,13 +27,13 @@ local add_decorations = function(c)
 
     -- https://www.reddit.com/r/awesomewm/comments/ggru8u/custom_rule_properties/
     if c.class == "firefox" then
-        require("decorations.top-alternate")(c, args)
+        require("signals.client.titlebars.top-alternate")(c, args)
     else
-        require("decorations.top")(c, args)
+        require("signals.client.titlebars.top")(c, args)
     end
-    require("decorations.left")(c, args)
-    require("decorations.right")(c, args)
-    require("decorations.bottom")(c, args)
+    require("signals.client.titlebars.left")(c, args)
+    require("signals.client.titlebars.right")(c, args)
+    require("signals.client.titlebars.bottom")(c, args)
 
     -- Clean up
     collectgarbage("collect")

@@ -26,7 +26,7 @@ local set_left_titlebar = function(c, left_border_img, client_color)
 end
 
 local set_thunar_left_titlebar = function(c, left_border_img)
-    local custom_titlebar = require("decorations.thunar")(c)
+    local custom_titlebar = require("signals.client.titlebars.thunar")(c)
 
     awful.titlebar(c, {
         position = "left",
