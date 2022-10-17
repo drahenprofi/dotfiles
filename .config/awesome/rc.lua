@@ -23,7 +23,7 @@ beautiful.init(awful.util.getdir("config") .. "theme.lua" )
 --require("decorations")
 
 -- init configs
-require("config.wallpaper")
+--require("config.wallpaper")
 require("config.layout")
 require("rules")
 require("config.tags")

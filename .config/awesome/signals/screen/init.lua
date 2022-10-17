@@ -21,4 +21,3 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 end)
--- }}}
