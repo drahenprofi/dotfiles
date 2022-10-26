@@ -60,7 +60,7 @@ client.connect_signal('request::default_keybindings', function()
         },
         awful.key{
             modifiers = {mod.super},
-            key = 'm',
+            key = 'Up',
             description = '(un)maximize',
             group = 'client',
             on_press = function(c)

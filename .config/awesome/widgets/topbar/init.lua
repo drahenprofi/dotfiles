@@ -32,6 +32,7 @@ local battery = require("widgets.topbar.battery")
 local clock = require("widgets.topbar.clock")
 local tasklist = require("widgets.topbar.tasklist")
 local launcher = require("widgets.topbar.launcher")
+local update = require("widgets.topbar.update")
 
 beautiful.systray_icon_spacing = dpi(12)
 local systray = wibox.widget.systray()
@@ -77,6 +78,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal, 
                 }
             }),
+            widget(update),
             widget(clock), 
             widget(launcher),
             layout = wibox.layout.fixed.horizontal, 
