@@ -11,7 +11,7 @@ local notify_widget = wibox.widget {
 
 local update_widget = wibox.widget {
     {
-        markup = "<span foreground='#ffffff'></span>",
+        markup = "<span foreground='"..beautiful.fg_dark.."'></span>",
         font = "JetBrains Mono NerdFont 10",
         forced_width = 16,
         widget = wibox.widget.textbox

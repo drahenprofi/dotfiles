@@ -126,12 +126,13 @@ button.create_image_onclick = function(image, image_hover, onclick)
     return container
 end
 
-button.create_text = function(color, color_hover, text, font, onclick)
+button.create_text = function(color, color_hover, text, font_size, onclick)
     local textWidget = wibox.widget {
-        font = font, 
+        font = beautiful.glyph_font .. " " .. font_size, 
         align = "center",
         valign = "center",
         markup = "<span foreground='"..color.."'>"..text.."</span>", 
+        forced_width = font_size + 4,
         widget = wibox.widget.textbox
     }
 

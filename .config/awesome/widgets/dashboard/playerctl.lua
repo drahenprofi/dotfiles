@@ -57,19 +57,19 @@ local title = wibox.widget {
 
 local previous = wibox.widget {
     font = beautiful.glyph_font.." Nerd Font 16",
-    markup = "玲",
+    markup = "󰒮",
     widget = wibox.widget.textbox
 }
 
 local play_pause = wibox.widget {
     font = beautiful.glyph_font.." Nerd Font 24",
-    markup = "契",
+    markup = "󰐊",
     widget = wibox.widget.textbox
 }
 
 local next = wibox.widget {
     font = beautiful.glyph_font.." Nerd Font 16",
-    markup = "怜",
+    markup = "󰒭",
     widget = wibox.widget.textbox
 }
 
@@ -94,9 +94,9 @@ awesome.connect_signal("evil::playerctl", function(data)
     end
 
     if data.status:lower() == "playing" then 
-        play_pause.markup = ""
+        play_pause.markup = "󰏤"
     else 
-        play_pause.markup = "契"
+        play_pause.markup = "󰐊"
     end 
 
     if data.image ~= "" then

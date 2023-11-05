@@ -9,6 +9,6 @@ watch(GET_BRIGHTNESS_CMD, 1, function(_, stdout, _, _ , _)
 
     awesome.emit_signal("evil::brightness", {
         value = value, 
-        image = ""
+        image = "󰃠"
     })
 end, nil)

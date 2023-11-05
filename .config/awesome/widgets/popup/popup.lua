@@ -8,7 +8,8 @@ local apply_borders = require("lib.borders")
 
 local createPopup = function(color)
     local icon = wibox.widget {
-        font = beautiful.glyph_font.." 28",
+        font = beautiful.glyph_font.." 14",
+        forced_width = 20,
         align = "center", 
         valign = "center",
         widget = wibox.widget.textbox
@@ -35,26 +36,30 @@ local createPopup = function(color)
     local widget = apply_borders({
         {
             {
-                nil, 
-                progressbar_container,
-                nil, 
-                expand = "none",
-                layout = wibox.layout.align.horizontal
+                {
+                    nil, 
+                    progressbar_container,
+                    nil, 
+                    expand = "none",
+                    layout = wibox.layout.align.horizontal
+                }, 
+                left = 8,
+                widget = wibox.container.margin
             }, 
             icon,
-            spacing = dpi(4),
+            spacing = dpi(16),
             layout = wibox.layout.fixed.vertical,
         },
         top = dpi(16),
         left = dpi(8), 
         right = dpi(8),
         widget  = wibox.container.margin
-    }, 30, 176, 6)
+    }, 46, 176, 6)
 
     local popup = awful.popup {
         widget = widget,
         y            = awful.screen.focused().geometry.height / 2 - 72,
-        x            = awful.screen.focused().geometry.width - 48,
+        x            = awful.screen.focused().geometry.width - 88,
         shape        = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
         end,

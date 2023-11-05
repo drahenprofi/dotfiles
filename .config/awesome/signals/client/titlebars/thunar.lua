@@ -8,7 +8,7 @@ local dpi = beautiful.xresources.apply_dpi
 local button = require("lib.button")
 
 local create_shortcut = function(c, icon, location)
-    local shortcut = button.create_text(beautiful.fg_normal .. "E6", beautiful.red, icon, beautiful.glyph_font.." Nerd Font 12", function()
+    local shortcut = button.create_text(beautiful.fg_normal .. "E6", beautiful.red, icon, 12, function()
         awful.spawn.with_shell("xdotool key ctrl+l; xdotool type --delay 0 "..location.."; xdotool key Return;")
     end)
 

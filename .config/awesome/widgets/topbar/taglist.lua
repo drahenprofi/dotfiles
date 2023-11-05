@@ -93,7 +93,7 @@ taglist.init = function(s)
 
     local container = wibox.widget {
         taglist, 
-        button.create_text(beautiful.fg_dark, beautiful.fg_normal, "", beautiful.glyph_font.." 12", function() 
+        button.create_text(beautiful.fg_dark, beautiful.fg_normal, "", 12, function() 
             for _, tag in pairs(root.tags()) do
                 if #tag:clients() == 0 then
                 tag:view_only()

@@ -39,9 +39,9 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
     charge = math.floor(charge / count)
 
     if charging then
-        icon = ""
+        icon = "󰂄"
     elseif (charge >= 0 and charge < 10) then
-        icon = ""
+        icon = "󰁺"
         if os.difftime(os.time(), last_battery_check) > 300 or not warningDisplayed or charge < 3 then
             -- if 5 minutes have elapsed since the last warning
             last_battery_check = os.time()
@@ -50,25 +50,25 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
             awesome.emit_signal("evil::battery_warning", charge)
         end
     elseif (charge < 20) then 
-        icon = ""
+        icon = "󰁻"
     elseif charge < 30 then
-        icon = ""
+        icon = "󰁼"
     elseif charge < 40 then
-        icon = ""
+        icon = "󰁽"
     elseif charge < 50 then
-        icon = ""
+        icon = "󰁾"
     elseif charge < 60 then
-        icon = ""
+        icon = "󰁿"
     elseif charge < 70 then
-        icon = ""
+        icon = "󰂀"
     elseif charge < 80 then
-        icon = ""
+        icon = "󰂁"
     elseif charge < 90 then
-        icon = ""
+        icon = "󰂂"
     elseif charge < 100 then
-        icon = ""
+        icon = "󰁹"
     else
-        icon = ""
+        icon = "󰁹"
     end
     
     awesome.emit_signal("evil::battery", {

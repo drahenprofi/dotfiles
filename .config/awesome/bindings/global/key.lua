@@ -97,13 +97,28 @@ awful.keyboard.append_global_keybindings{
         end
     },
     awful.key {
-        modifiers = {},
-        key = "XF86MonBrightnessDown",
-        description = "lower brightness", 
-        group = "launcher",
-        on_press = function ()
-            awful.spawn.easy_async_with_shell("brightnessctl set 3%- > /dev/null", function(stdout)
-                awesome.emit_signal("popup::brightness", {amount = -3})
+         modifiers = {},
+         key = "XF86MonBrightnessDown",
+         description = "lower brightness", 
+         group = "launcher",
+         on_press = function ()
+
+            awful.spawn.easy_async_with_shell("brightnessctl info", function(stdout)
+               local value = tonumber(string.match(string.match(stdout, "%d+%%"), "%d+"))
+
+               local decrease = 3
+
+               if value == 3 then
+                  decrease = 2
+               elseif value == 2 then
+                  decrease = 1
+               elseif value < 2 then
+                  decrease = 0
+               end
+
+               awful.spawn.easy_async_with_shell("brightnessctl set "..decrease.."%- > /dev/null", function(stdout)
+                  awesome.emit_signal("popup::brightness", {amount = -decrease})
+               end)
             end)
         end
     },

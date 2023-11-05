@@ -13,7 +13,7 @@ local mute_color = beautiful.misc2
 local image_size = 24
 
 local icon =  wibox.widget {
-    font = beautiful.glyph_font.." 24", 
+    font = beautiful.glyph_font.." 14", 
     valign = "center", 
     align = "center",
     forced_height = image_size, 

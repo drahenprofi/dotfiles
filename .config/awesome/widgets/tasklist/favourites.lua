@@ -26,7 +26,7 @@ return {
     spotify = {
         name = "spotify", 
         class = "spotify", 
-        command = "spotify", 
+        command = "spotify-launcher", 
         index = 5
     },
     discord = {

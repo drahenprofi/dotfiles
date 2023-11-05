@@ -17,7 +17,7 @@ Changes are applied instantly and globally, for the whole application.
 	border: 0;
 	border-radius: 50px;
 	background-color: #232530;
-	font-family: "Fira Mono"; 
+	font-family: "JetBrains Mono"; 
 	padding-left: 12px;
 	padding-right: 12px;
 }
@@ -30,4 +30,9 @@ Changes are applied instantly and globally, for the whole application.
 .thunar entry selection {
 	background-color: #6C6F93;
 	color: white;
+}
+
+.Gummi text {
+	background-color: #e1e1e1;
+	color: black;
 }
