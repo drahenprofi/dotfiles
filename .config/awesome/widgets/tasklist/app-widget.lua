@@ -10,10 +10,14 @@ local get_app_icon = function(is_template)
     local default_icon = nil
 
     if is_template then 
-        default_icon = {
-            awful.widget.clienticon,
-            id = "default_icon",
-            widget = wibox.container.background
+        default_icon = { 
+            {
+                awful.widget.clienticon,
+                id = "default_icon",
+                widget = wibox.container.background
+            }, 
+            left = dpi(6),
+            widget = wibox.container.margin
         }
     end
 

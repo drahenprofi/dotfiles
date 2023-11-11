@@ -72,7 +72,6 @@ local widget = awful.widget.tasklist {
     source = source,
     buttons = tasklist_buttons,
     layout = {
-        spacing = 8,
         layout  = wibox.layout.fixed.vertical, 
     },
     widget_template = {

@@ -39,7 +39,7 @@ local get_widget = function(c)
                         create_shortcut(c, "", "/data/downloads"),
                         create_shortcut(c, "", "/data/documents"),
                         create_shortcut(c, "", "/data/pictures"),
-                        create_shortcut(c, "ﱘ", "/data/music"),
+                        create_shortcut(c, "󰝚", "/data/music"),
                         create_shortcut(c, "", "/data/uni"),
                         spacing = dpi(10),
                         layout = wibox.layout.fixed.vertical

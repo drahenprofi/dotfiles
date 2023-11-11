@@ -21,22 +21,22 @@ local get_icon = function(condition)
     local icon
 
     if (condition == "Thunderstorm") then
-        icon = "朗"
+        icon = ""
     elseif (condition == "Drizzle") then
-        icon = "殺"
+        icon = ""
     elseif (condition == "Rain") then
-        icon = "歹"
+        icon = ""
     elseif (condition == "Snow") then
-        icon = "流"
+        icon = ""
     elseif (condition == "Clear") then
         local time = os.date("*t")
         if time.hour > 6 and time.hour < 18 then
-            icon = "滛"
+            icon = ""
         else
-            icon = "望"
+            icon = ""
         end
     elseif (condition == "Clouds") then
-        icon = "摒"
+        icon = ""
     else
         icon = "敖"
     end
@@ -61,7 +61,9 @@ local description = wibox.widget {
 }
 
 local icon_widget = wibox.widget {
-    font = beautiful.glyph_font.." 48",
+    font = beautiful.glyph_font.." 36",
+    forced_width = dpi(54),
+    forced_height = dpi(54),
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -96,7 +98,9 @@ local forecast1_temp = wibox.widget {
 }
 
 local forecast1_icon = wibox.widget {
-    font = beautiful.glyph_font.." Nerd Font 32",
+    font = beautiful.glyph_font.." Nerd Font 28",
+    forced_width = dpi(44),
+    forced_height = dpi(64),
     align = "center",
     widget = wibox.widget.textbox
 }
@@ -114,7 +118,9 @@ local forecast2_temp = wibox.widget {
 }
 
 local forecast2_icon = wibox.widget {
-    font = beautiful.glyph_font.." Nerd Font 32",
+    font = beautiful.glyph_font.." Nerd Font 28",
+    forced_width = dpi(44),
+    forced_height = dpi(64),
     align = "center",
     widget = wibox.widget.textbox
 }
@@ -132,7 +138,9 @@ local forecast3_temp = wibox.widget {
 }
 
 local forecast3_icon = wibox.widget {
-    font = beautiful.glyph_font.." Nerd Font 32",
+    font = beautiful.glyph_font.." Nerd Font 28",
+    forced_width = dpi(44),
+    forced_height = dpi(64),
     align = "center",
     widget = wibox.widget.textbox
 }
@@ -150,7 +158,9 @@ local forecast4_temp = wibox.widget {
 }
 
 local forecast4_icon = wibox.widget {
-    font = beautiful.glyph_font.." Nerd Font 32",
+    font = beautiful.glyph_font.." Nerd Font 28",
+    forced_width = dpi(44),
+    forced_height = dpi(64),
     align = "center",
     widget = wibox.widget.textbox
 }

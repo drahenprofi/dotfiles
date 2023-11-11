@@ -20,7 +20,7 @@ local app_config = {
     --['Telegram Desktop'] = { icon = "", title = true },
     --['NetworkManager'] = { icon = "", title = true },
     ["Spotify"] = { icon = "", title = false },
-    ["battery"] = { icon = "", title = true }
+    ["battery"] = { icon = "󰂃", title = true }
 
 }
 
