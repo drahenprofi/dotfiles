@@ -29,7 +29,8 @@ end
 local session = require("widgets.topbar.session")
 local taglist = require("widgets.topbar.taglist")
 local battery = require("widgets.topbar.battery")
-local clock = require("widgets.topbar.clock")
+local clock = widget(require("widgets.topbar.clock"))
+clock.right = dpi(0)
 local tasklist = require("widgets.topbar.tasklist")
 local launcher = require("widgets.topbar.launcher")
 local update = require("widgets.topbar.update")
@@ -79,7 +80,7 @@ awful.screen.connect_for_each_screen(function(s)
                 }
             }),
             widget(update),
-            widget(clock), 
+            clock, 
             widget(launcher),
             layout = wibox.layout.fixed.horizontal, 
         }

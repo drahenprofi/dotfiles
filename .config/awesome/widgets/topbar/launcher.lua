@@ -8,4 +8,6 @@ local launcher = button.create_text(beautiful.fg_dark, beautiful.fg_focus, ""
     awful.spawn(apps.launcher, false)
 end)
 
+launcher.forced_width = 24
+
 return launcher

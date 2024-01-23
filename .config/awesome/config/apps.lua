@@ -9,7 +9,7 @@ local apps = {
     browser = "firefox", 
     fileexplorer = "thunar",
     musicplayer = "pragha", 
-    settings = "code /home/parndt/awesome/"
+    settings = "code /home/parndt/.config/awesome/"
 }
 
 user = {
