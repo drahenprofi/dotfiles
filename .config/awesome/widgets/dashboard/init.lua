@@ -1,134 +1,171 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local gears = require("gears")
 local beautiful = require("beautiful")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
-
-local apply_borders = require("lib.borders")
-local content = require("widgets.dashboard.content")
+local dpi = require("beautiful.xresources").apply_dpi
 
 local naughty = require("naughty")
 
-local rubato = require("modules.rubato")
+local apps = require("config.apps")
 
-local height = 663
-local width = 582
-
-local outer_padding = 24
-
-local busy = false
+local drawBox = require("widgets.dashboard.drawBox")
+local leftdock = require("widgets.dashboard.docks.left")
+local rightdock = require("widgets.dashboard.docks.right")
+local avatar = require("widgets.dashboard.avatar")
+local calendar = require("widgets.dashboard.calendar")
+local time = require("widgets.dashboard.time")
+local storage = require("widgets.dashboard.storage")
+local volume = require("widgets.dashboard.volume")
+local brightness = require("widgets.dashboard.brightness")
+local battery = require("widgets.dashboard.battery")
+local settings = require("widgets.dashboard.settings")
+local weather = require("widgets.dashboard.weather")
+local playerctl = require("widgets.dashboard.playerctl")
 
 local dashboard = wibox({
+    visible = false, 
     ontop = true, 
     type = "dock", 
     screen = screen.primary, 
-    x = width, 
-    y = 0,
+    x = 0, 
+    y = beautiful.bar_height,
     width = awful.screen.focused().geometry.width, 
-    height = awful.screen.focused().geometry.height, 
-    bg = "#00000000"
+    height = awful.screen.focused().geometry.height - beautiful.bar_height,
 })
 
-dashboard.open = function()
-    if busy then return end 
+require("widgets.dashboard.background")(dashboard)
 
-    dashboard.visible = true
-    busy = true
-
-    timed = rubato.timed {
-        duration = 0.75, 
-        subscribed = function(pos) 
-            dashboard.x = (width + outer_padding) - pos
-
-            if pos == (width + outer_padding) then
-                busy = false
+local keygrabber
+local function getKeygrabber()
+    return awful.keygrabber {
+        keypressed_callback = function(_, mod, key) 
+            if key == "Escape" then
+                dashboard.visible = false
+                keygrabber:stop()
+                return
             end
-        end
-    }
-
-    timed.target = width + outer_padding
-end
-
-dashboard.close = function()
-    if busy then return end 
-
-    busy = true
-
-    timed = rubato.timed {
-        duration = 0.75, 
-        subscribed = function(pos) 
-            dashboard.x = pos
             
-            if pos == (width + outer_padding) then
-                dashboard.visible = false 
-                busy = false
+            -- don't do anything for non-alphanumeric characters or stuff like F1, Backspace, etc
+            if key:match("%W") or string.len(key) > 1 and key ~= "Escape" then
+                return 
             end
-        end
-    }
 
-    timed.target = width + outer_padding
+            local launchedAppWithLauncher = false
+            -- spawn launcher with input arguments
+            awful.spawn.with_line_callback(apps.launcher .. " " .. key, {
+                stdout = function(line)
+                    -- this line is emitted by debug rofi when an app is launched
+                    if string.match(line, "Parsed command") then
+                        launchedAppWithLauncher = true
+                        dashboard.visible = false
+                    end
+                end, 
+                output_done = function()
+                    -- restart the keygrabber when no app was launched
+                    if not launchedAppWithLauncher then
+                        keygrabber = getKeygrabber()
+                        keygrabber:start()
+                    end
+                end
+            })
+            keygrabber:stop()
+        end,
+    }
 end
+
+keygrabber = getKeygrabber()
 
 dashboard.toggle = function()
-    if dashboard.x >= width then
-        dashboard.open()
-    else
-        dashboard.close()
+    calendar.reset()
+    dashboard.visible = not dashboard.visible
+
+    keygrabber:stop()
+
+    if dashboard.visible then
+        keygrabber = getKeygrabber()
+        keygrabber:start()
     end
 end
 
+dashboard.close = function()
+    calendar.reset()
+    dashboard.visible = false
+    keygrabber:stop()
+end
+
+-- listen to signal emitted by other widgets
 awesome.connect_signal("dashboard::toggle", dashboard.toggle)
 awesome.connect_signal("dashboard::close", dashboard.close)
 
-local background_top = wibox.widget {
-    input_passthrough = true,
-    bg = "#00000000",
-    forced_width = awful.screen.focused().geometry.width,
-    forced_height = beautiful.bar_height + 4,
-}
-
-local background_bottom = wibox.widget {
-    input_passthrough = true,
-    bg = "#00000000",
-    forced_width = awful.screen.focused().geometry.width,
-    forced_height = awful.screen.focused().geometry.height - beautiful.bar_height - 4,
-}
-
-local background_left = wibox.widget {
-    input_passthrough = true,
-    bg = "#00000000",
-    forced_width = awful.screen.focused().geometry.width - width - 4,
-    forced_height = height,
-}
-
-local background_right = wibox.widget {
-    input_passthrough = true,
-    bg = "#00000000",
-    forced_width = 4,
-    forced_height = height,
-}
-
-background_top:connect_signal("button::press", dashboard.toggle)
-background_bottom:connect_signal("button::press", dashboard.toggle)
-background_left:connect_signal("button::press", dashboard.toggle)
-background_right:connect_signal("button::press", dashboard.toggle)
-
 dashboard:setup {
-    background_top, 
     {
-        background_left, 
+        leftdock,
         {
-            apply_borders({
-                content, 
-                bg = beautiful.bg_normal,
-                widget = wibox.container.background
-            }, width, height, 8), 
-            forced_width = width,
-            widget = wibox.container.background
+            nil, {
+                nil, 
+                {
+                        {
+                            playerctl,
+                            settings,
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        {
+                            drawBox({
+                                volume,
+                                brightness, 
+                                battery,
+                                spacing = dpi(16), 
+                                widget = wibox.layout.fixed.vertical
+                            }, 200, 114),
+                            drawBox(storage(), 200, 114), 
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        {
+                            drawBox(time, 260, 48),
+                            drawBox(calendar, 260, 180), 
+                            layout = wibox.layout.fixed.vertical
+                        }, 
+                        layout = wibox.layout.fixed.horizontal
+                },
+                expand = "none",
+                layout = wibox.layout.align.vertical
+            }, 
+            expand = "none",
+            layout = wibox.layout.align.horizontal
         }, 
-        background_right, 
-        layout = wibox.layout.fixed.horizontal
+        rightdock,
+        layout = wibox.layout.align.horizontal
+    }, 
+    {
+        nil,
+        nil,
+        {
+            {
+                weather,
+                top = dpi(8),
+                right = dpi(32),
+                widget = wibox.container.margin
+            },
+            expand = "none", 
+            layout = wibox.layout.align.vertical
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
     },
-    background_bottom, 
-    layout = wibox.layout.fixed.vertical
+    {
+        {
+            drawBox(avatar, 180, 44),
+            nil,
+            nil,
+            expand = "none", 
+            layout = wibox.layout.align.horizontal
+        },
+        nil,
+        nil,
+        expand = "none",
+        layout = wibox.layout.align.vertical
+    },
+    layout = wibox.layout.stack
 }
+
+return dashboard

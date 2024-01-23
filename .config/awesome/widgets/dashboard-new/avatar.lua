@@ -6,14 +6,6 @@ local naughty = require("naughty")
 
 local dpi = require("beautiful.xresources").apply_dpi
 
-local weed = wibox.widget{
-    markup = '<span foreground="'..beautiful.green..'">ﲤ</span>',
-    font = "JetBrains Mono 48",
-    align  = 'center',
-    valign = 'center',
-    widget = wibox.widget.textbox
-}
-
 local avatar = wibox.widget {
     {
         image = beautiful.avatar,
@@ -33,7 +25,7 @@ local username = wibox.widget{
 
 local uptime = wibox.widget {
     text = "up 0 minutes",
-    font = "Roboto Regular 9",
+    font = "Roboto Regular 10",
     widget = wibox.widget.textbox
 }
 
@@ -44,19 +36,24 @@ awful.widget.watch("uptime -p", 60, function(_, stdout)
 end)
 
 return wibox.widget {
-    avatar, 
     {
-        nil,
+        avatar, 
         {
-            username, 
-            uptime, 
-            spacing = dpi(2),
-            layout = wibox.layout.fixed.vertical
-        },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
+            nil,
+            {
+                username, 
+                uptime, 
+                spacing = dpi(2),
+                layout = wibox.layout.fixed.vertical
+            },
+            nil,
+            expand = "none",
+            layout = wibox.layout.align.vertical
+        }, 
+        spacing = dpi(16),
+        layout = wibox.layout.fixed.horizontal
     }, 
-    spacing = dpi(16),
-    layout = wibox.layout.fixed.horizontal
+    forced_height = dpi(56),
+    forced_width = dpi(230),
+    widget = wibox.container.background
 }

@@ -40,5 +40,10 @@ return {
         class = "discord", 
         icon = "󰙯",
         color = beautiful.highlight_alt
+    }, 
+    texstudio = {
+        class = "texstudio", 
+        icon = "", 
+        color = beautiful.red
     }
 }

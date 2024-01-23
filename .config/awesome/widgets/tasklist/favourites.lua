@@ -17,22 +17,22 @@ return {
         command = "kitty", 
         index = 3
     },
-    intellij = {
-        name = "intellij",
-        class = "jetbrains-idea",
-        command = "intellij-idea-ultimate-edition",
-        index = 4
-    }, 
     spotify = {
         name = "spotify", 
         class = "spotify", 
         command = "spotify-launcher", 
-        index = 5
+        index = 4
     },
     discord = {
         name = "discord", 
         class = "discord", 
         command = "discord", 
+        index = 5
+    }, 
+    texstudio = {
+        name = "texstudio", 
+        class = "texstudio", 
+        command = "texstudio", 
         index = 6
     }
 }
