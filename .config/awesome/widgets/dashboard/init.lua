@@ -104,8 +104,8 @@ dashboard:setup {
                 nil, 
                 {
                         {
-                            drawBox(avatar, 168, 44), 
                             playerctl,
+                            drawBox(avatar, 168, 44), 
                             layout = wibox.layout.fixed.vertical
                         }, 
                         {

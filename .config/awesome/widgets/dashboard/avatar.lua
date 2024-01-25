@@ -27,14 +27,18 @@ local avatar = wibox.widget {
 
 local username = wibox.widget{
     markup = '<span foreground="'..beautiful.highlight..'">parndt</span>@<span foreground="'..beautiful.highlight..'">rouge</span>',
-    font = "JetBrains Mono 11",
-    widget = wibox.widget.textbox
+    font = "JetBrains Mono 12",
+    align = "center", 
+    valign = "center",
+    widget = wibox.widget.textbox,
 }
 
 local uptime = wibox.widget {
     text = "up 0 minutes",
-    font = "Roboto Regular 9",
-    widget = wibox.widget.textbox
+    font = "Roboto Regular 10",
+    align = "center", 
+    valign = "center",
+    widget = wibox.widget.textbox,
 }
 
 awful.widget.watch("uptime -p", 60, function(_, stdout)
@@ -44,19 +48,14 @@ awful.widget.watch("uptime -p", 60, function(_, stdout)
 end)
 
 return wibox.widget {
-    avatar, 
+    nil,
     {
-        nil,
-        {
-            username, 
-            uptime, 
-            spacing = dpi(2),
-            layout = wibox.layout.fixed.vertical
-        },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
-    }, 
-    spacing = dpi(16),
-    layout = wibox.layout.fixed.horizontal
+        username, 
+        uptime, 
+        spacing = dpi(2),
+        layout = wibox.layout.fixed.vertical
+    },
+    nil,
+    expand = "none",
+    layout = wibox.layout.align.vertical
 }

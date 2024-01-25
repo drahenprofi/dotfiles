@@ -54,7 +54,15 @@ awful.keyboard.append_global_keybindings{
       key = 'Return',
       description = 'open a terminal',
       group = 'launcher',
-      on_press = function () awful.spawn(user.floating_terminal, {floating = true}) end
+      on_press = function () awful.spawn(user.floating_terminal, {
+         floating = true, 
+         callback = function (c)
+            -- centered if it is the only client on the focused screen 
+            if #awful.screen.focused().clients < 2 then 
+               awful.placement.centered(c)
+            end 
+         end
+      }) end
    },
    awful.key{
       modifiers = {mod.super},

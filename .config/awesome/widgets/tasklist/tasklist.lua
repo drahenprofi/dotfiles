@@ -53,12 +53,7 @@ end
 
 local tasklist_buttons = gears.table.join(
     awful.button({}, 1, function(c)
-        if c == client.focus then
-            c.minimized = true
-        else
-            c:jump_to(false)
-        end
-
+        c:jump_to(false)
         awesome.emit_signal("dashboard::close")
     end), awful.button({}, 3, function()
         awful.menu.client_list({theme = {width = 250}})

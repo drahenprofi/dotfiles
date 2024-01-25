@@ -98,9 +98,14 @@ ruled.client.connect_signal('request::rules', function()
         rule_any = {floating = true},
         callback = function (c)
             local max_height = awful.screen.focused().workarea.height
+            local max_width = awful.screen.focused().workarea.width
 
             if c.height > max_height then
                 c.height = max_height
+            end
+
+            if c.width > max_width then 
+                c.width = max_width
             end
         end
     }
