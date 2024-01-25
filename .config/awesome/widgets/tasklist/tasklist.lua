@@ -58,6 +58,8 @@ local tasklist_buttons = gears.table.join(
         else
             c:jump_to(false)
         end
+
+        awesome.emit_signal("dashboard::close")
     end), awful.button({}, 3, function()
         awful.menu.client_list({theme = {width = 250}})
     end), awful.button({}, 4, function() awful.client.focus.byidx(1) end),

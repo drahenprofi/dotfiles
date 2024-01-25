@@ -121,7 +121,7 @@ local playerctl_widget = wibox.widget {
             forced_height = dpi(18),
             layout = wibox.layout.align.horizontal
         },
-        spacing = dpi(8),
+        spacing = dpi(2),
         layout = wibox.layout.fixed.vertical
     },
     top = dpi(4),
@@ -134,7 +134,7 @@ return wibox.widget {
         playerctl_widget, 
         bg = beautiful.bg_normal,
         widget = wibox.container.background
-    }, 184, 212, 8), 
+    }, 184, 200, 8), 
     margins = dpi(8),
     widget = wibox.container.margin
 }

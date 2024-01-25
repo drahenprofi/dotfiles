@@ -20,14 +20,14 @@ local avatar = wibox.widget {
         widget = wibox.widget.imagebox
     },
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(200))
+        gears.shape.rounded_rect(cr, width, height, dpi(8))
     end,
     widget = wibox.container.background
 }
 
 local username = wibox.widget{
     markup = '<span foreground="'..beautiful.highlight..'">parndt</span>@<span foreground="'..beautiful.highlight..'">rouge</span>',
-    font = "JetBrains Mono 12",
+    font = "JetBrains Mono 11",
     widget = wibox.widget.textbox
 }
 

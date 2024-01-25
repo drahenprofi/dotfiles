@@ -18,7 +18,6 @@ local storage = require("widgets.dashboard.storage")
 local volume = require("widgets.dashboard.volume")
 local brightness = require("widgets.dashboard.brightness")
 local battery = require("widgets.dashboard.battery")
-local settings = require("widgets.dashboard.settings")
 local weather = require("widgets.dashboard.weather")
 local playerctl = require("widgets.dashboard.playerctl")
 
@@ -105,8 +104,8 @@ dashboard:setup {
                 nil, 
                 {
                         {
+                            drawBox(avatar, 168, 44), 
                             playerctl,
-                            settings,
                             layout = wibox.layout.fixed.vertical
                         }, 
                         {
@@ -151,19 +150,6 @@ dashboard:setup {
         },
         expand = "none",
         layout = wibox.layout.align.horizontal
-    },
-    {
-        {
-            drawBox(avatar, 180, 44),
-            nil,
-            nil,
-            expand = "none", 
-            layout = wibox.layout.align.horizontal
-        },
-        nil,
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
     },
     layout = wibox.layout.stack
 }

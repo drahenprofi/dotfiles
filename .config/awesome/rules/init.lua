@@ -92,4 +92,16 @@ ruled.client.connect_signal('request::rules', function()
             floating = true
         }
     }
+
+    -- prevent overflowing of floating clients
+    ruled.client.append_rule {
+        rule_any = {floating = true},
+        callback = function (c)
+            local max_height = awful.screen.focused().workarea.height
+
+            if c.height > max_height then
+                c.height = max_height
+            end
+        end
+    }
 end)

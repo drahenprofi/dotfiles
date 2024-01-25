@@ -18,7 +18,6 @@ local beautiful = require("beautiful")
 require("config.errorhandling")
 
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
-
 -- window decorations (titlebars)
 --require("decorations")
 

@@ -59,13 +59,14 @@ for i, v in pairs(favourites) do
                 for _, c in pairs(tag:clients()) do
                     if clientIsApp(c, v["class"]) then
                         c:jump_to(false)
-                        return
                     end
                 end
             end
         else
             awful.spawn(v["command"])
         end
+
+        awesome.emit_signal("dashboard::close")
     end)
 
     helpers.hover_pointer(widget)
