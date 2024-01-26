@@ -2,6 +2,7 @@ local lgi = require "lgi"
 local Gio = lgi.Gio
 local gtk = lgi.require("Gtk", "3.0")
 
+local MAX_AMOUNT = 5
 
 get_all_apps = function()
     local all_apps = {}
@@ -32,6 +33,8 @@ get_apps_for_input = function(input)
 
     local icon_theme = gtk.IconTheme.get_default()
     
+    local added = 0
+
     for i, app in ipairs(all_apps) do 
         local input_in_name = string.find(string.lower(app:get_name()), string.lower(input))
         local input_in_description = app:get_description() ~= nil and string.find(string.lower(app:get_description()), string.lower(input))
@@ -54,6 +57,11 @@ get_apps_for_input = function(input)
             }
             
             table.insert(filtered, item)
+            added = added + 1
+
+            if added >= MAX_AMOUNT then 
+                return filtered
+            end
         end
     end
 

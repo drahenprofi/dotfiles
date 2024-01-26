@@ -1,10 +1,12 @@
 local wibox = require("wibox")
+local gears = require("gears")
 local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 
 local get_apps = require("widgets.prompt.get_apps")
 
 local layout = wibox.layout.fixed.vertical()
-layout.spacing = 8
+layout.spacing = dpi(8)
 
 local suggestions = {}
 local current_command = ""
@@ -80,16 +82,29 @@ layout.update_suggestions_widget = function()
 
         layout:add(wibox.widget {
             {
-                icon,
                 {
-                    markup = suggestion["name"],
-                    widget = wibox.widget.textbox
+                    {
+                        icon,
+                        {
+                            markup = suggestion["name"],
+                            font = "Roboto Regular 12",
+                            widget = wibox.widget.textbox
+                        },
+                        spacing = dpi(16),
+                        widget = wibox.layout.fixed.horizontal
+                    },
+                    margins = dpi(8),
+                    widget = wibox.container.margin
                 },
-                spacing = 8,
-                widget = wibox.layout.fixed.horizontal
-            },
-            bg = suggestion_background,
-            widget = wibox.container.background
+                bg = suggestion_background,
+                shape = function(cr, width, height)
+                    gears.shape.rounded_rect(cr, width, height, dpi(4))
+                end,
+                widget = wibox.container.background
+            }, 
+            left = dpi(8),
+            right = dpi(8),
+            widget = wibox.container.margin
         })
     end
 
@@ -103,6 +118,10 @@ layout.run = function()
             return 
         end
     end
+end
+
+layout.count = function()
+    return #layout.children
 end
 
 return layout

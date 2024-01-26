@@ -5,9 +5,13 @@ local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 
 local suggestions_widget = require("widgets.prompt.suggestions")
+local apply_borders = require("lib.borders")
 
-local height = 48
-local width = 300
+local prompt_widget
+local prompt_container
+
+local height = 58
+local width = 400
 
 local prompt = wibox({
     visible = false, 
@@ -17,7 +21,7 @@ local prompt = wibox({
     x = (awful.screen.focused().geometry.width - width) / 2, 
     y = (awful.screen.focused().geometry.height - height) / 3,
     width = width, 
-    height = height * 5,
+    height = height * 6,
     bg = "#00000000"
 })
 
@@ -25,19 +29,29 @@ local textbox = wibox.widget {
     widget = wibox.widget.textbox
 }
 
+local update_borders = function()
+    local new_height = height + suggestions_widget.count() * 40 + math.max(suggestions_widget.count() - 1, 0) * 8
+    prompt_container = apply_borders(prompt_widget, width, new_height, 8)
+    prompt:setup({prompt_container, layout = wibox.layout.fixed.vertical})
+end
+
 prompt.run = function()
-    prompt.visible = true
     suggestions_widget.reset()
+    update_borders()
+    prompt.visible = true
 
     awful.prompt.run {
         prompt = "> ",
         font = "Roboto Medium 14",
+        bg_cursor = beautiful.fg_normal,
         textbox = textbox, 
         done_callback = function()
             prompt.visible = false
         end, 
         changed_callback = function(command)
             suggestions_widget.update(command)
+
+            update_borders()
         end, 
         exe_callback = function(command)
             suggestions_widget.run()
@@ -59,19 +73,38 @@ end
 -- listen to signal emitted by other widgets
 awesome.connect_signal("prompt::run", prompt.run)
 
-prompt:setup {
+prompt_widget = wibox.widget {
     {
-        textbox,
+        {
+            {
+                {
+                    textbox,
+                    margins = dpi(8), 
+                    widget = wibox.container.margin
+                },
+                bg = beautiful.bg_light,
+                shape = function(cr, width, height)
+                    gears.shape.rounded_rect(cr, width, height, dpi(4))
+                end,
+                widget = wibox.container.background
+            },
+            margins = dpi(8), 
+            widget = wibox.container.margin
+        },
         bg = beautiful.bg_normal, 
         widget = wibox.container.background
     },
     {
-      suggestions_widget,
+        suggestions_widget,
         bg = beautiful.bg_normal, 
         widget = wibox.container.background
     },
     layout = wibox.layout.fixed.vertical
 }
+
+prompt_container = apply_borders(prompt_widget, width, height, 8)
+
+prompt:setup({prompt_container, layout = wibox.layout.fixed.vertical})
 
 return prompt
 
