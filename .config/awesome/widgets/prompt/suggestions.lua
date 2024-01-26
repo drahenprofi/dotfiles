@@ -25,21 +25,31 @@ layout.update = function(command)
 
     layout.reset()
 
+    local icon_theme = gtk.IconTheme.get_default()
+
     for i, suggestion in ipairs(suggestions) do
-        local icon = Gio.AppInfo.get_icon(suggestion)
-        local icon_theme = gtk.IconTheme.get_default()
-        gtk.IconTheme.lookup_by_gicon(icon_theme, icon, 48, {})--:get_filename()
+        local icon = suggestion:get_icon()
+        local themed_icon = icon_theme:lookup_by_gicon(icon, 48, 0)
 
+        local icon = wibox.widget {
+            forced_width = 24,
+            forced_height = 24,
+            widget = wibox.container.background
+        }
 
-        --require("naughty").notify{text=test}
+        if themed_icon ~= nil then 
+            icon = wibox.widget {
+                image = themed_icon:get_filename(),
+                forced_width = 24,
+                forced_height = 24,
+                widget = wibox.widget.imagebox
+            }
+        end
 
         layout:add(wibox.widget {
+            icon,
             {
-                --image = ,
-                widget = wibox.widget.imagebox
-            }, 
-            {
-                markup = Gio.AppInfo.get_name(suggestion),
+                markup = suggestion:get_name(),
                 widget = wibox.widget.textbox
             }, 
             spacing = 8,
@@ -52,7 +62,7 @@ end
 
 layout.run = function()
     if #suggestions > 0 then
-        Gio.AppInfo.launch(suggestions[1])
+        suggestions[1]:launch()
     end
 end
 

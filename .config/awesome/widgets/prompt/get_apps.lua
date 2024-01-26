@@ -11,8 +11,10 @@ create_menu_entry_for_app = (app_info) -> {
 get_all_apps = function()
     local all_apps = {}
 
-	for _, app_info in ipairs(Gio.AppInfo.get_all()) do
-        table.insert(all_apps, app_info)--Gio.AppInfo.get_name(app_info))
+	for i, app_info in ipairs(Gio.AppInfo.get_all()) do
+        if not app_info:get_boolean("NoDisplay") and app_info:get_show_in() then 
+            table.insert(all_apps, app_info)--Gio.AppInfo.get_name(app_info))
+        end
     end
 
 
