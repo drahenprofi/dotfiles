@@ -41,6 +41,13 @@ prompt.run = function()
         end, 
         exe_callback = function(command)
             suggestions_widget.run()
+        end, 
+        keyreleased_callback = function(mod, key, command)
+            if key == "Up" then 
+                suggestions_widget.navigate_up()
+            elseif key == "Down" then 
+                suggestions_widget.navigate_down()
+            end
         end
     }
 end
