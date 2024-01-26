@@ -69,7 +69,8 @@ awful.keyboard.append_global_keybindings{
       key = 'r',
       description = 'run launcher',
       group = 'launcher',
-      on_press = function() awful.spawn(apps.launcher, false) end,
+      --on_press = function() awful.spawn(apps.launcher, false) end,
+      on_press = function() awesome.emit_signal("prompt::run") end,
    },
     awful.key {
         modifiers = {},

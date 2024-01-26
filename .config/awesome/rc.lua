@@ -18,11 +18,8 @@ local beautiful = require("beautiful")
 require("config.errorhandling")
 
 beautiful.init(awful.util.getdir("config") .. "theme.lua" )
--- window decorations (titlebars)
---require("decorations")
 
 -- init configs
---require("config.wallpaper")
 require("config.layout")
 require("rules")
 require("config.tags")
@@ -30,15 +27,12 @@ require("config.tags")
 require("bindings")
 require("signals")
 
--- init daemons
---require("evil")
 
 -- init widgets
 require("widgets.dashboard")
 require("widgets.topbar")
 require("widgets.popup")
---require("widgets.dock")
---require("widgets.notifications")
+require("widgets.prompt")
 
 require("awful.autofocus")
 
