@@ -110,4 +110,10 @@ ruled.client.connect_signal('request::rules', function()
             end
         end
     }
+
+    ruled.client.append_rule {
+        rule = {name = "Welcome to PyCharm"}, 
+        properties = {floating = true},
+        callback = awful.placement.centered
+    }
 end)

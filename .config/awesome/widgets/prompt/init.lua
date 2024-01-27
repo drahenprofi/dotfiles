@@ -31,7 +31,7 @@ local textbox = wibox.widget {
 
 local update_borders = function()
     local new_height = height + suggestions_widget.count() * 50 + math.max(suggestions_widget.count() - 1, 0) * 8
-    prompt_container = apply_borders(prompt_widget, width, new_height, 8)
+    prompt_container = apply_borders(prompt_widget, width, new_height, 4)
     prompt:setup({prompt_container, layout = wibox.layout.fixed.vertical})
 end
 
@@ -96,7 +96,7 @@ prompt_widget = wibox.widget {
     layout = wibox.layout.fixed.vertical
 }
 
-prompt_container = apply_borders(prompt_widget, width, height, 8)
+prompt_container = apply_borders(prompt_widget, width, height, 4)
 
 prompt:setup({prompt_container, layout = wibox.layout.fixed.vertical})
 
