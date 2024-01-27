@@ -11,30 +11,35 @@ get_all_apps = function()
 
 	for i, app_info in ipairs(Gio.AppInfo.get_all()) do
         if not app_info:get_boolean("NoDisplay") and app_info:get_show_in() then 
-            table.insert(all_apps, app_info)--Gio.AppInfo.get_name(app_info))
+            table.insert(all_apps, app_info)
         end
     end
 
-
     return all_apps
-
-    --[[
-    for k, app_list in ipairs(all_apps) do
-		table.sort(app_list, function (a, b) 
-            return a.lower() < b.lower() 
-        end)
-    end
-
-    return app_list]]--
 end
 
 get_apps_for_input = function(input)
     local all_apps = get_all_apps()
 
-    local filtered = {}
+    local history_data = history.read()
 
-    local icon_theme = gtk.IconTheme.get_default()
+    -- sort by history count and alphabetically
+    table.sort(all_apps, function (a, b) 
+        local history_a = history_data[a:get_name()]
+        local history_b = history_data[b:get_name()]
+
+        if history_a == nil then history_a = 0 end
+        if history_b == nil then history_b = 0 end
+
+        if history_a ~= history_b then 
+            return history_a > history_b 
+        else 
+            return string.lower(a:get_name()) < string.lower(b:get_name()) 
+        end
+    end)
     
+    local filtered = {}
+    local icon_theme = gtk.IconTheme.get_default()
     local added = 0
 
     for i, app in ipairs(all_apps) do 
@@ -56,8 +61,8 @@ get_apps_for_input = function(input)
                 icon = filename, 
                 launch = function() 
                     app:launch() 
+
                     history.write(app)
-                    -- write history
                 end,
                 selected = #filtered == 0
             }
@@ -70,10 +75,6 @@ get_apps_for_input = function(input)
             end
         end
     end
-
-    -- TODO: sort
-    -- get history for apps
-    -- sort by history count and alphabetically
 
     return filtered
 end
