@@ -2,6 +2,8 @@ local lgi = require "lgi"
 local Gio = lgi.Gio
 local gtk = lgi.require("Gtk", "3.0")
 
+local history = require("widgets.prompt.history")
+
 local MAX_AMOUNT = 5
 
 get_all_apps = function()
@@ -52,7 +54,11 @@ get_apps_for_input = function(input)
                 name = app:get_name(), 
                 description = app:get_description(), 
                 icon = filename, 
-                launch = function() app:launch() end,
+                launch = function() 
+                    app:launch() 
+                    history.write(app)
+                    -- write history
+                end,
                 selected = #filtered == 0
             }
             
@@ -64,6 +70,10 @@ get_apps_for_input = function(input)
             end
         end
     end
+
+    -- TODO: sort
+    -- get history for apps
+    -- sort by history count and alphabetically
 
     return filtered
 end
