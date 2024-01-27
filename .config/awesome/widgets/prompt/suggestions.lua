@@ -77,18 +77,33 @@ layout.update_suggestions_widget = function()
         local suggestion_background = beautiful.bg_normal
 
         if suggestion["selected"] then 
-            suggestion_background = beautiful.bg_very_light
+            suggestion_background = beautiful.bg_light
         end
 
         layout:add(wibox.widget {
             {
                 {
                     {
-                        icon,
                         {
-                            markup = suggestion["name"],
-                            font = "Roboto Regular 12",
-                            widget = wibox.widget.textbox
+                            nil,
+                            icon,
+                            expand = "none", 
+                            widget = wibox.layout.align.vertical
+                        },
+                        {
+                            {
+                                markup = suggestion["name"],
+                                font = "Roboto Medium 12",
+                                forced_height = 18,
+                                widget = wibox.widget.textbox
+                            }, 
+                            {
+                                markup = suggestion["description"],
+                                font = "Roboto Regular 10",
+                                forced_height = 16,
+                                widget = wibox.widget.textbox
+                            },
+                            widget = wibox.layout.fixed.vertical
                         },
                         spacing = dpi(16),
                         widget = wibox.layout.fixed.horizontal

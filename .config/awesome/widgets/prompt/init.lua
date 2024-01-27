@@ -19,9 +19,9 @@ local prompt = wibox({
     type = "dock", 
     screen = screen.primary, 
     x = (awful.screen.focused().geometry.width - width) / 2, 
-    y = (awful.screen.focused().geometry.height - height) / 3,
+    y = (awful.screen.focused().geometry.height - 332) / 2,
     width = width, 
-    height = height * 6,
+    height = height * 7,
     bg = "#00000000"
 })
 
@@ -30,7 +30,7 @@ local textbox = wibox.widget {
 }
 
 local update_borders = function()
-    local new_height = height + suggestions_widget.count() * 40 + math.max(suggestions_widget.count() - 1, 0) * 8
+    local new_height = height + suggestions_widget.count() * 50 + math.max(suggestions_widget.count() - 1, 0) * 8
     prompt_container = apply_borders(prompt_widget, width, new_height, 8)
     prompt:setup({prompt_container, layout = wibox.layout.fixed.vertical})
 end
@@ -41,7 +41,7 @@ prompt.run = function()
     prompt.visible = true
 
     awful.prompt.run {
-        prompt = "> ",
+        prompt = "",
         font = "Roboto Medium 14",
         bg_cursor = beautiful.fg_normal,
         textbox = textbox, 
@@ -78,17 +78,15 @@ prompt_widget = wibox.widget {
         {
             {
                 {
-                    textbox,
-                    margins = dpi(8), 
-                    widget = wibox.container.margin
+                    markup = "", 
+                    font = "JetBrains Mono 14",
+                    forced_width = dpi(28),
+                    widget = wibox.widget.textbox
                 },
-                bg = beautiful.bg_light,
-                shape = function(cr, width, height)
-                    gears.shape.rounded_rect(cr, width, height, dpi(4))
-                end,
-                widget = wibox.container.background
-            },
-            margins = dpi(8), 
+                textbox,
+                widget = wibox.layout.fixed.horizontal
+            }, 
+            margins = dpi(16), 
             widget = wibox.container.margin
         },
         bg = beautiful.bg_normal, 
