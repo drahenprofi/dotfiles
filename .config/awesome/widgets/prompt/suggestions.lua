@@ -80,6 +80,38 @@ layout.update_suggestions_widget = function()
             suggestion_background = beautiful.bg_light
         end
 
+        local suggestion_text = {}
+
+        if suggestion["description"] ~= nil then 
+            suggestion_text = wibox.widget {
+                {
+                    markup = suggestion["name"],
+                    font = "Roboto Medium 12",
+                    forced_height = 18,
+                    widget = wibox.widget.textbox
+                }, 
+                {
+                    markup = suggestion["description"],
+                    font = "Roboto Regular 10",
+                    forced_height = 16,
+                    widget = wibox.widget.textbox
+                },
+                widget = wibox.layout.fixed.vertical
+            }
+        else 
+            suggestion_text = wibox.widget {
+                nil, 
+                {
+                    markup = suggestion["name"],
+                    font = "Roboto Medium 12",
+                    forced_height = 34,
+                    widget = wibox.widget.textbox
+                }, 
+                expand = "none", 
+                widget = wibox.layout.align.vertical
+            }
+        end
+
         layout:add(wibox.widget {
             {
                 {
@@ -90,21 +122,7 @@ layout.update_suggestions_widget = function()
                             expand = "none", 
                             widget = wibox.layout.align.vertical
                         },
-                        {
-                            {
-                                markup = suggestion["name"],
-                                font = "Roboto Medium 12",
-                                forced_height = 18,
-                                widget = wibox.widget.textbox
-                            }, 
-                            {
-                                markup = suggestion["description"],
-                                font = "Roboto Regular 10",
-                                forced_height = 16,
-                                widget = wibox.widget.textbox
-                            },
-                            widget = wibox.layout.fixed.vertical
-                        },
+                        suggestion_text,
                         spacing = dpi(16),
                         widget = wibox.layout.fixed.horizontal
                     },

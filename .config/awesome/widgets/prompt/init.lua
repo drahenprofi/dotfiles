@@ -66,10 +66,6 @@ prompt.run = function()
     }
 end
 
-prompt.close = function()
-    prompt.visible = false
-end
-
 -- listen to signal emitted by other widgets
 awesome.connect_signal("prompt::run", prompt.run)
 
