@@ -12,8 +12,8 @@ Arch Linux dotfiles
 + `playerctl` - Get media player information
 + `xdotool` - Spawn key combinations
 + `imagemagick` - Blur images
-+ `JetBrains Mono` and `Roboto` - Fonts
-+ `nerd-fonts-fira-mono` - Icons
++ `ttf-jetbrains-mono` and `ttf-roboto` - Fonts
++ `ttf-jetbrains-mono-nerd` - Icons
 
 ### Honorable mentions
 
