@@ -49,7 +49,7 @@ naughty.connect_signal("request::display", function(n)
         icon = app_config[n.app_name].icon
         title_visible = app_config[n.app_name].title
     else
-        icon = n.app_name ~= '' and n.app_name:sub(1,1):upper() or default_icon
+        icon = default_icon
         title_visible = true
     end
 

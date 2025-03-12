@@ -95,9 +95,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#alias neofetch="neofetch --chafa /home/parndt/.config/awesome/themes/custom/wallpaper.jpg --size 150% --gap -103"
 
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias resetmouse='sudo modprobe -r psmouse && sudo modprobe psmouse'
+# swap left and right alt key
+# https://unix.stackexchange.com/a/648298
+setxkbmap -option lv3:lalt_switch -option lv3:ralt_alt
 
-clear
+# python pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
