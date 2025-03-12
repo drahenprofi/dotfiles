@@ -126,4 +126,17 @@ container = borders(
     }, 53, get_height(), 8
 )
 
-return container
+container.forced_width = 53
+
+local dock_opener = wibox.widget {
+    forced_width = dpi(8),
+    input_passthrough = true,
+    bg = "#00000000",
+    widget = wibox.container.background
+}
+
+return wibox.widget {
+    container, 
+    dock_opener,
+    layout = wibox.layout.fixed.horizontal
+}
