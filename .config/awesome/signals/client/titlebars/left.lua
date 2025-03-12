@@ -53,11 +53,11 @@ local left = function(c, args)
         inner_stroke_color = args.stroke_color_inner_sides,
     }
 
-    if c.class == "Thunar" and c.type == "normal" then
+    --[[if c.class == "Thunar" and c.type == "normal" then
         set_thunar_left_titlebar(c, left_border_img)
-    else
+    else]]--
         set_left_titlebar(c, left_border_img, args.client_color)
-    end
+    --end
 end
 
 return left

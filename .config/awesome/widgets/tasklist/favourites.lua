@@ -20,7 +20,7 @@ return {
     spotify = {
         name = "spotify", 
         class = "spotify", 
-        command = "spotify-launcher", 
+        command = "spotify", 
         index = 4
     },
     discord = {
@@ -29,10 +29,16 @@ return {
         command = "discord", 
         index = 5
     }, 
-    texstudio = {
-        name = "texstudio", 
-        class = "texstudio", 
-        command = "texstudio", 
+    steam = {
+        name = "steam", 
+        class = "steam", 
+        command = "steam", 
         index = 6
+    }, 
+    pianoteq = {
+        name = "pianoteq", 
+        class = "Pianoteq STAGE", 
+        command = "'pianoteq 8'",
+        index = 7
     }
 }

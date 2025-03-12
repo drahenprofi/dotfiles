@@ -18,8 +18,8 @@ local dock_container = wibox({
     screen = screen.primary, 
     x = 0, 
     y = beautiful.bar_height,
-    width = dpi(width + openerWidth), 
-    height = dpi(awful.screen.focused().geometry.height - beautiful.bar_height),
+    width = width + openerWidth, 
+    height = awful.screen.focused().geometry.height - beautiful.bar_height,
     bg = "#00000000"
 })
 

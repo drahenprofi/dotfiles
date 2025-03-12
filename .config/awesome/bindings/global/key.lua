@@ -172,23 +172,24 @@ awful.keyboard.append_global_keybindings{
 -- focus related keybindings
 awful.keyboard.append_global_keybindings{
     awful.key{
-        modifiers = {mod.alt},
+        modifiers = {mod.super},
         key = 'Tab',
         description = 'open app switcher forward',
         group = 'client',
         on_press = function() 
-            apps.switcher.switch(1, "Mod1", "Alt_L", "Shift", "Tab") 
+            apps.switcher.switch(1, mod.super, "Super_L", mod.shift, "Tab") 
         end,
     },
     awful.key{
-        modifiers = {mod.alt, mod.shift},
+        modifiers = {mod.super, mod.shift},
         key = 'Tab',
         description = 'open app switcher backwards',
         group = 'client',
         on_press = function() 
-            apps.switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab") 
+            apps.switcher.switch(-1, mod.super, "Super_L", mod.shift, "Tab") 
         end,
     },
+    --[[
    awful.key{
       modifiers = {mod.super},
       key = 'Tab',
@@ -200,7 +201,7 @@ awful.keyboard.append_global_keybindings{
             client.focus:raise()
          end
       end,
-   },
+   },]]--
    awful.key{
       modifiers = {mod.super, mod.ctrl},
       key = 'j',

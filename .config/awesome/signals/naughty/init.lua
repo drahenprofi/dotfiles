@@ -145,9 +145,11 @@ naughty.connect_signal("request::display", function(n)
                 }, 
                 layout  = wibox.layout.fixed.horizontal,
             },
+            forced_height = 70,
+            forced_width = 284,
             bg = beautiful.bg_normal,
             widget = wibox.container.background
-        }, 300, 72, 8)
+        }, 300, 88, 8)
     }
 end)
 

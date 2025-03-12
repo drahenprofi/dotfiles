@@ -9,15 +9,12 @@ local content = {}
 local container = {}
 
 local function createDiskRow(disk)
-  --[[local detailText = math.floor(disk.used/1024/1024)
-  .. '/'
-  .. math.floor(disk.size/1024/1024) .. 'GB']]--
     local detailText = math.floor((disk.size - disk.used)/1024/1024) .. " GB free"
 
     return wibox.widget{
         {
             markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.mount.."</span>",
-            font = "JetBrains Mono Bold 12", 
+            font = "JetBrains Mono Bold 10", 
             align = "center",
             widget = wibox.widget.textbox
         },
@@ -39,7 +36,7 @@ local function createDiskRow(disk)
             align = "center",  
             widget = wibox.widget.textbox
           },
-          forced_height = 54, 
+          forced_height = 50, 
           layout = wibox.layout.stack
         }, 
         {
@@ -54,17 +51,41 @@ local function createDiskRow(disk)
 end
 
 local function worker(args)
-    local mounts = {"/", "/data"}
+    local mounts = {"/", "/software", "/data", "/data2"}
     local timeout = 60
     local disks = {}
 
-    content = wibox.layout.fixed.horizontal()
-    content.spacing = 36
+    content = wibox.layout.grid()
+    --content.horizontal_spacing = 4
+    content.expand = true
+    content.forced_width = 200
+    content.vertical_spacing = 24
+    content.horizontal_spacing = 54
+    content.forced_num_cols = 2
 
     container = wibox.widget {
-      content, 
-      spacing = 24, 
-      layout = wibox.layout.fixed.horizontal
+      {
+        nil, 
+        {
+          {
+            markup = "<span foreground='"..beautiful.highlight_alt.."'>󱛟</span>",
+            font = "JetBrains Mono 24",
+            forced_width = 36,
+            widget = wibox.widget.textbox
+          }, 
+          {
+            markup = "<span foreground='"..beautiful.fg_normal.."'>DRIVES</span>",
+            font = "Roboto Bold 14",
+            widget = wibox.widget.textbox
+          }, 
+          layout = wibox.layout.fixed.horizontal
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      },
+      content,
+      spacing = 12,
+      layout = wibox.layout.fixed.vertical
     }
 
     watch([[bash -c "df | tail -n +2"]], timeout,

@@ -14,9 +14,9 @@ local get_app_icon = function(is_template)
             {
                 awful.widget.clienticon,
                 id = "default_icon",
-                widget = wibox.container.background
+                widget = wibox.container.background, 
             }, 
-            left = dpi(6),
+            left = 6,
             widget = wibox.container.margin
         }
     end
@@ -29,17 +29,17 @@ local get_app_icon = function(is_template)
                     bg = beautiful.misc1,
                     id = "selected_indicator",
                     shape = function(cr, width, height)
-                        gears.shape.rounded_rect(cr, width, height, dpi(50))
+                        gears.shape.rounded_rect(cr, width, height, 50)
                     end,
-                    forced_height = dpi(4),
-                    forced_width = dpi(4),
+                    forced_height = 4,
+                    forced_width = 4,
                     widget = wibox.container.background
                 },
                 nil,
                 expand = "none",
                 widget = wibox.layout.align.vertical
             },
-            left = dpi(3),
+            left = 3,
             widget = wibox.container.margin
         },
         {
@@ -52,12 +52,12 @@ local get_app_icon = function(is_template)
                     widget = wibox.widget.textbox
                 },
                 default_icon,
-                forced_height = dpi(32), 
-                forced_width = dpi(32),
+                forced_height = 32, 
+                forced_width = 32,
                 layout = wibox.layout.fixed.vertical
             }, 
-            top = dpi(4), 
-            bottom = dpi(4),
+            top = 4, 
+            bottom = 4,
             widget = wibox.container.margin
         }, 
         layout = wibox.layout.fixed.horizontal

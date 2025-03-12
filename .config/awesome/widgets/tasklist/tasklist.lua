@@ -32,9 +32,9 @@ local redraw_borders = function()
 
     if previous_height ~= current_height then
         if helpers.tablelength(source()) == 0 then
-            applist.spacing = dpi(0)
+            applist.spacing = 0
         else 
-            applist.spacing = dpi(8)
+            applist.spacing = 8
         end
 
         container.redraw(current_height)

@@ -10,7 +10,7 @@ local apply_borders = require("lib.borders")
 local prompt_widget
 local prompt_container
 
-local height = 58
+local height = 55
 local width = 400
 
 local prompt = wibox({

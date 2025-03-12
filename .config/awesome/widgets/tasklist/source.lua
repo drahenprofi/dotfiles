@@ -1,4 +1,5 @@
 local favourites = require("widgets.tasklist.favourites")
+local naughty = require("naughty")
 
 function reverse_table(t)
     local reversedTable = {}
@@ -17,9 +18,19 @@ return function()
     local result = {}
     local class_seen = {}
     for _, c in pairs(cls) do
-        if c.class ~= nil and not class_seen[c.class] and not favourites[c.class:lower()] then
-            class_seen[c.class] = true
-            table.insert(result, c)
+        client_identifier = c.class
+
+        --if c.icon_name == "com.bitwig.BitwigStudio" then 
+        --    client_identifier = "bitwig"
+        --end
+
+        if client_identifier ~= nil and not class_seen[client_identifier] and not favourites[client_identifier:lower()] then
+            
+            if client_identifier:lower() == "pianoteq stage" then 
+            else 
+                class_seen[client_identifier] = true
+                table.insert(result, c)
+            end
         end
     end
     

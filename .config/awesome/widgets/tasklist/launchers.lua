@@ -16,7 +16,9 @@ layout.spacing = 8
 local clientIsApp = function(c, app)
     -- returns if the client c is the same as the sidebarbox-app (e.g. firefox, kitty, ...) 
     -- some fiddling needed, is kinda hacky
-    if app == "intellij" and c.class == "jetbrains-idea" then
+
+    if (app == "intellij" and c.class == "jetbrains-idea") or 
+        (app == "pianoteq" and c.class == "Pianoteq STAGE") then
         -- hmm
         return true
     elseif c.class ~= nil then

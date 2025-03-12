@@ -45,5 +45,15 @@ return {
         class = "texstudio", 
         icon = "", 
         color = beautiful.red
+    }, 
+    steam = {
+        class = "steam",
+        icon = "󰓓", 
+        color = beautiful.blue
+    }, 
+    pianoteq = {
+        class = "Pianoteq STAGE", 
+        icon = "󰙽", 
+        color = beautiful.fg_normal
     }
 }

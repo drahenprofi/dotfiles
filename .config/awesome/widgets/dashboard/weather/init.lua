@@ -40,21 +40,21 @@ local get_icon = function(condition)
 end
 
 local temperature = wibox.widget {
-    font = "Roboto Bold 14",
+    font = "Roboto Bold 18",
     widget = wibox.widget.textbox
 }
 
 local description = wibox.widget {
-    font = "Roboto Medium 10", 
+    font = "Roboto Medium 14", 
     widget = wibox.widget.textbox
 }
 
 local icon_widget = wibox.widget {
-    font = "JetBrains Mono Bold 30",
+    font = "JetBrains Mono Bold 36",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox,
-    forced_width = dpi(50)
+    forced_width = dpi(58)
 }
 
 local weather_widget = wibox.widget {
@@ -77,13 +77,13 @@ local weather_widget = wibox.widget {
 local update_widget = function(widget, stdout, stderr)
     local result = json.decode(stdout)
 
-    temperature.markup = "<span foreground='"..beautiful.fg_normal.."'>"..tostring(result.main.temp).." °C</span>"
-    description.markup = "<span foreground='"..beautiful.fg_normal.."'>"..result.weather[1].description.."</span>" 
+    temperature.markup = "<span foreground='"..beautiful.bg_normal.."'>"..tostring(math.floor(result.main.temp+0.5)).." °C</span>"
+    description.markup = "<span foreground='"..beautiful.bg_normal.."'>"..result.weather[1].description.."</span>" 
     
     local condition = result.weather[1].main
     local icon = get_icon(condition)
 
-    icon_widget.markup = "<span foreground='"..beautiful.fg_normal.."'>"..icon.."</span>"
+    icon_widget.markup = "<span foreground='"..beautiful.bg_normal.."'>"..icon.."</span>"
 end
 
 local api_key_path = awful.util.getdir("config") .. "widgets/dashboard/weather/openweathermap.txt"
@@ -91,7 +91,7 @@ awful.spawn.easy_async_with_shell("cat "..api_key_path, function(stdout)
     local api_key = stdout:gsub("\n", "")
 
     -- wait for wifi to connect
-    awful.spawn.easy_async_with_shell("sleep 10", function()
+    awful.spawn.easy_async_with_shell("sleep 5", function()
         awful.widget.watch(get_command(api_key), 5000, update_widget, weather_widget)
     end)
 end)
