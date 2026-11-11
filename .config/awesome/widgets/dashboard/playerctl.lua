@@ -134,7 +134,7 @@ return wibox.widget {
         playerctl_widget, 
         bg = beautiful.bg_normal,
         widget = wibox.container.background
-    }, 184, 200, 8), 
+    }, 186, 230, 8), 
     margins = dpi(8),
     widget = wibox.container.margin
 }

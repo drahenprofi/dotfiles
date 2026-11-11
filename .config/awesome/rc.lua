@@ -30,9 +30,10 @@ require("signals")
 
 -- init widgets
 require("widgets.dashboard")
-require("widgets.topbar")
 require("widgets.popup")
+require("widgets.topbar")
 require("widgets.prompt")
+require("widgets.tasklist")
 
 require("awful.autofocus")
 
@@ -53,7 +54,6 @@ client.connect_signal("manage", function (c)
 end)
 
 -- autorun programs
-awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")
+awful.spawn.with_shell("~/.config/awesome/scripts/autorun.sh")
 
 
-require("widgets.tasklist")

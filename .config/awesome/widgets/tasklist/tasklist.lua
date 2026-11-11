@@ -18,8 +18,15 @@ local container = {}
 local applist = {}
 
 local get_height = function()
-    local app_count = helpers.tablelength(favourites) + helpers.tablelength(source())
-    local height = app_count * 48 - 8
+    local num_favorites = helpers.tablelength(favourites)
+    local num_other_apps = helpers.tablelength(source())
+
+    local height = (num_favorites + num_other_apps) * 52
+
+    if num_other_apps > 0 then
+        height = height - 6
+    end
+
     return height
 end
 
@@ -56,19 +63,20 @@ local tasklist_buttons = gears.table.join(
         c:jump_to(false)
         awesome.emit_signal("dashboard::close")
     end), awful.button({}, 3, function()
-        awful.menu.client_list({theme = {width = 250}})
+        --awful.menu.client_list({theme = {width = 250}})
     end), awful.button({}, 4, function() awful.client.focus.byidx(1) end),
                             awful.button({}, 5, function()
         awful.client.focus.byidx(-1)
     end)
 )
 
-local widget = awful.widget.tasklist {
+local tasklist = awful.widget.tasklist {
     screen = screen.primary, 
     filter = function() return true end, -- Filtering is already done in source
     source = source,
     buttons = tasklist_buttons,
     layout = {
+        spacing = 8, 
         layout  = wibox.layout.fixed.vertical, 
     },
     widget_template = {
@@ -114,7 +122,11 @@ end)
 
 applist = wibox.widget {
     launchers,
-    widget,
+    {
+        top = -6, -- hacky
+        tasklist, 
+        widget = wibox.container.margin
+    }, 
     layout = wibox.layout.fixed.vertical
 }
 
@@ -123,10 +135,10 @@ container = borders(
         applist,
         bg = beautiful.bg_normal,
         widget = wibox.container.background
-    }, 53, get_height(), 8
+    }, 56, get_height(), 8
 )
 
-container.forced_width = 53
+container.forced_width = 56
 
 local dock_opener = wibox.widget {
     forced_width = dpi(8),

@@ -1,0 +1,326 @@
+/*
+ _   _               ____
+| \ | | __ ___   __ | __ )  __ _ _ __ ___
+|  \| |/ _` \ \ / / |  _ \ / _` | '__/ __|
+| |\  | (_| |\ V /  | |_) | (_| | |  \__ \
+|_| \_|\__,_| \_/   |____/ \__,_|_|  |___/
+*/
+
+/* left most bar */
+.NavTabs {
+  background-color: #1C1E26 !important;
+}
+
+.NavTabs__ItemButton:hover {
+  background-color: #232530 !important;
+}
+
+.NavTabs__Item[aria-selected="true"] > span > .NavTabs__ItemButton {
+  background-color: #2E303E !important;
+}
+
+/* buttons in qr and link section of personal user profile */
+.UsernameLinkModalBody__actions__save,
+.UsernameLinkModalBody__actions__color {
+  background-color: #2E303E !important;
+}
+
+/* second to left bar */
+.NavSidebar {
+  background-color: #1C1E26 !important;
+}
+
+/* view archive button when clicking on ... */
+.ContextMenu__popper--single-item {
+  background-color: #232530 !important;
+}
+
+.module-conversation-list__item--contact-or-conversation--is-selected {
+  background-color: #2E303E !important;
+}
+
+/* no archived chat text */
+.module-left-pane__archive-helper-text {
+  background-color: #232530 !important;
+}
+
+.module-conversation-list__item--contact-or-conversation:hover,
+.module-conversation-list__item--contact-or-conversation:focus,
+.module-conversation-list__item--archive-button:hover,
+.module-conversation-list__item--archive-button:focus {
+  background-color: #232530 !important;
+}
+
+/*
+ _   _                        ____
+| | | | ___  _ __ ___   ___  |  _ \ __ _  __ _  ___
+| |_| |/ _ \| '_ ` _ \ / _ \ | |_) / _` |/ _` |/ _ \
+|  _  | (_) | | | | | |  __/ |  __/ (_| | (_| |  __/
+|_| |_|\___/|_| |_| |_|\___| |_|   \__,_|\__, |\___|
+                                         |___/
+*/
+
+.Inbox__no-conversation-open {
+  background-color: #1C1E26 !important;
+}
+
+/*
+ _____         _   _                  _
+|_   _|____  _| |_(_)_ __   __ _     / \   _ __ ___  __ _
+  | |/ _ \ \/ / __| | '_ \ / _` |   / _ \ | '__/ _ \/ _` |
+  | |  __/>  <| |_| | | | | (_| |  / ___ \| | |  __/ (_| |
+  |_|\___/_/\_\\__|_|_| |_|\__, | /_/   \_\_|  \___|\__,_|
+                           |___/
+*/
+
+/* the bar at the top containing your contact name */
+.module-ConversationHeader {
+  background-color: #1C1E26 !important;
+}
+
+/* call, search, etc button present at conversation header */
+.module-ConversationHeader__button:hover,
+.module-ConversationHeader__button:focus {
+  background-color: #232530 !important;
+}
+
+/* ... menu at conversation header */
+.react-contextmenu {
+  background-color: #232530 !important;
+}
+
+/* ... menu hover */
+.react-contextmenu-item--selected {
+  background-color: #2E303E !important;
+}
+
+/* the vm player that appears at top */
+.MiniPlayer {
+  background-color: #2E303E !important;
+}
+
+/* conversation area */
+.module-timeline {
+  background-color: #1C1E26 !important;
+}
+
+/* messages */
+.module-message__container--incoming {
+  background-color: #2E303E !important;
+}
+
+/* replying box */
+.module-quote--incoming > .module-quote__primary,
+.module-quote--incoming > .module-quote__icon-container {
+  background-color: #2E303E !important;
+  border: 0px !important;
+}
+
+/* call again button */
+.module-Button--system-message {
+  background-color: #2E303E !important;
+}
+
+/* the area where you write message, attach file, send vm, etc. */
+.CompositionArea {
+  background-color: #1C1E26 !important;
+}
+
+/* the actual typing box */
+.module-composition-input__input {
+  background-color: #232530 !important;
+}
+
+/* the today or yesterday thing that appears when you scroll up */
+.TimelineDateHeader--floating {
+  background-color: #232530 !important;
+}
+
+.TimelineFloatingHeader__spinner-container {
+  background-color: #232530 !important;
+}
+
+.ScrollDownButton {
+  background-color: #6C6F93 !important;
+}
+
+/*
+  ____      _ _ _                  _
+ / ___|__ _| | (_)_ __   __ _     / \   _ __ ___  __ _
+| |   / _` | | | | '_ \ / _` |   / _ \ | '__/ _ \/ _` |
+| |__| (_| | | | | | | | (_| |  / ___ \| | |  __/ (_| |
+ \____\__,_|_|_|_|_| |_|\__, | /_/   \_\_|  \___|\__,_|
+                        |___/
+*/
+
+/* background when contact isn't selected */
+.CallsTab__EmptyState {
+  background-color: #232530 !important;
+}
+
+/* background when contact is selected */
+.CallsTab__ConversationCallDetails {
+  background-color: #232530 !important;
+}
+
+/* contact list sidebar item */
+.CallsList__ItemTile:hover {
+  background-color: #232530 !important;
+}
+
+.CallsList__ItemTile[aria-selected="true"] {
+  background-color: #2E303E !important;
+}
+
+.CallsNewCall_ItemActionButton {
+  background-color: #585b70 !important;
+}
+
+/*
+ ____  _                        _
+/ ___|| |_ ___  _ __ _   _     / \   _ __ ___  __ _
+\___ \| __/ _ \| '__| | | |   / _ \ | '__/ _ \/ _` |
+ ___) | || (_) | |  | |_| |  / ___ \| | |  __/ (_| |
+|____/ \__\___/|_|   \__, | /_/   \_\_|  \___|\__,_|
+                     |___/
+*/
+
+.Stories__placeholder {
+  background-color: #232530 !important;
+}
+
+/*
+ _   _                 ____             __ _ _
+| | | |___  ___ _ __  |  _ \ _ __ ___  / _(_) | ___
+| | | / __|/ _ \ '__| | |_) | '__/ _ \| |_| | |/ _ \
+| |_| \__ \  __/ |    |  __/| | | (_) |  _| | |  __/
+ \___/|___/\___|_|    |_|   |_|  \___/|_| |_|_|\___|
+*/
+
+/* background of user details panel */
+.ConversationPanel,
+.ConversationPanel__header {
+  background-color: #232530 !important;
+}
+
+/* disappering message timer */
+.module-select > select {
+  background-color: #232530 !important;
+}
+
+/* nickname, chatcolor, add to group and other button */
+.ConversationDetails-panel-row__root--button:hover {
+  background-color: #232530 !important;
+}
+
+/* nickname edit menu*/
+.Input__container {
+  background-color: #232530 !important;
+  border-color: #9399b2 !important;
+}
+
+/* add to group button background color */
+.ConversationDetails-groups__add-to-group-icon {
+  background-color: #232530 !important;
+}
+
+/* the user profile, signal connection and safety number popup */
+.module-Modal {
+  background-color: #232530 !important;
+}
+
+/* mark as varified or clear verification button */
+.module-SafetyNumberViewer__button > button {
+  background-color: #2E303E !important;
+}
+
+/*
+           _
+ _ __ ___ (_)___  ___
+| '_ ` _ \| / __|/ __|
+| | | | | | \__ \ (__
+|_| |_| |_|_|___/\___|
+*/
+
+/* background when viewing image */
+.Lightbox__animated {
+  background-color: #232530 !important;
+}
+
+/* many of the buttons */
+.module-Button {
+  background-color: #2E303E !important;
+}
+
+.module-Button:hover {
+  background-color: #232530 !important;
+}
+
+/*
+ ____       _   _   _
+/ ___|  ___| |_| |_(_)_ __   __ _ ___
+\___ \ / _ \ __| __| | '_ \ / _` / __|
+ ___) |  __/ |_| |_| | | | | (_| \__ \
+|____/ \___|\__|\__|_|_| |_|\__, |___/
+                            |___/
+*/
+
+/* side pannel of settings */
+.Preferences__page-selector {
+  background-color: #1C1E26 !important;
+}
+
+/* main settings pannel */
+.Preferences__settings-pane {
+  background-color: #232530 !important;
+}
+
+/* page selector selected background */
+.Preferences__button--selected {
+  background-color: #2E303E !important;
+}
+
+.Preferences__button:focus {
+  background-color: #232530 !important;
+}
+
+/* language and chat color button */
+.Preferences__control--clickable:hover {
+  background-color: #232530 !important;
+}
+
+.module-Button--secondary--destructive {
+  color: #f38ba8 !important;
+}
+
+/*
+  ____      _ _
+ / ___|__ _| | |
+| |   / _` | | |
+| |__| (_| | | |
+ \____\__,_|_|_|
+*/
+
+.module-calling__container {
+  background-color: #232530 !important;
+}
+
+/* cancel and settings button */
+.CallSettingsButton__Button {
+  background-color: #232530 !important;
+}
+
+/* the bar at the bottom during calls */
+.CallControls {
+  background-color: #232530 !important;
+}
+
+/* mike and camera button */
+.CallingButton__icon {
+  background-color: #585b70 !important;
+}
+
+/* your pfp box during call */
+.module-calling__background {
+  background-color: #232530 !important;
+}

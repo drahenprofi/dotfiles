@@ -4,13 +4,15 @@ local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require('beautiful').xresources.apply_dpi
 
+local rubato = require("modules.rubato")
+
 local apply_borders = require("lib.borders")
 
 local createPopup = function(color)
     local icon = wibox.widget {
         font = beautiful.glyph_font.." 14",
-        forced_width = 20,
-        align = "center", 
+        forced_width = 28,
+        align = "left", 
         valign = "center",
         widget = wibox.widget.textbox
     }
@@ -19,56 +21,63 @@ local createPopup = function(color)
         value         = 1,
         color		  = color,
         background_color = beautiful.misc2,
-        forced_width = dpi(100),
+        forced_width = dpi(120),
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
         end,
-        forced_height  = dpi(5),
+        forced_height  = dpi(6),
         widget        = wibox.widget.progressbar
     }
 
-    local progressbar_container = wibox.widget {
-        progressbar,
-        direction     = 'east',
-        layout        = wibox.container.rotate,
+    local text = wibox.widget {
+        text = 0,
+        forced_width = 24,
+        align = "right",
+        font = "Roboto Bold 11",
+        widget = wibox.widget.textbox
     }
+
 
     local widget = apply_borders({
         {
-            {
-                {
-                    nil, 
-                    progressbar_container,
-                    nil, 
-                    expand = "none",
-                    layout = wibox.layout.align.horizontal
-                }, 
-                left = 8,
-                widget = wibox.container.margin
-            }, 
             icon,
-            spacing = dpi(16),
-            layout = wibox.layout.fixed.vertical,
+            {
+                nil, 
+                progressbar,
+                expand = "none",
+                layout = wibox.layout.align.vertical
+            },
+            text, 
+            spacing = 8,
+            layout = wibox.layout.fixed.horizontal,
         },
-        top = dpi(16),
-        left = dpi(8), 
-        right = dpi(8),
+        left = 12, 
+        right = 12,
         widget  = wibox.container.margin
-    }, 46, 176, 6)
+    }, 204, 36, 6)
 
     local popup = awful.popup {
         widget = widget,
-        y            = awful.screen.focused().geometry.height / 2 - 72,
-        x            = awful.screen.focused().geometry.width - 88,
+        y = awful.screen.focused().geometry.height + 2,
+        x            = awful.screen.focused().geometry.width / 2 - 72,
         shape        = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
         end,
         bg           = beautiful.bg_normal,
         ontop        = true,
-        visible      = false,
     }
 
     popup:connect_signal("button::press", function() notyfi.visible = false end)
+
+     local animation = rubato.timed {
+        duration = 0.3, --half a second
+        intro = 0.1, --one third of duration
+        override_dt = true, --better accuracy for testing
+        subscribed = function(pos) 
+            --popup.y = pos * (beautiful.bar_height + 64) - 56
+            popup.y = awful.screen.focused().geometry.height + 2 - pos * 64
+        end
+    }
 
     local timer_die = timer { timeout = 3 }
 
@@ -79,12 +88,12 @@ local createPopup = function(color)
             timer_die:start()
         end
         
-        popup.visible = true
+        animation.target = 1
     end
 
     -- Hide popup after timeout
     timer_die:connect_signal("timeout", function()
-        popup.visible = false
+        animation.target = 0
         -- Prevent infinite timers events on errors.
         if timer_die.started then
             timer_die:stop()
@@ -98,7 +107,8 @@ local createPopup = function(color)
 
     popup.updateValue = function(value)
         if value ~= nil then
-            progressbar.value = progressbar.value + (value / 100)
+            progressbar.value = value / 100
+            text.text = value
         end
     end
 

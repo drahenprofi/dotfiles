@@ -12,8 +12,8 @@ local function drawBox(content, width, height)
 
     local container = wibox.container.background()
     container.bg = beautiful.bg_normal
-    container.forced_width = dpi(width + margin + padding)
-    container.forced_height = dpi(height + margin + padding)
+    container.forced_width = width + margin + padding
+    container.forced_height = height + margin + padding
     
     local box = wibox.widget {
             {
@@ -28,7 +28,7 @@ local function drawBox(content, width, height)
                     expand = "none",
                     layout = wibox.layout.align.horizontal,
                 }, 
-                margins = dpi(padding),
+                margins = padding,
                 widget = wibox.container.margin
             },
             widget = container
@@ -38,7 +38,7 @@ local function drawBox(content, width, height)
 
     return wibox.widget {
         bordered_box,
-        margins = dpi(margin),
+        margins = margin,
         widget = wibox.container.margin
     }
 end

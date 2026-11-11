@@ -25,8 +25,7 @@ return function()
         --end
 
         if client_identifier ~= nil and not class_seen[client_identifier] and not favourites[client_identifier:lower()] then
-            
-            if client_identifier:lower() == "pianoteq stage" then 
+            if client_identifier:lower() == "pianoteq stage" or client_identifier == "thugpro.exe" then 
             else 
                 class_seen[client_identifier] = true
                 table.insert(result, c)

@@ -32,7 +32,7 @@ local function createDiskRow(disk)
           },        
           {
             markup = "<span foreground='"..beautiful.fg_dark.."'>"..disk.perc.."%</span>",
-            font = "Roboto Bold 10", 
+            font = "Roboto Medium 8", 
             align = "center",  
             widget = wibox.widget.textbox
           },
@@ -51,14 +51,14 @@ local function createDiskRow(disk)
 end
 
 local function worker(args)
-    local mounts = {"/", "/software", "/data", "/data2"}
+    local mounts = {"/", "/software", "/data2", "/software2"}
     local timeout = 60
     local disks = {}
 
     content = wibox.layout.grid()
     --content.horizontal_spacing = 4
     content.expand = true
-    content.forced_width = 200
+    content.forced_width = 220
     content.vertical_spacing = 24
     content.horizontal_spacing = 54
     content.forced_num_cols = 2

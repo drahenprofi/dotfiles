@@ -95,11 +95,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-# swap left and right alt key
-# https://unix.stackexchange.com/a/648298
-setxkbmap -option lv3:lalt_switch -option lv3:ralt_alt
-
 # python pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -108,3 +103,5 @@ eval "$(pyenv init -)"
 
 # dotfiles command
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+
+export PATH=$PATH:/home/parndt/.spicetify

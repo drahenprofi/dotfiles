@@ -8,7 +8,7 @@ local naughty = require("naughty")
 
 local createPopup = require("widgets.popup.popup")
 
-local popup = createPopup(beautiful.blue)
+local popup = createPopup(beautiful.misc1)
 
 awesome.connect_signal("evil::volume", function(volume)
 	popup.update(volume.value, volume.image)

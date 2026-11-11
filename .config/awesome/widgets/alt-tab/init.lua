@@ -23,7 +23,7 @@ local unpack = unpack or table.unpack
 local surface = cairo.ImageSurface(cairo.Format.RGB24,20,20)
 local cr = cairo.Context(surface)
 
-local popupLib = require("lib.popup")
+local apply_borders = require("lib.borders")
 
 local _M = {}
 
@@ -34,14 +34,13 @@ _M.settings = {
 }
 
 -- Create a wibox to contain all the client-widgets
-_M.preview_wbox = wibox({ 
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
-    end, 
+_M.preview_wbox = wibox({
+	border_width = 0, 
+	ontop = true, 
+	visible = false, 
+    type = "dock", 
+    screen = screen.primary, 
 })
-_M.preview_wbox.border_width = 0
-_M.preview_wbox.ontop = true
-_M.preview_wbox.visible = false
 
 _M.preview_widgets = {}
 
@@ -179,8 +178,7 @@ function _M.cycle(dir)
 end
 
 function _M.preview()
-	-- Apply settings
-    _M.preview_wbox:set_bg(beautiful.bg_normal)
+    _M.preview_wbox:set_bg(beautiful.transparent)
 
 	-- cols in the grid view
 	local cols = 3
@@ -204,7 +202,8 @@ function _M.preview()
 
 	local x = (screen[mouse.screen].geometry.width - W) / 2
 	local y = (screen[mouse.screen].geometry.height - H) / 2
-	_M.preview_wbox:geometry({x = x, y = y, width = W, height = H})
+	_M.preview_wbox:geometry({x = x, y = y, width = W, height = H+12})
+
 
 	-- create a list that holds the clients to preview, from left to right
 	local leftRightTab = {}
@@ -273,19 +272,24 @@ function _M.preview()
 				{
 					preview_img, 
 					{
+						nil, 
 						{
-							image = c.icon, 
-							widget = wibox.widget.imagebox
+							{
+								image = c.icon, 
+								widget = wibox.widget.imagebox
+							}, 
+							{
+								font = "Roboto Bold 10", 
+								markup = c.class, 
+								widget = wibox.widget.textbox
+							}, 
+							spacing = 5, 
+							forced_height = textboxHeight, 
+							layout = wibox.layout.fixed.horizontal
 						}, 
-						{
-							font = "Roboto Bold 10", 
-							markup = c.class, 
-							widget = wibox.widget.textbox
-						}, 
-						spacing = 5, 
 						forced_width = w, 
-						forced_height = textboxHeight, 
-						layout = wibox.layout.fixed.horizontal
+						expand = "none",
+						layout = wibox.layout.align.horizontal
 					}, 
 					layout = wibox.layout.fixed.vertical
 				}, 
@@ -326,15 +330,15 @@ function _M.preview()
 		preview_layout:add(_M.preview_widgets[i])
 	end
 
-	_M.preview_wbox:set_widget(wibox.widget {
-		popupLib.separator(), 
-		{
-			preview_layout,
-			margins = outerMargin, 
-			widget = wibox.container.margin
-		}, 
-		layout = wibox.layout.fixed.vertical
-	})
+	_M.preview_wbox:set_widget(apply_borders({
+			{
+				preview_layout,
+				margins = outerMargin, 
+				widget = wibox.container.margin
+			}, 
+			bg = beautiful.bg_normal, 
+			layout = wibox.container.background
+		}, W, H, 8))
 end
 
 

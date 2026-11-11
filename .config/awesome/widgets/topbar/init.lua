@@ -28,12 +28,26 @@ end
 ------------------------------------------------
 local session = require("widgets.topbar.session")
 local taglist = require("widgets.topbar.taglist")
---local battery = require("widgets.topbar.battery")
 local clock = widget(require("widgets.topbar.clock"))
-clock.right = dpi(0)
+clock.right = 0
+
 local tasklist = require("widgets.topbar.tasklist")
 local launcher = require("widgets.topbar.launcher")
-local update = require("widgets.topbar.update")
+local update = require("widgets.topbar.notifications")
+local globalmenu = require("widgets.topbar.globalmenu")
+
+globalmenu.config.desktop_name   = "Desktop"
+globalmenu.config.terminal       = "kitty"
+globalmenu.config.editor         = "code"
+globalmenu.config.editor_in_terminal = false
+globalmenu.config.font           = "Roboto Medium 10"
+globalmenu.config.menu_font      = "Roboto Medium 10"
+globalmenu.config.menu_shape     = 4
+globalmenu.config.menu_border_width = 1
+globalmenu.config.menu_border_color = beautiful.bg_very_light
+globalmenu.config.submenu_text   = ""
+globalmenu.config.cursor         = "pointer"
+globalmenu.config.disabled_fg    = "#444444"
 
 beautiful.systray_icon_spacing = dpi(12)
 local systray = wibox.widget.systray()
@@ -59,7 +73,7 @@ awful.screen.connect_for_each_screen(function(s)
         expand = "none",
         {   -- Left
             widget(session), 
-            bar_taglist,
+            globalmenu, 
             spacing = dpi(6),
             layout = wibox.layout.fixed.horizontal, 
         }, 
@@ -70,10 +84,12 @@ awful.screen.connect_for_each_screen(function(s)
         },
         {   -- Right 
             --widget(battery), 
+            bar_taglist,
             widget(wibox.widget {
                 widget = wibox.container.margin,
-                top = dpi(1), 
-                bottom = dpi(1), 
+                left = 8, 
+                top = 1,
+                bottom = 1, 
                 {
                     systray, 
                     layout = wibox.layout.fixed.horizontal, 

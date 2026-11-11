@@ -78,8 +78,8 @@ awful.keyboard.append_global_keybindings{
         description = "lower volume", 
         group = "launcher",
         on_press = function ()
-            awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%", function(stdout)
-                awesome.emit_signal("popup::volume", {amount = -3})
+            awful.spawn.easy_async_with_shell("pamixer --decrease 2 && pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | tr -d '%'", function(stdout)
+               awesome.emit_signal("popup::volume", {amount = stdout:gsub("%s+", "")})
             end)
         end
     },
@@ -89,8 +89,8 @@ awful.keyboard.append_global_keybindings{
         description = "raise volume", 
         group = "launcher",
         on_press = function ()
-            awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3%", function(stdout)
-                awesome.emit_signal("popup::volume", {amount = 3})
+            awful.spawn.easy_async_with_shell("pamixer --increase 2 && pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | tr -d '%'", function(stdout)
+               awesome.emit_signal("popup::volume", {amount = stdout:gsub("%s+", "")})
             end)
         end
     },
@@ -172,21 +172,21 @@ awful.keyboard.append_global_keybindings{
 -- focus related keybindings
 awful.keyboard.append_global_keybindings{
     awful.key{
-        modifiers = {mod.super},
+        modifiers = {mod.alt},
         key = 'Tab',
         description = 'open app switcher forward',
         group = 'client',
         on_press = function() 
-            apps.switcher.switch(1, mod.super, "Super_L", mod.shift, "Tab") 
+            apps.switcher.switch(1, mod.alt, "Alt_L", mod.shift, "Tab") 
         end,
     },
     awful.key{
-        modifiers = {mod.super, mod.shift},
+        modifiers = {mod.alt, mod.shift},
         key = 'Tab',
         description = 'open app switcher backwards',
         group = 'client',
         on_press = function() 
-            apps.switcher.switch(-1, mod.super, "Super_L", mod.shift, "Tab") 
+            apps.switcher.switch(-1, mod.alt, "Alt_L", mod.shift, "Tab") 
         end,
     },
     --[[
@@ -319,19 +319,6 @@ awful.keyboard.append_global_keybindings{
       end
    },
    awful.key{
-      modifiers = {mod.super, mod.ctrl},
-      keygroup    = 'numrow',
-      description = 'toggle tag',
-      group = 'tag',
-      on_press = function(index)
-         local screen = awful.screen.focused()
-         local tag = screen.tags[index]
-         if tag then
-            tag:viewtoggle(tag)
-         end
-      end
-   },
-   awful.key{
       modifiers = {mod.super, mod.shift},
       keygroup    = 'numrow',
       description = 'move focused client to tag',
@@ -344,20 +331,6 @@ awful.keyboard.append_global_keybindings{
             end
          end
       end
-   },
-   awful.key {
-      modifiers = {mod.super, mod.ctrl, mod.shift},
-      keygroup    = 'numrow',
-      description = 'toggle focused client on tag',
-      group = 'tag',
-      on_press = function(index)
-         if client.focus then
-            local tag = client.focus.screen.tags[index]
-            if tag then
-               client.focus:toggle_tag(tag)
-            end
-         end
-      end,
    },
    awful.key{
       modifiers = {mod.super},

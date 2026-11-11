@@ -15,7 +15,7 @@ client.connect_signal('request::default_keybindings', function()
             end,
         },
         awful.key {
-            modifiers = {mod.super},
+            modifiers = {mod.alt},
             key = "F4",
             description = "close", 
             group = "client",

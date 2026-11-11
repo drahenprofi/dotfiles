@@ -23,12 +23,6 @@ return {
         command = "spotify", 
         index = 4
     },
-    discord = {
-        name = "discord", 
-        class = "discord", 
-        command = "discord", 
-        index = 5
-    }, 
     steam = {
         name = "steam", 
         class = "steam", 
@@ -37,8 +31,8 @@ return {
     }, 
     pianoteq = {
         name = "pianoteq", 
-        class = "Pianoteq STAGE", 
-        command = "'pianoteq 8'",
+        class = "Pianoteq", 
+        command = "pianoteq-stage9",
         index = 7
     }
 }

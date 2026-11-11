@@ -9,7 +9,7 @@ local rubato = require("modules.rubato")
 
 local tasklist = require("widgets.tasklist.tasklist")
 
-local width = 61
+local width = 64
 local openerWidth = 8
 --tasklist.forced_width = width + openerWidth
 

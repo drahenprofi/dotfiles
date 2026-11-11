@@ -16,10 +16,10 @@ local calendar = require("widgets.dashboard.calendar")
 local time = require("widgets.dashboard.time")
 local storage = require("widgets.dashboard.storage")
 local volume = require("widgets.dashboard.volume")
-local brightness = require("widgets.dashboard.brightness")
-local battery = require("widgets.dashboard.battery")
 local weather = require("widgets.dashboard.weather")
 local playerctl = require("widgets.dashboard.playerctl")
+local cpu = require("widgets.dashboard.cpu")
+local mem = require("widgets.dashboard.mem")
 
 local dashboard = wibox({
     visible = false, 
@@ -103,29 +103,27 @@ dashboard:setup {
             nil, {
                 nil, 
                 {
-                        {
-                            playerctl,
-                            drawBox(avatar, 168, 44), 
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        {
-                            --[[
-                            drawBox({
-                                volume,
-                                --brightness, 
-                                --battery,
-                                spacing = dpi(16), 
-                                widget = wibox.layout.fixed.vertical
-                            }, 200, 32),]]--
-                            drawBox(storage(), 216, 276), 
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        {
-                            drawBox(time, 260, 48),
-                            drawBox(calendar, 260, 180), 
-                            layout = wibox.layout.fixed.vertical
-                        }, 
-                        layout = wibox.layout.fixed.horizontal
+                    {
+                        playerctl,
+                        drawBox(avatar, 170, 44), 
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+                    {
+                        drawBox(storage(), 256, 306), 
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+                    {
+                        drawBox(time, 260, 78),
+                        drawBox(calendar, 260, 180), 
+                        layout = wibox.layout.fixed.vertical
+                    }, 
+
+                    layout = wibox.layout.fixed.horizontal
+                }, 
+                {
+                    nil, 
+                    expand = "none",
+                    layout = wibox.layout.align.horizontal
                 },
                 expand = "none",
                 layout = wibox.layout.align.vertical
@@ -144,6 +142,30 @@ dashboard:setup {
                 weather,
                 top = dpi(8),
                 right = dpi(32),
+                widget = wibox.container.margin
+            },
+            expand = "none", 
+            layout = wibox.layout.align.vertical
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+    },
+    {
+        nil,
+        nil,
+        {
+            nil, 
+            nil,
+            {
+                
+                drawBox(wibox.widget {
+                    cpu,
+                    mem, 
+                    spacing = 48, 
+                    layout = wibox.layout.fixed.horizontal
+                }, 300, 64), 
+                bottom = dpi(8),
+                right = dpi(8),
                 widget = wibox.container.margin
             },
             expand = "none", 

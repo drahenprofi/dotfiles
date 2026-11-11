@@ -6,7 +6,6 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 
 local get_app_icon = function(is_template)
-
     local default_icon = nil
 
     if is_template then 
@@ -14,9 +13,12 @@ local get_app_icon = function(is_template)
             {
                 awful.widget.clienticon,
                 id = "default_icon",
-                widget = wibox.container.background, 
+                widget = wibox.container.background,
+                forced_width = 28, 
+                forced_height = 28
             }, 
-            left = 6,
+            top = 2,
+            left = 10,
             widget = wibox.container.margin
         }
     end
@@ -52,8 +54,8 @@ local get_app_icon = function(is_template)
                     widget = wibox.widget.textbox
                 },
                 default_icon,
-                forced_height = 32, 
-                forced_width = 32,
+                forced_height = 36, 
+                forced_width = 36,
                 layout = wibox.layout.fixed.vertical
             }, 
             top = 4, 

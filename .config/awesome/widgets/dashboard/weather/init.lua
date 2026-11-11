@@ -33,7 +33,7 @@ local get_icon = function(condition)
     elseif (condition == "Clouds") then
         icon = ""
     else
-        icon = "敖"
+        icon = "󰖑"
     end
 
     return icon

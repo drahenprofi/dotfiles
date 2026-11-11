@@ -1,4 +1,5 @@
 local awful = require('awful')
+local beautiful = require("beautiful")
 local ruled = require('ruled')
 
 ruled.client.connect_signal('request::rules', function()
@@ -31,7 +32,6 @@ ruled.client.connect_signal('request::rules', function()
             'xtightvncviewer',
             "feh",
             "Galculator", 
-            "Pianoteq STAGE"
          },
          -- Note that the name property shown in xprop might be set slightly after creation of the client
          -- and the name shown there might not match defined rules here.
@@ -85,6 +85,25 @@ ruled.client.connect_signal('request::rules', function()
     }
 
     ruled.client.append_rule {
+        rule_any = {
+            class = "Pianoteq"
+        }, 
+        properties = {
+            floating = true, 
+            callback = awful.placement.centered
+        }
+    }
+
+    ruled.client.append_rule {
+        rule = {
+            class = "aimp.exe"
+        }, 
+        properties = {
+            titlebars_enabled = false
+        }
+    }
+
+    ruled.client.append_rule {
         rule = {
             class = "jetbrains-.*",
             name = "win.*"
@@ -116,5 +135,15 @@ ruled.client.connect_signal('request::rules', function()
         rule = {name = "Welcome to PyCharm"}, 
         properties = {floating = true},
         callback = awful.placement.centered
+    }
+
+    ruled.client.append_rule {
+        rule = {class = "jamesdsp"}, 
+        properties = {
+            width = 730, 
+            height = 450, 
+            y = beautiful.bar_height + 8, 
+            x = awful.screen.focused().workarea.width - 730 - 8
+        }
     }
 end)

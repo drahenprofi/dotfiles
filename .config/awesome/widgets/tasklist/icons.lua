@@ -55,5 +55,10 @@ return {
         class = "Pianoteq STAGE", 
         icon = "󰙽", 
         color = beautiful.fg_normal
+    },
+    thps = {
+        class = "thugpro.exe", 
+        icon = "󰔁", 
+        color = beautiful.yellow
     }
 }
