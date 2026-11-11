@@ -1347,6 +1347,16 @@ local function signature(node)
     return table.concat(parts, "\3")
 end
 
+-- Lua's garbage collector only sees the small Lua side of a menu, not the
+-- cairo/pango memory behind its widgets, so closed menus can pile up for a
+-- long time before a collection frees them -- and awesome's memory use then
+-- stays at that peak. Collect a moment after a menu closes (at most once a
+-- second, however quickly menus are opened and closed).
+local collect_timer = gears.timer {
+    timeout = 1, single_shot = true,
+    callback = function() collectgarbage("collect") end,
+}
+
 -- Build and show the awful.menu described by `info` (see show_menu).
 local function present(info)
     local items = build_items(info.node)
@@ -1364,6 +1374,7 @@ local function present(info)
         end
         backends[info.target.kind].closed(info.target, info.node)
         if info.on_hide then info.on_hide() end
+        if not collect_timer.started then collect_timer:start() end
     end)
     m:show({ coords = info.coords })
     watch_leave(m)
@@ -1392,6 +1403,7 @@ local function refresh_open_menu()
         local old = info.menu
         old._replaced = true
         old:hide()
+        if not collect_timer.started then collect_timer:start() end
         present(info)
     end, info.seen)
 end
