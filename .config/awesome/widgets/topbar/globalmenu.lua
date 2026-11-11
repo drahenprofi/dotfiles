@@ -14,6 +14,10 @@
 --     org.gtk.Actions. GTK4 apps that embed their own GtkPopoverMenuBar
 --     (instead of using set_menubar) export nothing and can't be shown.
 --
+-- Dependencies
+--   * appmenu-gtk-module
+--   * libdbusmenu-glib
+--
 -- Usage (rc.lua)
 --   beautiful.init(...)
 --   local globalmenu = require("globalmenu")   -- before any autostart!
@@ -41,6 +45,12 @@
 --   ~/.config/gtk-3.0/settings.ini:  [Settings] gtk-shell-shows-menubar=1
 --   ~/.config/gtk-4.0/settings.ini:  [Settings] gtk-shell-shows-menubar=1
 --   ~/.gtkrc-2.0:                    gtk-shell-shows-menubar=1
+-- 
+-- Firefox setup
+-- widget.gtk.global-menu.enabled = true in about:config
+-- 
+-- Visual Studio Code setup
+-- "window.titleBarStyle": "native" in settings.json
 ---------------------------------------------------------------------------
 local lgi       = require("lgi")
 local Gio       = lgi.Gio

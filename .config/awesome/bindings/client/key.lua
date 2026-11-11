@@ -101,8 +101,8 @@ client.connect_signal('request::default_keybindings', function()
             description = "neofetch size",
             group = "client",
             on_press = function(c)
-                c.width = 450
-                c.height = 250
+                c.width = 420
+                c.height = 252
             end
         },
    }

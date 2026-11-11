@@ -67,7 +67,7 @@ local createPopup = function(color)
         ontop        = true,
     }
 
-    popup:connect_signal("button::press", function() notyfi.visible = false end)
+    --popup:connect_signal("button::press", function() notyfi.visible = false end)
 
      local animation = rubato.timed {
         duration = 0.3, --half a second
